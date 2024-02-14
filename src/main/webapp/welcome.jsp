@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<!-- need to be chnaged -->
 <a href="login.jsp">login</a>
 <a href="signup.jsp">Sign up</a>
 
