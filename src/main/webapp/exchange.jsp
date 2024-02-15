@@ -10,12 +10,13 @@
 </head>
 <body>
 <%@ include file="components/track/exchange_nav.jsp" %>
-
-<div style="margin-top:60px;">
-
+<div class="d-flex" style="margin-top:10em;height:500px;">
+<div style="height:300px;width:50%;">
+<p class="text-center">Your Lend List </p>
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Launch demo modal
+
+<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="border-radius:50%;margin-left:50%;transform:translateX(-50%);">
+  +
 </button>
 
 <!-- Modal -->
@@ -27,17 +28,64 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <form>
+					  <div class="form-group row">
+					    <label for="to" class="col-sm-2 col-form-label">To</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control"  placeholder="Lended money to whom?" name="to">
+					    </div>
+					  </div>
+					  <br>
+					  <div class="form-group row">
+					    <label for="amount" class="col-sm-2 col-form-label">Amount</label>
+					    <div class="col-sm-10">
+					      <input type="number" class="form-control"  placeholder="Enter the amount lended" name="amt">
+					    </div>
+					  </div>
+					  <br>
+					  <div class="form-group row">
+					    <label for="date" class="col-sm-2 col-form-label">Date</label>
+					    <div class="col-sm-10">
+					      <input type="date" class="form-control"  placeholder="Enter the Date lended on" name="date">
+					    </div>
+					  </div>
+					  <br>
+					  <div class="form-group row">
+					    <label for="purpose" class="col-sm-2 col-form-label">Purpose</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control"  placeholder="" name="purpose">
+					    </div>
+					  </div>
+					  <br>
+					  <fieldset class="form-group">
+					    <div class="row">
+					      <legend class="col-form-label col-sm-12 pt-0">Want to remind you for follow-up?</legend>
+					      <div class="col-sm-10">
+					        <div class="form-check">
+					          <input class="form-check-input" type="radio" name="followup" id="gridRadios1" value="Yes" checked>
+					          <label class="form-check-label" for="gridRadios1">
+					            Yes
+					          </label>
+					        </div>
+					        <div class="form-check">
+					          <input class="form-check-input" type="radio" name="followup" id="gridRadios2" value="No">
+					          <label class="form-check-label" for="gridRadios2">
+					           No
+					          </label>
+					        </div>
+					      </div>
+					    </div>
+					  </fieldset>
+					  <button type="submit" class="btn btn-primary" style="margin-top:15px;margin-left:50%;transform:translateX(-50%);">Save</button>
+      </form>
       </div>
     </div>
   </div>
 </div>
 
 </div>
+</div>
+
 <!-- Button trigger modal -->
 <!-- checking -->
 
