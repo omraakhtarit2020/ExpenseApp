@@ -1,3 +1,8 @@
+<%@page import="com.DAO.LendDAO"%>
+<%@page import="com.db.DBConnection"%>
+<%@page import="com.entity.Lend" %>
+<%@page import="java.util.List"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -28,7 +33,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form>
+        <form action="./addLend" method="POST">
 					  <div class="form-group row">
 					    <label for="to" class="col-sm-2 col-form-label">To</label>
 					    <div class="col-sm-10">
@@ -82,6 +87,21 @@
     </div>
   </div>
 </div>
+
+<div class="px-3">
+    <%
+          User user=(User) session.getAttribute("userobj");
+         LendDAO dao=new LendDAO(DBConnection.getConn());
+         List<Lend> list=dao.getLendById(user.getId());
+	     for(Lend lend:list){
+	%>
+	  <p class=" p-3" style="background:#f7ffe0;border-left:5px solid #008000;min-width: 20rem;"><b><%=lend.getTo()%> :</b> <span><%=lend.getAmt()%></span>
+	    <!-- <button class="btn btn-outline-secondary" style="margin-left:100px;">Delete</button> -->
+	     <span><cite style="margin-left:15%;color:#48cae4"><%=lend.getDate().toLocalDate() %>&nbsp&nbsp</cite></span>
+	  </p>
+	 
+	<%} %>
+	</div>
 
 </div>
 </div>
