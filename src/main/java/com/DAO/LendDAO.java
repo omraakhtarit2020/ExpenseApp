@@ -60,6 +60,7 @@ public class LendDAO {
 				lend.setPurpose(rs.getString(2));
 				lend.setAmt(rs.getLong(3));
 				lend.setDate(rs.getDate(4));
+				lend.setLend_id(rs.getInt(5));
 				lend.setFollowup(rs.getString(7));
 				list.add(lend);
 			}
@@ -69,6 +70,24 @@ public class LendDAO {
 		}
 
 		return list;
+	}
+
+	public boolean deleteLend(int id) {
+		boolean f = false;
+		try {
+			String sql = "delete from lend where lend_id=?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, id);
+
+			int i = ps.executeUpdate();
+			if (i == 1) {
+				f = true;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return f;
 	}
 
 }

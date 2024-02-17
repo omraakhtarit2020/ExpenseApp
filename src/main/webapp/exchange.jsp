@@ -16,28 +16,21 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <style>
  .borrow{
-  background-image: linear-gradient(to right, #abc4ff, #b6ccfe, #c1d3fe, #ccdbfd, #d7e3fc, #e2eafc, #edf2fb);
-  border-radius:15px;
+  background-image:linear-gradient(to right, #abc4ff, #b6ccfe, #c1d3fe, #ccdbfd, #d7e3fc, #e2eafc, #edf2fb);  border-radius:15px;
   box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
  }
- .borrow:hover{
-   background-image: linear-gradient(to left, #abc4ff, #b6ccfe, #c1d3fe, #ccdbfd, #d7e3fc, #e2eafc, #edf2fb);
- }
  .lend{
-    background-image: linear-gradient(to left, #abc4ff, #b6ccfe, #c1d3fe, #ccdbfd, #d7e3fc, #e2eafc, #edf2fb);
+    background-image:linear-gradient(to right, #abc4ff, #b6ccfe, #c1d3fe, #ccdbfd, #d7e3fc, #e2eafc, #edf2fb);
     border-radius:15px;
     box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
- }
- .lend:hover{
-   background-image: linear-gradient(to right, #abc4ff, #b6ccfe, #c1d3fe, #ccdbfd, #d7e3fc, #e2eafc, #edf2fb);
  }
 </style>
 </head>
 <body>
 <%@ include file="components/track/exchange_nav.jsp" %>
-<div class="d-flex justify-content-evenly" style="margin-top:5em;height:100%;margin-left:2em;">
+<div class="d-flex justify-content-evenly " style="margin-top:5em;height:100%;margin-left:2em;">
 <div style="height:auto;width:40%;" class="lend">
-<p class="text-center fs-4"><b>Lend List</b></p>
+<p class="text-center fs-4 "><b>Lend List</b></p>
 <!-- Button trigger modal -->
 
 <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal" style="border-radius:50%;margin-left:50%;transform:translateX(-50%);">
@@ -137,7 +130,7 @@
      <%
     }
     %>
-       <span style="transform:translateX(-50%);"><a href="#"><i class="bi bi-trash3-fill fs-4" type="button"></i></a>
+       <span style="transform:translateX(-50%);"><a href="./deleteLend?lend_id=<%=lend.getLend_id()%>"><i class="bi bi-trash3-fill fs-4" type="button"></i></a>
             <a href="#"><i class="bi bi-pencil-fill fs-4" type="button"></i></a>
        </span>
 	  </div>
@@ -152,7 +145,7 @@
 <!-- Borrow start -->
 
 <div style="height:auto;width:40%;" class="borrow">
-<p class="text-center fs-4"><b>Borrow List</b></p>
+<p class="text-center fs-4 "><b>Borrow List</b></p>
 <!-- Button trigger modal -->
 
 <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModalborrow" style="border-radius:50%;margin-left:50%;transform:translateX(-50%);">
@@ -252,7 +245,7 @@
      <%
     }
     %>
-       <span style="transform:translateX(-50%);"><a href="#"><i class="bi bi-trash3-fill fs-4" type="button"></i></a>
+       <span style="transform:translateX(-50%);"><a href="./deleteBorrow?borrow_id=<%=borrow.getBorrow_id()%>"><i class="bi bi-trash3-fill fs-4" type="button"></i></a>
             <a href="#"><i class="bi bi-pencil-fill fs-4" type="button"></i></a>
        </span>
 	  </div>

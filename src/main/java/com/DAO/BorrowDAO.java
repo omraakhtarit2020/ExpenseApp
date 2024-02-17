@@ -60,6 +60,7 @@ public class BorrowDAO {
 				borrow.setPurpose(rs.getString(2));
 				borrow.setAmt(rs.getLong(3));
 				borrow.setDate(rs.getDate(4));
+				borrow.setBorrow_id(rs.getInt(5));
 				borrow.setFollowup(rs.getString(7));
 				list.add(borrow);
 			}
@@ -69,6 +70,24 @@ public class BorrowDAO {
 		}
 
 		return list;
+	}
+
+	public boolean deleteBorrow(int id) {
+		boolean f = false;
+		try {
+			String sql = "delete from borrow where borrow_id=?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, id);
+
+			int i = ps.executeUpdate();
+			if (i == 1) {
+				f = true;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return f;
 	}
 
 }
