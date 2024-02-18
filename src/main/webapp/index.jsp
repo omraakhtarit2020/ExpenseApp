@@ -29,7 +29,7 @@
   <p><a href="#">BUDGET PLANNING</a></p>
 </div>
 <div id="third" class="element">
-  <p><a href="#">FINANCIAL GOALS</a></p>
+  <p><a href="goal.jsp">FINANCIAL GOALS</a></p>
 </div>
 <div id="fourth" class="element">
   <p><a href="exchange.jsp">EXCHANGE</a></p>
