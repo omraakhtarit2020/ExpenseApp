@@ -23,6 +23,16 @@ public class Borrow {
 		this.user_id = userId;
 	}
 
+	public Borrow(String to, String purpose, long amt, Date date, int userId, String followup, int borrow_id) {
+		this.to = to;
+		this.purpose = purpose;
+		this.followup = followup;
+		this.date = date;
+		this.amt = amt;
+		this.user_id = userId;
+		this.borrow_id = borrow_id;
+	}
+
 	public String getTo() {
 		return to;
 	}

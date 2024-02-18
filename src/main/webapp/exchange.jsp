@@ -110,29 +110,98 @@
          int colorindex = 0;
 	     for(Lend lend:list){
 	%>
-	  <div class="p-1 text-white" style="background:black;max-width:25rem;margin-left:13%;margin-top:5%;">
-	     <div class="d-flex justify-content-evenly">
+	  <div class="p-1" style="background:black;max-width:25rem;margin-left:13%;margin-top:5%;">
+	     <div class="d-flex justify-content-evenly text-white">
 	       <div class="p-1 text-center fs-3"
               data-bs-toggle="tooltip" data-bs-title=<%=lend.getTo() %>
               style="background:<%=color[colorindex%color.length]%>;border-radius:50%;width:60px;height:60px;margin-left:-5em;"><%=lend.getTo().charAt(0)%>
               </div>
               <h4 ><%=lend.getDate().toLocalDate() %></h4>
 	     </div>
-	      <span class="fs-5"><i class="bi bi-currency-rupee"></i><b><%=lend.getAmt()%></b></span>
+	      <span class="fs-5 text-white"><i class="bi bi-currency-rupee"></i><b><%=lend.getAmt()%></b></span>
 	     <%
               if(lend.getFollowup().equals("Yes")) {
           %>
-         <span style="margin-left:25%;"><i class="bi bi-bell-fill fs-4"></i></span>
+         <span style="margin-left:25%;"><i class="bi bi-bell-fill fs-4 text-white"></i></span>
      <%
          } else {
        %>
-         <span style="margin-left:25%;"><i class="bi bi-bell-slash-fill fs-4"></i></span>
+         <span style="margin-left:25%;"><i class="bi bi-bell-slash-fill fs-4 text-white"></i></span>
      <%
     }
     %>
-       <span style="transform:translateX(-50%);"><a href="./deleteLend?lend_id=<%=lend.getLend_id()%>"><i class="bi bi-trash3-fill fs-4" type="button"></i></a>
-            <a href="#"><i class="bi bi-pencil-fill fs-4" type="button"></i></a>
+       <span style="transform:translateX(-50%);"><a href="./deleteLend?lend_id=<%=lend.getLend_id()%>"><i class="bi bi-trash3-fill fs-4 text-white" type="button"></i></a>
+            <a  data-bs-toggle="modal" data-bs-target="#exampleModalupdatelend"><i class="bi bi-pencil-fill fs-4 text-white" type="button"></i></a>
        </span>
+       
+       <div class="modal fade" id="exampleModalupdatelend" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Update LEND</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="./updateLend" method="POST">
+					  <div class="form-group row">
+					    <label for="to" class="col-sm-2 col-form-label">To</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control"  value="<%=lend.getTo() %>" name="to">
+					    </div>
+					  </div>
+					  <br>
+					  <div class="form-group row">
+					  <input type="hidden" class="form-control"
+						value="<%=lend.getLend_id()%>" name="lend_id">
+					</div>
+					  <br>
+					  <div class="form-group row">
+					    <label for="amount" class="col-sm-2 col-form-label">Amount</label>
+					    <div class="col-sm-10">
+					      <input type="number" class="form-control"  value="<%=lend.getAmt() %>" name="amt">
+					    </div>
+					  </div>
+					  <br>
+					  <div class="form-group row">
+					    <label for="date" class="col-sm-2 col-form-label">Date</label>
+					    <div class="col-sm-10">
+					      <input type="date" class="form-control"  value="<%=lend.getDate().toLocalDate()%>" name="date">
+					    </div>
+					  </div>
+					  <br>
+					  <div class="form-group row">
+					    <label for="purpose" class="col-sm-2 col-form-label">Purpose</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control"  value="<%=lend.getPurpose() %>" name="purpose">
+					    </div>
+					  </div>
+					  <br>
+					  <fieldset class="form-group">
+					    <div class="row">
+					      <legend class="col-form-label col-sm-12 pt-0">Want to remind you for follow-up?</legend>
+					      <div class="col-sm-10">
+					        <div class="form-check">
+					          <input class="form-check-input" type="radio" name="followup" id="gridRadios1" value="<%=lend.getFollowup() %>" checked>
+					          <label class="form-check-label" for="gridRadios1">
+					            Yes
+					          </label>
+					        </div>
+					        <div class="form-check">
+					          <input class="form-check-input" type="radio" name="followup" id="gridRadios2" value="<%=lend.getFollowup()%>">
+					          <label class="form-check-label" for="gridRadios2">
+					           No
+					          </label>
+					        </div>
+					      </div>
+					    </div>
+					  </fieldset>
+					  <button type="submit" class="btn btn-primary" style="margin-top:15px;margin-left:50%;transform:translateX(-50%);">Save</button>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+       
 	  </div>
 	 
 	<%
@@ -225,29 +294,99 @@
 	     for(Borrow borrow:list2){
 	%>
 	  
-	  <div class="p-1 text-white" style="background:black;max-width:25rem;margin-left:13%;margin-top:5%;">
-	     <div class="d-flex justify-content-evenly">
+	  <div class="p-1 " style="background:black;max-width:25rem;margin-left:13%;margin-top:5%;">
+	     <div class="d-flex justify-content-evenly text-white">
 	       <div class="p-1 text-center fs-3"
               data-bs-toggle="tooltip" data-bs-title=<%=borrow.getTo() %>
               style="background:<%=colors[colorIndex%colors.length]%>;border-radius:50%;width:60px;height:60px;margin-left:-5em;color:white;"><%=borrow.getTo().charAt(0)%>
               </div>
               <h4 ><%=borrow.getDate().toLocalDate() %></h4>
 	     </div>
-	      <span class="fs-5"><i class="bi bi-currency-rupee"></i><b><%=borrow.getAmt()%></b></span>
+	      <span class="fs-5 text-white"><i class="bi bi-currency-rupee"></i><b><%=borrow.getAmt()%></b></span>
 	     <%
               if(borrow.getFollowup().equals("Yes")) {
           %>
-         <span style="margin-left:25%;"><i class="bi bi-bell-fill fs-4"></i></span>
+         <span style="margin-left:25%;"><i class="bi bi-bell-fill fs-4 text-white"></i></span>
      <%
          } else {
        %>
-         <span style="margin-left:25%;"><i class="bi bi-bell-slash-fill fs-4"></i></span>
+         <span style="margin-left:25%;"><i class="bi bi-bell-slash-fill fs-4 text-white"></i></span>
      <%
     }
     %>
-       <span style="transform:translateX(-50%);"><a href="./deleteBorrow?borrow_id=<%=borrow.getBorrow_id()%>"><i class="bi bi-trash3-fill fs-4" type="button"></i></a>
-            <a href="#"><i class="bi bi-pencil-fill fs-4" type="button"></i></a>
+       <span style="transform:translateX(-50%);"><a href="./deleteBorrow?borrow_id=<%=borrow.getBorrow_id()%>"><i class="bi bi-trash3-fill fs-4 text-white" type="button"></i></a>
+            <a data-bs-toggle="modal" data-bs-target="#exampleModalupdateborrow"><i class="bi bi-pencil-fill fs-4 text-white" type="button"></i></a>
        </span>
+       
+       
+       <div class="modal fade" id="exampleModalupdateborrow" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Update BORROW</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="./updateBorrow" method="POST">
+					  <div class="form-group row">
+					    <label for="to" class="col-sm-2 col-form-label">To</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control"  value="<%=borrow.getTo() %>" name="to">
+					    </div>
+					  </div>
+					  <br>
+					  <div class="form-group row">
+					  <input type="hidden" class="form-control"
+						value="<%=borrow.getBorrow_id()%>" name="borrow_id">
+					</div>
+					  <br>
+					  <div class="form-group row">
+					    <label for="amount" class="col-sm-2 col-form-label">Amount</label>
+					    <div class="col-sm-10">
+					      <input type="number" class="form-control"  value="<%=borrow.getAmt() %>" name="amt">
+					    </div>
+					  </div>
+					  <br>
+					  <div class="form-group row">
+					    <label for="date" class="col-sm-2 col-form-label">Date</label>
+					    <div class="col-sm-10">
+					      <input type="date" class="form-control"  value="<%=borrow.getDate().toLocalDate()%>" name="date">
+					    </div>
+					  </div>
+					  <br>
+					  <div class="form-group row">
+					    <label for="purpose" class="col-sm-2 col-form-label">Purpose</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control"  value="<%=borrow.getPurpose() %>" name="purpose">
+					    </div>
+					  </div>
+					  <br>
+					  <fieldset class="form-group">
+					    <div class="row">
+					      <legend class="col-form-label col-sm-12 pt-0">Want to remind you for follow-up?</legend>
+					      <div class="col-sm-10">
+					        <div class="form-check">
+					          <input class="form-check-input" type="radio" name="followup" id="gridRadios1" value="<%=borrow.getFollowup() %>" checked>
+					          <label class="form-check-label" for="gridRadios1">
+					            Yes
+					          </label>
+					        </div>
+					        <div class="form-check">
+					          <input class="form-check-input" type="radio" name="followup" id="gridRadios2" value="<%=borrow.getFollowup()%>">
+					          <label class="form-check-label" for="gridRadios2">
+					           No
+					          </label>
+					        </div>
+					      </div>
+					    </div>
+					  </fieldset>
+					  <button type="submit" class="btn btn-primary" style="margin-top:15px;margin-left:50%;transform:translateX(-50%);">Save</button>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+       
 	  </div>
 	 
 	<%

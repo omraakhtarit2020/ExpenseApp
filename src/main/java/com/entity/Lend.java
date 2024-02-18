@@ -14,6 +14,16 @@ public class Lend {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Lend(String to, String purpose, long amt, Date date, int userId, String followup, int lend_id) {
+		this.to = to;
+		this.purpose = purpose;
+		this.followup = followup;
+		this.date = date;
+		this.amt = amt;
+		this.user_id = userId;
+		this.lend_id = lend_id;
+	}
+
 	public Lend(String to, String purpose, long amt, Date date, int userId, String followup) {
 		this.to = to;
 		this.purpose = purpose;

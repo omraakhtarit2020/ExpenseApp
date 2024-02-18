@@ -90,4 +90,28 @@ public class BorrowDAO {
 		return f;
 	}
 
+	public boolean updateBorrow(Borrow b) {
+		boolean f = false;
+
+		try {
+			String sql = "update borrow set `to`=?,purpose=?,amt=?,borrowdate=?,followup=? where borrow_id=?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, b.getTo());
+			ps.setString(2, b.getPurpose());
+			ps.setLong(3, b.getAmt());
+			ps.setDate(4, b.getDate());
+			ps.setString(5, b.getFollowup());
+			ps.setInt(6, b.getBorrow_id());
+			int i = ps.executeUpdate();
+
+			if (i == 1) {
+				f = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return f;
+	}
+
 }

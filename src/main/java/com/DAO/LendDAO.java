@@ -90,4 +90,28 @@ public class LendDAO {
 		return f;
 	}
 
+	public boolean updateLend(Lend l) {
+		boolean f = false;
+
+		try {
+			String sql = "update lend set `to`=?,purpose=?,amt=?,lenddate=?,followup=? where lend_id=?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, l.getTo());
+			ps.setString(2, l.getPurpose());
+			ps.setLong(3, l.getAmt());
+			ps.setDate(4, l.getDate());
+			ps.setString(5, l.getFollowup());
+			ps.setInt(6, l.getLend_id());
+			int i = ps.executeUpdate();
+
+			if (i == 1) {
+				f = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return f;
+	}
+
 }
