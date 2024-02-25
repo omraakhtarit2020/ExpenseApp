@@ -1,6 +1,8 @@
 package com.finance;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.time.LocalDate;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +15,7 @@ import com.db.DBConnection;
 import com.entity.User;
 import com.DAO.goalDAO;
 import com.entity.goal_entity;
+
 
 /**
  * Servlet implementation class goalServlet
@@ -39,18 +42,23 @@ public class goalServlet extends HttpServlet {
 		try {
 			String principal = request.getParameter("principal");
 			String year = request.getParameter("year");
-
+			// Get the current date
+		    long currentDate = System.currentTimeMillis();
+		    // Convert it to java.sql.Date
+		    Date date = new Date(currentDate);
+		    
 			HttpSession session = request.getSession();
 			int userId = ((User) session.getAttribute("userobj")).getId();
 
 			// create a entity object
-			goal_entity g_entity = new goal_entity(principal, year, userId);
+			goal_entity g_entity = new goal_entity(principal, year, userId, date);
 			
 			System.out.println(g_entity.toString());
 			// create a DAO object
 			goalDAO g = new goalDAO(DBConnection.getConn());
 			if (g.insertGoal(g_entity)) {
 				System.out.println("submitted");
+				response.sendRedirect("goal.jsp");
 			} else {
 				System.out.println("error encountered");
 			}

@@ -45,7 +45,23 @@ const initg = () => {
 };
 
 initg();
-calculateGBtn.addEventListener("click", initg);
+
+let popup = document.getElementById("popup");
+
+        function openPopup() {
+            popup.classList.add("open-popup");
+        }
+
+        function closePopup() {
+            popup.classList.remove("open-popup");
+        }
+
+calculateGBtn.addEventListener("click", () => {
+    initg();
+    setTimeout(() => {
+        openPopup();
+    }, 1000);
+});
 
 const refreshGInput = () => {
     initialAmount.value = "";

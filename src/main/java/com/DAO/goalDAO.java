@@ -15,12 +15,13 @@ public class goalDAO {
 		try {
 			
 			
-			String q="insert into goal(principal, year, userId) values(?,?,?)";
+			String q="insert into goal(principal, year, userId, date ) values(?,?,?,?)";
 			PreparedStatement p=this.conn.prepareStatement(q);
 			//set values
 			p.setString(1, goal_entity.getPrincipal());
 			p.setString(2, goal_entity.getYear());
 			p.setInt(3, goal_entity.getUserId());
+			p.setDate(4,goal_entity.getDate());
 			int x=p.executeUpdate();
 			if(x==1) {
 				f=true;

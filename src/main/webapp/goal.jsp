@@ -16,27 +16,6 @@
 <title>Financial-Goal</title>
 
 <style>
-.bell {
-	background-color: #d42367;;
-	align-items: end;
-	font-size: 25px;
-	padding: 8px 10px;
-	border-radius: 50%;
-	color: #fff;
-	cursor: pointer;
-	border: none;
-	margin: 24px 0;
-	float: right;
-}
-
-.container {
-	height: 100vh;
-	position: relative;
-}
-
-#loading, #result {
-	display: none;
-}
 
 .icon {
 	padding-top: 60px;
@@ -499,6 +478,72 @@
 		text-align: center;
 	}
 }
+
+.popup {
+	width: 400px;
+	background: #f7f0ea;
+	border-radius: 6px;
+	position: absolute;
+	top: 0%;
+	left: 50%;
+	transform: translate(-50%, -50%) scale(0.1);
+	text-align: center;
+	padding: 0 30px 30px;
+	color: #303030;
+	transition: transform 0.4s, top 0.4s;
+	visibility: hidden;
+}
+
+.open-popup {
+	visibility: visible;
+	top: 50%;
+	transform: translate(-50%, -50%) scale(1);
+}
+
+.popup h2 {
+	font-size: 30px;
+	font-weight: 500;
+	margin: 30px 0;
+}
+
+.popup .bell {
+	background-color: #d42367;
+	align-items: center;
+	font-size: 45px;
+	height: 90px;
+	width: 100px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+	padding: 10px 10px;
+	border-radius: 50%;
+	color: #fff;
+	border: none;
+	margin-top: -50px;
+}
+
+.popup .popup-buttons {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 20px;
+}
+
+.popup .popup-buttons button {
+	width: 48%; /* Adjust as needed */
+	padding: 10px 0;
+	background-color: #d72c68;
+	color: #fff;
+	border: 0;
+	outline: none;
+	font-size: 18px;
+	border-radius: 4px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+	transition: background-color 0.3s ease;
+	/* Add transition for smooth effect */
+}
+
+/* Hover effect */
+.popup .popup-buttons button:hover {
+	background-color: #b71752; /* Change background color on hover */
+}
 </style>
 </head>
 <body>
@@ -533,7 +578,7 @@
 						<div class="top">
 
 							<!--h2>Goal Calculator</h2-->
-							<form action="./goalServlet" method="POST">
+							<form action="goalServlet" method="POST">
 								<div class="group">
 									<div class="title">Initial Amount</div>
 									<input name="principal" type="text" value=""
@@ -553,7 +598,14 @@
 									<div class="title">Tenure</div>
 									<input name="year" type="text" value="" class="year">
 								</div>
-								<button type="submit" class="fa-solid fa-bell bell"></button>
+								<div class="popup" id="popup">
+									<span class="fa-solid fa-bell bell"></span>
+									<h2>Do you want a reminder?</h2>
+									<div class="popup-buttons">
+										<button type="submit" onclick="closePopup()" class="yes">Yes</button>
+										<button onclick="closePopup()" class="no">No</button>
+									</div>
+								</div>
 							</form>
 						</div>
 						<div class="result">
@@ -569,7 +621,7 @@
 
 								<button class="calculateGBtn">Calculate</button>
 								<button class="calculateGBtn" id="refreshGBtn">Refresh</button>
-								<!--button type="submit" class="fa-solid fa-bell bell"></button-->
+
 							</div>
 						</div>
 					</div>
@@ -577,7 +629,6 @@
 			</div>
 		</div>
 	</div>
-
 
 	<!-- emi -->
 	<div class="emi">
