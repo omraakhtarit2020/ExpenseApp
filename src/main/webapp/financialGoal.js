@@ -1,9 +1,6 @@
 /**
- * 
- */
- /**
- * 
- */
+* 
+*/
 //Goal 
 
 const initialAmount = document.querySelector(".initialAmount");
@@ -45,17 +42,16 @@ const initg = () => {
 };
 
 initg();
-
-let popup = document.getElementById("popup");
+//calculateGBtn.addEventListener("click", initg);
+let popup = document.getElementById("popupGoal");
 
         function openPopup() {
-            popup.classList.add("open-popup");
+            popup.classList.add("openGpopup");
         }
 
         function closePopup() {
-            popup.classList.remove("open-popup");
+            popup.classList.remove("openGpopup");
         }
-
 calculateGBtn.addEventListener("click", () => {
     initg();
     setTimeout(() => {
@@ -73,23 +69,6 @@ const refreshGInput = () => {
 
 refreshGBtn.addEventListener("click", refreshGInput);
 
-
-
-//let fv = value * Math.pow(1 + interestRate, tenure);
-//let inflatedFV = fv / Math.pow(1 + inflationRate, tenure);
-
-/*function calculateEMI() {
-	const principal = parseFloat(document.getElementById('principal').value);
-	const interestRate = parseFloat(document.getElementById('interest').value);
-	const years = parseFloat(document.getElementById('year').value);
-
-	const monthlyInterestRate = interestRate / 12 / 100;
-	const months = years * 12;
-
-	const emi = principal * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, months) / (Math.pow(1 + monthlyInterestRate, months) - 1);
-
-	document.getElementById('emi').value = emi.toFixed(2);
-  }*/
 //Loan
 const amount = document.querySelector(".loanAmount");
 const interest = document.querySelector(".interestRate");
@@ -138,7 +117,11 @@ const init = () => {
 
 init();
 
-calculateBtn.addEventListener("click", init);
+
+calculateBtn.addEventListener("click", () => {
+	init();
+});
+
 
 const clearInputs = () => {
 	amount.value = "";
@@ -150,7 +133,6 @@ const clearInputs = () => {
 
 refreshBtn.addEventListener("click", clearInputs);
 
-//emi
 
 // EMI Calculator
 
@@ -162,7 +144,7 @@ const emiValueDisplay = document.querySelector(".emiMon .value");
 const emiTotalInterestDisplay = document.querySelector(".totalInterestEmi .value");
 const emiTotalAmountDisplay = document.querySelector(".totalPayable .value");
 
-const emiCalculateButton = document.querySelector(".calculateEBtn");
+const calculateEBtn = document.querySelector(".calculateEBtn");
 const emiRefreshButton = document.getElementById("refreshEBtn");
 
 let emiPrincipalAmount = parseFloat(emiPrincipalInput.value) || 0;
@@ -172,43 +154,52 @@ let emiTenureMonths = parseFloat(emiTenureInput.value) || 0;
 let emiInterestRateMonthly = emiInterestRate / 12 / 100;
 
 const calculateemi = () => {
-    let emi = emiPrincipalAmount * emiInterestRateMonthly * (Math.pow(1 + emiInterestRateMonthly, emiTenureMonths) / (Math.pow(1 + emiInterestRateMonthly, emiTenureMonths) - 1));
-    return emi;
+	let emi = emiPrincipalAmount * emiInterestRateMonthly * (Math.pow(1 + emiInterestRateMonthly, emiTenureMonths) / (Math.pow(1 + emiInterestRateMonthly, emiTenureMonths) - 1));
+	return emi;
 };
 
 const updateEMIData = (emi) => {
-    emiValueDisplay.textContent = isNaN(emi) ? "" : Math.round(emi);
+	emiValueDisplay.textContent = isNaN(emi) ? "" : Math.round(emi);
 
-    let emiTotalAmountValue = isNaN(emi) ? "" : Math.round(emiTenureMonths * emi);
-    emiTotalAmountDisplay.textContent = emiTotalAmountValue;
+	let emiTotalAmountValue = isNaN(emi) ? "" : Math.round(emiTenureMonths * emi);
+	emiTotalAmountDisplay.textContent = emiTotalAmountValue;
 
-    let emiTotalInterestPayable = isNaN(emi) ? "" : Math.round(emiTotalAmountValue - emiPrincipalAmount);
-    emiTotalInterestDisplay.textContent = emiTotalInterestPayable;
+	let emiTotalInterestPayable = isNaN(emi) ? "" : Math.round(emiTotalAmountValue - emiPrincipalAmount);
+	emiTotalInterestDisplay.textContent = emiTotalInterestPayable;
 };
 
 const refreshEMIInput = () => {
-    emiPrincipalAmount = parseFloat(emiPrincipalInput.value) || 0;
-    emiInterestRate = parseFloat(emiInterestInput.value) || 0;
-    emiTenureMonths = parseFloat(emiTenureInput.value) || 0;
-    emiInterestRateMonthly = emiInterestRate / 12 / 100;
+	emiPrincipalAmount = parseFloat(emiPrincipalInput.value) || 0;
+	emiInterestRate = parseFloat(emiInterestInput.value) || 0;
+	emiTenureMonths = parseFloat(emiTenureInput.value) || 0;
+	emiInterestRateMonthly = emiInterestRate / 12 / 100;
 };
 
 const initEMI = () => {
-    refreshEMIInput();
-    let emi = calculateemi();
-    updateEMIData(emi);
+	refreshEMIInput();
+	let emi = calculateemi();
+	updateEMIData(emi);
 };
 
 initEMI();
 
-emiCalculateButton.addEventListener("click", initEMI);
+
+
+// Define the function to open the popup
+function openPopupWithDelay() {
+    initEMI();
+}
+
+// Attach the event listener to the button
+calculateEBtn.addEventListener("click", openPopupWithDelay);
+
 
 const clearEMIInputs = () => {
-    emiPrincipalInput.value = "";
-    emiInterestInput.value = "";
-    emiTenureInput.value = "";
-    refreshEMIInput();
-    updateEMIData(); // Clear the result values
+	emiPrincipalInput.value = "";
+	emiInterestInput.value = "";
+	emiTenureInput.value = "";
+	refreshEMIInput();
+	updateEMIData(); // Clear the result values
 };
 
 emiRefreshButton.addEventListener("click", clearEMIInputs);

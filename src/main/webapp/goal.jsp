@@ -16,6 +16,72 @@
 <title>Financial-Goal</title>
 
 <style>
+.popup {
+	width: 400px;
+	background: #f7f0ea;
+	border-radius: 6px;
+	position: absolute;
+	top: 0%;
+	left: 50%;
+	transform: translate(-50%, -50%) scale(0.1);
+	text-align: center;
+	padding: 0 30px 30px;
+	color: #303030;
+	transition: transform 0.4s, top 0.4s;
+	visibility: hidden;
+}
+
+.popup h2 {
+	font-size: 30px;
+	font-weight: 500;
+	margin: 30px 0;
+}
+
+.popup .bell {
+	background-color: #d42367;
+	align-items: center;
+	font-size: 45px;
+	height: 90px;
+	width: 100px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+	padding: 10px 10px;
+	border-radius: 50%;
+	color: #fff;
+	border: none;
+	margin-top: -50px;
+}
+
+.popup .popup-buttons {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 20px;
+}
+
+.openGpopup {
+	visibility: visible;
+	top: 50%;
+	transform: translate(-50%, -50%) scale(1);
+}
+
+.popup .popup-buttons button {
+	width: 48%; /* Adjust as needed */
+	padding: 10px 0;
+	background-color: #d72c68;
+	color: #fff;
+	border: 0;
+	outline: none;
+	font-size: 18px;
+	border-radius: 4px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+	transition: background-color 0.3s ease;
+	/* Add transition for smooth effect */
+}
+
+/* Hover effect */
+.popup .popup-buttons button:hover {
+	background-color: #b71752; /* Change background color on hover */
+}
+
 
 .icon {
 	padding-top: 60px;
@@ -478,72 +544,6 @@
 		text-align: center;
 	}
 }
-
-.popup {
-	width: 400px;
-	background: #f7f0ea;
-	border-radius: 6px;
-	position: absolute;
-	top: 0%;
-	left: 50%;
-	transform: translate(-50%, -50%) scale(0.1);
-	text-align: center;
-	padding: 0 30px 30px;
-	color: #303030;
-	transition: transform 0.4s, top 0.4s;
-	visibility: hidden;
-}
-
-.open-popup {
-	visibility: visible;
-	top: 50%;
-	transform: translate(-50%, -50%) scale(1);
-}
-
-.popup h2 {
-	font-size: 30px;
-	font-weight: 500;
-	margin: 30px 0;
-}
-
-.popup .bell {
-	background-color: #d42367;
-	align-items: center;
-	font-size: 45px;
-	height: 90px;
-	width: 100px;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-	padding: 10px 10px;
-	border-radius: 50%;
-	color: #fff;
-	border: none;
-	margin-top: -50px;
-}
-
-.popup .popup-buttons {
-	display: flex;
-	justify-content: space-between;
-	margin-top: 20px;
-}
-
-.popup .popup-buttons button {
-	width: 48%; /* Adjust as needed */
-	padding: 10px 0;
-	background-color: #d72c68;
-	color: #fff;
-	border: 0;
-	outline: none;
-	font-size: 18px;
-	border-radius: 4px;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-	transition: background-color 0.3s ease;
-	/* Add transition for smooth effect */
-}
-
-/* Hover effect */
-.popup .popup-buttons button:hover {
-	background-color: #b71752; /* Change background color on hover */
-}
 </style>
 </head>
 <body>
@@ -598,14 +598,14 @@
 									<div class="title">Tenure</div>
 									<input name="year" type="text" value="" class="year">
 								</div>
-								<div class="popup" id="popup">
-									<span class="fa-solid fa-bell bell"></span>
-									<h2>Do you want a reminder?</h2>
-									<div class="popup-buttons">
-										<button type="submit" onclick="closePopup()" class="yes">Yes</button>
-										<button onclick="closePopup()" class="no">No</button>
-									</div>
-								</div>
+								 <div class="popup" id="popupGoal">
+                                    <span class="fa-solid fa-bell bell"></span>
+                                    <h2>Do you want a reminder?</h2>
+                                    <div class="popup-buttons">
+                                        <button type=submit name="buttonClicked" value="Yes"  class="yes">Yes</button>
+                                        <button  class="no">No</button>
+                                    </div>
+                                </div>
 							</form>
 						</div>
 						<div class="result">
@@ -657,7 +657,7 @@
 				<div class="modal-body">
 					<div class="emiCalculator">
 						<div class="top">
-							<!--h2>EMI Calculator</h2-->
+
 							<form action="#">
 								<div class="group">
 									<div class="title">Principal Amount</div>
@@ -690,7 +690,7 @@
 
 								<button class="calculateEBtn">Calculate</button>
 								<button class="calculateEBtn" id="refreshEBtn">Refresh</button>
-								<button class="fa-solid fa-bell bell"></button>
+
 							</div>
 						</div>
 					</div>
@@ -762,7 +762,7 @@
 
 								<button class="calculateBtn">Calculate</button>
 								<button class="calculateBtn" id="refreshBtn">Refresh</button>
-								<button class="fa-solid fa-bell bell"></button>
+
 							</div>
 						</div>
 					</div>
@@ -774,7 +774,8 @@
 	</div>
 
 
-
+<!-- Include script.js -->
+	<script src="financialGoal.js"></script>
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
@@ -790,8 +791,7 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
 		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
 		crossorigin="anonymous"></script>
-	<!-- Include script.js -->
-	<script src="financialGoal.js"></script>
+	
 
 </body>
 </html>

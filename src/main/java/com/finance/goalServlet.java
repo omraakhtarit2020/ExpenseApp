@@ -16,7 +16,6 @@ import com.entity.User;
 import com.DAO.goalDAO;
 import com.entity.goal_entity;
 
-
 /**
  * Servlet implementation class goalServlet
  */
@@ -38,29 +37,41 @@ public class goalServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub 
 		try {
-			String principal = request.getParameter("principal");
-			String year = request.getParameter("year");
-			// Get the current date
-		    long currentDate = System.currentTimeMillis();
-		    // Convert it to java.sql.Date
-		    Date date = new Date(currentDate);
-		    
-			HttpSession session = request.getSession();
-			int userId = ((User) session.getAttribute("userobj")).getId();
+			String buttonClicked = request.getParameter("buttonClicked");
 
-			// create a entity object
-			goal_entity g_entity = new goal_entity(principal, year, userId, date);
-			
-			System.out.println(g_entity.toString());
-			// create a DAO object
-			goalDAO g = new goalDAO(DBConnection.getConn());
-			if (g.insertGoal(g_entity)) {
-				System.out.println("submitted");
-				response.sendRedirect("goal.jsp");
+			// Check if the button clicked is "Yes"
+			if (buttonClicked != null && buttonClicked.equals("Yes")) {
+
+				String principal = request.getParameter("principal");
+				String year = request.getParameter("year");
+				// Get the current date
+				long currentDate = System.currentTimeMillis();
+				// Convert it to java.sql.Date
+				Date date = new Date(currentDate);
+
+				HttpSession session = request.getSession();
+				int userId = ((User) session.getAttribute("userobj")).getId();
+
+				// create a entity object
+				goal_entity g_entity = new goal_entity(principal, year, userId, date);
+
+				System.out.println(g_entity.toString());
+				// create a DAO object
+				goalDAO g = new goalDAO(DBConnection.getConn());
+				if (g.insertGoal(g_entity)) {
+					System.out.println("submitted");
+					
+					response.sendRedirect("goal.jsp");
+				} else {
+					System.out.println("error encountered");
+				}
+				
 			} else {
-				System.out.println("error encountered");
+				// Button click was not "Yes", do nothing or handle as needed
+				response.sendRedirect("goal.jsp");
+				System.out.println("Reminder not needed.");
 			}
 		}
 
