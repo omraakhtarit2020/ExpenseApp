@@ -24,8 +24,8 @@ import com.entity.User;
 /**
  * Servlet implementation class ForgotPassword
  */
-@WebServlet("/forgotPassword")
-public class ForgotPassword extends HttpServlet {
+@WebServlet("/resendOtp")
+public class resendOtp extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String fname = request.getAttribute("fname").toString(); // Retrieve first name from request attribute
 		String email = request.getParameter("email");

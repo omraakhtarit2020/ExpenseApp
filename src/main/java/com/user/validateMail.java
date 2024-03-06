@@ -44,7 +44,9 @@ public class validateMail extends HttpServlet {
             // Check if email exists in the database
             if (rs.next()) {
                 // Email exists, set email as a session attribute and redirect user to updateMpin servlet
-                request.getSession().setAttribute("email", email);
+            	String fname = rs.getString("fname"); // Assuming the column name for first name is "first_name"
+                request.setAttribute("fname", fname); // Set first name as a request attribute
+            	request.getSession().setAttribute("email", email);
                 request.getRequestDispatcher("/forgotPassword").forward(request, response);
                
             } else {

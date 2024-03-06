@@ -340,6 +340,8 @@ keyframes animationRightLeft { 0% {
 </head>
 <body>
 
+<% String message = (String)request.getAttribute("message"); %>
+
 	<div class="login-root">
 		<div class="box-root flex-flex flex-direction--column"
 			style="min-height: 100vh; flex-grow: 1;">
@@ -396,6 +398,9 @@ keyframes animationRightLeft { 0% {
 				<div class="formbg-outer">
 					<div class="formbg">
 						<div class="formbg-inner padding-horizontal--48">
+						<% if (message != null) { %>
+    							<div><h6><%= message %></h6></div>
+							<% } %>
 							<form action="validateMail" method="POST" id="stripe-login">
 								<div class="field padding-bottom--24">
 									<label for="email"><i class="fa-solid fa-envelope"></i>E-mail
@@ -408,14 +413,6 @@ keyframes animationRightLeft { 0% {
 									<button id="generateOtpBtn" class="btn genOtp">Generate
 										OTP</button>
 								</div>
-								<div class="popup" id="popupOtp">
-                                    <label for="otp">OTP </label> 
-                                    <input id="otp" placeholder="Enter OTP"
-										name="otp">
-                                    <div class="Otp-button">
-                                        <button type=submit name="buttonClicked" value="Next"  class="next">Yes</button>
-                                    </div>
-                                </div>
 
 							</form>
 						</div>
