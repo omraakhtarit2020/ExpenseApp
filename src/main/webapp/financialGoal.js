@@ -43,20 +43,8 @@ const initg = () => {
 
 initg();
 //calculateGBtn.addEventListener("click", initg);
-let popup = document.getElementById("popupGoal");
-
-        function openPopup() {
-            popup.classList.add("openGpopup");
-        }
-
-        function closePopup() {
-            popup.classList.remove("openGpopup");
-        }
 calculateGBtn.addEventListener("click", () => {
     initg();
-    setTimeout(() => {
-        openPopup();
-    }, 1000);
 });
 
 const refreshGInput = () => {
