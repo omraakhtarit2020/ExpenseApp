@@ -38,7 +38,7 @@ public class Notification extends HttpServlet {
 		sendEmail(LenderEmail, email, name, to, amt, date);
 
 		// Forward the request to the desired page
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		request.getRequestDispatcher("exchange.jsp").forward(request, response);
 	}
 
 	private void sendEmail(String Lenderemail, String email, String name, String to, Long amt, String date) {
