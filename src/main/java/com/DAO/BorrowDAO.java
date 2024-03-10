@@ -94,14 +94,13 @@ public class BorrowDAO {
 		boolean f = false;
 
 		try {
-			String sql = "update borrow set `to`=?,purpose=?,amt=?,borrowdate=?,followup=? where borrow_id=?";
+			String sql = "update borrow set `to`=?,purpose=?,amt=?,borrowdate=? where borrow_id=?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, b.getTo());
 			ps.setString(2, b.getPurpose());
 			ps.setLong(3, b.getAmt());
 			ps.setDate(4, b.getDate());
-			ps.setString(5, b.getFollowup());
-			ps.setInt(6, b.getBorrow_id());
+			ps.setInt(5, b.getBorrow_id());
 			int i = ps.executeUpdate();
 
 			if (i == 1) {

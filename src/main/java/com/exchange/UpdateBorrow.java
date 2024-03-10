@@ -22,7 +22,7 @@ public class UpdateBorrow extends HttpServlet {
 		try {
 			String to = (String) req.getParameter("to");
 			String purpose = (String) req.getParameter("purpose");
-			String followup = (String) req.getParameter("followup");
+			// String followup = (String) req.getParameter("followup");
 
 			long amt = Long.parseLong(req.getParameter("amt"));
 
@@ -32,7 +32,7 @@ public class UpdateBorrow extends HttpServlet {
 			HttpSession session = req.getSession();
 			int borrow_id = Integer.parseInt(req.getParameter("borrow_id"));
 			int userId = ((User) session.getAttribute("userobj")).getId();
-			Borrow borrow = new Borrow(to, purpose, amt, date, userId, followup, borrow_id);
+			Borrow borrow = new Borrow(to, purpose, amt, date, userId, borrow_id);
 			System.out.print(borrow.toString());
 			BorrowDAO dao = new BorrowDAO(DBConnection.getConn());
 			if (dao.updateBorrow(borrow)) {

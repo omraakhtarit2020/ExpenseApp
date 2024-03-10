@@ -94,7 +94,7 @@ public class LendDAO {
 		boolean f = false;
 
 		try {
-			String sql = "update lend set `to`=?,purpose=?,amt=?,lenddate=?,followup=? where lend_id=?";
+			String sql = "update lend set `to`=?,purpose=?,amt=?,lenddate=? where lend_id=?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, l.getTo());
 			ps.setString(2, l.getPurpose());

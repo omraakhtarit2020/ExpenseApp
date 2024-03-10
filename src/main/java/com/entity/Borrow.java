@@ -33,6 +33,15 @@ public class Borrow {
 		this.borrow_id = borrow_id;
 	}
 
+	public Borrow(String to2, String purpose2, long amt2, Date date2, int userId, int borrow_id2) {
+		this.to = to2;
+		this.purpose = purpose2;
+		this.date = date2;
+		this.amt = amt2;
+		this.user_id = userId;
+		this.borrow_id = borrow_id2;
+	}
+
 	public String getTo() {
 		return to;
 	}
