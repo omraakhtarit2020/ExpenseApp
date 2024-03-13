@@ -39,7 +39,8 @@ public class AddExpense extends HttpServlet {
 			ExpenseDAO dao = new ExpenseDAO(DBConnection.getConn());
 			if (dao.addexpense(exp)) {
 				session.setAttribute("succMsg", "Added successfully");
-				resp.sendRedirect("home.jsp");
+				req.getRequestDispatcher("/thresholdCheck").forward(req, resp);
+				
 			} else {
 				session.setAttribute("errorMsg", "An error occurred");
 				resp.sendRedirect("addExpense.jsp");

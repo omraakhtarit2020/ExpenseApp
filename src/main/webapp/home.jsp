@@ -3,6 +3,7 @@
 <%@page import="com.db.DBConnection"%>
 <%@page import="com.entity.User_income" %>
 <%@page import="com.entity.User_expense" %>
+<%@page import="com.entity.User" %>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -12,7 +13,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Track your Expense</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <style>
 .add_button{
