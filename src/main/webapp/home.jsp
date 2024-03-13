@@ -3,6 +3,7 @@
 <%@page import="com.db.DBConnection"%>
 <%@page import="com.entity.User_income" %>
 <%@page import="com.entity.User_expense" %>
+<%@page import="com.entity.User" %>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
