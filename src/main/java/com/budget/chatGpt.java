@@ -50,7 +50,7 @@ public class chatGpt extends HttpServlet {
 	    }
 		
 		String url = "https://api.openai.com/v1/chat/completions";
-		String apiKey = "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";
+		String apiKey ="api key"; //"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";
 		String model = "gpt-3.5-turbo";
 
 		try {
