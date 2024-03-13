@@ -46,7 +46,7 @@ public class Remind extends HttpServlet {
 		sendEmail(senderEmail, email, name, to, amt, date);
 
 		// Forward the request to the desired page
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		request.getRequestDispatcher("exchange.jsp").forward(request, response);
 	}
 
 	private void sendEmail(String senderemail, String email, String name, String to, Long amt, String date) {

@@ -50,7 +50,7 @@ public class BorrowRequest extends HttpServlet {
 		sendEmail(email, purpose, to, date, amt, name);
 
 		// Forward the request to the desired page
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		request.getRequestDispatcher("exchange.jsp").forward(request, response);
 	}
 
 	private void sendEmail(String email, String purpose, String to, Date date, Long amt, String name) {

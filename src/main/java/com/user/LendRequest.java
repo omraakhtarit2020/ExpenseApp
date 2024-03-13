@@ -58,7 +58,7 @@ public class LendRequest extends HttpServlet {
 		sendEmail(email, purpose, to, date, amt, name);
 
 		// Forward the request to the desired page
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		request.getRequestDispatcher("exchange.jsp").forward(request, response);
 	}
 
 //	private void scheduleMonthlyEmails(String email, String purpose, Date date, String to, Long amt, String name) {
