@@ -1,6 +1,9 @@
 package com.budget;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -16,41 +19,43 @@ public class chatGpt extends HttpServlet {
 
 	private ArrayList<String> responses = new ArrayList<>();
 	private ArrayList<String> promptAr = new ArrayList<>();
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String prompt = req.getParameter("query");
-        String ans = chatGPT(prompt);
-        
-        promptAr.add(prompt);//Adds prompts to ArrayList
-        responses.add(ans); // Add response to ArrayList
-        req.setAttribute("promptAr", promptAr);
-        req.setAttribute("responses", responses); // Set ArrayList as request attribute
-        req.getRequestDispatcher("budgetPlanning.jsp").forward(req, resp); // Forward to JSP page
-        System.out.println("Prompt:" + prompt);
-        System.out.println("chatgpt:" + ans);
-    }
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String prompt = req.getParameter("query");
+		String ans = chatGPT(prompt);
+
+		promptAr.add(prompt);// Adds prompts to ArrayList
+		responses.add(ans); // Add response to ArrayList
+		req.setAttribute("promptAr", promptAr);
+		req.setAttribute("responses", responses); // Set ArrayList as request attribute
+		req.getRequestDispatcher("budgetPlanning.jsp").forward(req, resp); // Forward to JSP page
+		System.out.println("Prompt:" + prompt);
+		System.out.println("chatgpt:" + ans);
+	}
 
 	public static String chatGPT(String prompt) {
 		// Define keywords related to budgets and expenses
-	    String[] budgetKeywords = {"budget", "expenses", "spending", "savings", "financial", "planning", "finances", "trip",
-	    						"Track", "flight", "train", "cost", "price"};
-	    boolean isBudgetRelated = false;
+		String[] budgetKeywords = { "budget", "expenses", "spending", "savings", "financial", "planning", "finances",
+				"trip", "Track", "flight", "train", "cost", "price" };
+		boolean isBudgetRelated = false;
 
-	    // Check if the prompt contains any of the budget-related keywords
-	    for (String keyword : budgetKeywords) {
-	        if (prompt.toLowerCase().contains(keyword)) {
-	            isBudgetRelated = true;
-	            break;
-	        }
-	    }
+		// Check if the prompt contains any of the budget-related keywords
+		for (String keyword : budgetKeywords) {
+			if (prompt.toLowerCase().contains(keyword)) {
+				isBudgetRelated = true;
+				break;
+			}
+		}
 
-	    // If the prompt is not budget-related, return a message indicating so
-	    if (!isBudgetRelated) {
-	        return "Sorry, I can only answer questions related to budgets and expenses.";
-	    }
-		
+		// If the prompt is not budget-related, return a message indicating so
+		if (!isBudgetRelated) {
+			return "Sorry, I can only answer questions related to budgets and expenses.";
+		}
+
 		String url = "https://api.openai.com/v1/chat/completions";
-		String apiKey ="api key"; //"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";
+		String apiKey ="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";
+
 		String model = "gpt-3.5-turbo";
 
 		try {
@@ -89,14 +94,13 @@ public class chatGpt extends HttpServlet {
 	}
 
 	public static String extractMessageFromJSONResponse(String response) {
-	    int start = response.indexOf("content") + 11;
-	    int end = response.indexOf("\"", start);
-	    String message = response.substring(start, end);
-	    // Replace newline characters with HTML line breaks
-	    message = message.replace("\\n", "<br>");
-	    return message;
+		int start = response.indexOf("content") + 11;
+		int end = response.indexOf("\"", start);
+		String message = response.substring(start, end);
+		// Replace newline characters with HTML line breaks
+		message = message.replace("\\n", "<br>");
+		return message;
 	}
-
 
 	/*
 	 * public static void main(String[] args) {
