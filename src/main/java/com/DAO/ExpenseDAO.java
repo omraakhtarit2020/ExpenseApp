@@ -157,4 +157,26 @@ public class ExpenseDAO {
 		}
 		return f;
 	}
+
+	public boolean updateExpense(User_expense ex) {
+		boolean f = false;
+
+		try {
+			String sql = "update expe set type=?,expense=? where exp_id=?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, ex.getType());
+			ps.setLong(2, ex.getExpense());
+			ps.setInt(3, ex.getExp_id());
+			int i = ps.executeUpdate();
+
+			if (i == 1) {
+				f = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return f;
+	}
+
 }

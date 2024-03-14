@@ -30,6 +30,14 @@ public class User_expense {
 		// TODO Auto-generated constructor stub
 	}
 
+	public User_expense(String type2, long expense2, int exp_id2, int userId) {
+		// TODO Auto-generated constructor stub
+		this.type = type2;
+		this.expense = expense2;
+		this.exp_id = exp_id2;
+		this.user_id = user_id;
+	}
+
 	public String getType() {
 		return type;
 	}
