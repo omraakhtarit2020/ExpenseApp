@@ -29,6 +29,14 @@ public class User_income {
 		this.date = date;
 	}
 
+	public User_income(String type2, long income2, int inco_id2, int userId) {
+		// TODO Auto-generated constructor stub
+		this.type = type2;
+		this.income = income2;
+		this.inco_id = inco_id2;
+		this.user_id = user_id;
+	}
+
 	public String getType() {
 		return type;
 	}
