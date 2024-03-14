@@ -1,9 +1,13 @@
 <%@page import="com.DAO.IncomeDAO"%>
+<%@page import="com.entity.TypeExpense" %>
+<%@page import="com.DAO.TypeExpenseDAO"%>
+<%@page import="com.DAO.TypeDAO"%>
 <%@page import="com.DAO.ExpenseDAO"%>
 <%@page import="com.db.DBConnection"%>
 <%@page import="com.entity.User_income" %>
 <%@page import="com.entity.User_expense" %>
 <%@page import="com.entity.User" %>
+<%@page import="com.entity.Type" %>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -18,7 +22,8 @@
 <style>
 .add_button{
     background: rgba(3,7,30,0.60);
-    width: max-content;
+    height:50px;
+    width: 50px;
     display: block;
     padding: 0.7rem 1.7rem;
     z-index: 2;
@@ -77,12 +82,53 @@
          List<User_income> list=dao.getIncomeById(user.getId());
 	     for(User_income inc:list){
 	%>
-	  <p class=" p-3" style="background:#f7ffe0;border-left:5px solid #008000;min-width: 20rem;"><b><%=inc.getType()%> :</b> <span><%=inc.getIncome()%></span>
-	    <!-- <button class="btn btn-outline-secondary" style="margin-left:100px;">Delete</button> -->
-	     <span><cite style="margin-left:15%;color:#48cae4"><%=inc.getDate().toLocalDate() %>&nbsp&nbsp</cite></span>
-	     <a href="./deleteIncome?inco_id=<%=inc.getInco_id()%>" type="button"><i class="bi bi-trash3-fill"></i></a>
-	     <a href="./EditIncome?inco_id=<%=inc.getInco_id()%>" type="button"><i class="bi bi-pencil-fill"></i></a>
-	  </p>
+	  <p class=" p-3" style="background:#F8E8EE;border-left:5px solid #008000;min-width: 20rem;"><b><%=inc.getType()%> :</b> <span><%=inc.getIncome()%></span>
+	     <span><cite style="margin-left:15%;color:#0E8388"><%=inc.getDate().toLocalDate() %>&nbsp&nbsp</cite></span>
+	     <a href="./deleteIncome?inco_id=<%=inc.getInco_id()%>" type="button"><i class="bi bi-trash3-fill " style="color:#7B2869;"></i></a>
+	     <span data-bs-toggle="modal" data-bs-target="#exampleModalupdateincome"><i class="bi bi-pencil-fill" type="button"></i></a></span>
+
+					<div class="modal fade" id="exampleModalupdateincome" tabindex="-1"
+						aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h1 class="modal-title fs-5" id="exampleModalLabel">Update
+										INCOME</h1>
+									<button type="button" class="btn-close" data-bs-dismiss="modal"
+										aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+									<form action="./EditIncome" method="POST">
+										<div class="mb-3">
+											<label for="type" class="form-label">Income</label>
+												  <select class="form-select" name="type">
+												    <option selected><%=inc.getType()%></option>
+												    <%
+														TypeDAO opt = new TypeDAO(DBConnection.getConn());
+														List<Type> list1=opt.getAllType();
+														for(Type ty:list1){
+													%>
+																	      
+												     <option><%=ty.getTypeDesc()%></option>
+													 <%} %>
+												  </select>
+									    </div>
+											<input type="hidden" class="form-control"
+												value="<%=inc.getInco_id()%>" name="inco_id">
+										<br>
+										 <div class="mb-3">
+										    <label for="income" class="form-label">Amount</label>
+										    <input type="number" class="form-control" name="income" value="<%=inc.getIncome()%>">
+										  </div>
+										<br>
+				
+										<button type="submit" class="btn btn-primary"
+											style="margin-top: 15px; margin-left: 50%; transform: translateX(-50%);">Save</button>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
 	 
 	<%} %>
 	</div>
@@ -95,18 +141,62 @@
          List<User_expense> list2=dao2.getExpenseById(user.getId());
 	     for(User_expense exp:list2){
 	%>
-	  <p class="p-3" style="background:#f7ffe0;border-left:5px solid #d00000;min-width: 20rem;"><b><%=exp.getType()%>:</b> <span><%=exp.getExpense()%></span>	  
-	     	    <span><cite style="margin-left:30%;color:#48cae4"><%=exp.getDate().toLocalDate() %></cite></span>
-	     	    <a href="./deleteExpense?exp_id=<%=exp.getExp_id()%>"><button class="btn btn-outline-warning py-0" style="margin-left:6em; margin-top:5px;">DELETE</button></a>
+	  <p class="p-3" style="background:#F8E8EE;border-left:5px solid #d00000;min-width: 20rem;"><b><%=exp.getType()%>:</b> <span><%=exp.getExpense()%></span>	  
+	     	    <span><cite style="margin-left:20%;color:#0E8388"><%=exp.getDate().toLocalDate() %></cite></span>
+	     	    <a href="./deleteExpense?exp_id=<%=exp.getExp_id()%>" type="button"><i class="bi bi-trash3-fill" style="color:#7B2869;"></i></a>
+	     	    <span data-bs-toggle="modal" data-bs-target="#exampleModalupdateexpense"><i class="bi bi-pencil-fill" type="button" ></i></a></span>
+
+					<div class="modal fade" id="exampleModalupdateexpense" tabindex="-1"
+						aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h1 class="modal-title fs-5" id="exampleModalLabel">Update
+										EXPENSE</h1>
+									<button type="button" class="btn-close" data-bs-dismiss="modal"
+										aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+									<form action="./EditExpense" method="POST">
+										<div class="mb-3">
+											<label for="type" class="form-label">Expense</label>
+												  <select class="form-select" name="type">
+												    <option selected><%=exp.getType() %></option>
+												    <%
+														TypeExpenseDAO opt = new TypeExpenseDAO(DBConnection.getConn());
+														List<TypeExpense> expe=opt.getAllType();
+														for(TypeExpense ty:expe){
+													%>
+																	      
+												     <option><%=ty.getTypeDesc()%></option>
+													 <%} %>
+												  </select>
+									    </div>
+											<input type="hidden" class="form-control"
+												value="<%=exp.getExp_id()%>" name="exp_id">
+										<br>
+										 <div class="mb-3">
+										    <label for="expense" class="form-label">Amount</label>
+										    <input type="number" class="form-control" name="expense" value="<%=exp.getExpense()%>">
+										  </div>
+										<br>
+				
+										<button type="submit" class="btn btn-primary"
+											style="margin-top: 15px; margin-left: 50%; transform: translateX(-50%);">Save</button>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
 	  </p>
 
 	
 	<%} %> 
 	</div>
 </div>
-<div class="add_button" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"><h2>+</h2></div>
+<div class="add_button" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"><h1 class="d-flex justify-content-center align-items-center fs-5"><b>+</b></h1></div>
 
-<a href="./download" class="d-flex justify-content-center align-items-center text-decoration-none" >Download All Transactions</a>
+<a href="./download" class="d-flex justify-content-center align-items-center text-decoration-none" style="color:#66347F";>Download All Transactions</a>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

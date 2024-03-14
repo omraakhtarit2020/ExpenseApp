@@ -159,4 +159,25 @@ public class IncomeDAO {
 		}
 		return f;
 	}
+
+	public boolean updateIncome(User_income inc) {
+		boolean f = false;
+
+		try {
+			String sql = "update inco set type=?,income=? where inco_id=?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, inc.getType());
+			ps.setLong(2, inc.getIncome());
+			ps.setInt(3, inc.getInco_id());
+			int i = ps.executeUpdate();
+
+			if (i == 1) {
+				f = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return f;
+	}
 }
