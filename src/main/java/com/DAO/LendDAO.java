@@ -100,8 +100,7 @@ public class LendDAO {
 			ps.setString(2, l.getPurpose());
 			ps.setLong(3, l.getAmt());
 			ps.setDate(4, l.getDate());
-			ps.setString(5, l.getFollowup());
-			ps.setInt(6, l.getLend_id());
+			ps.setInt(5, l.getLend_id());
 			int i = ps.executeUpdate();
 
 			if (i == 1) {
