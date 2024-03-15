@@ -13,6 +13,11 @@
     background-repeat: no-repeat;
     background-size: cover;
   }
+  #fifth{
+  background-image: url(components/indexItems/images/split.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
  <%@include file="components/indexItems/css.jsp" %>
 </style>
 </head>
@@ -33,6 +38,9 @@
 </div>
 <div id="fourth" class="element">
   <p><a href="exchange.jsp">EXCHANGE</a></p>
+</div>
+<div id="fifth" class="element">
+  <p><a href="split.jsp">SPLITWISER</a></p>
 </div>
 </div>
 

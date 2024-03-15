@@ -34,7 +34,7 @@ public class User_income {
 		this.type = type2;
 		this.income = income2;
 		this.inco_id = inco_id2;
-		this.user_id = user_id;
+		this.user_id = userId;
 	}
 
 	public String getType() {
