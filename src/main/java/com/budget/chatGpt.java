@@ -19,20 +19,67 @@ public class chatGpt extends HttpServlet {
 
 	private ArrayList<String> responses = new ArrayList<>();
 	private ArrayList<String> promptAr = new ArrayList<>();
-
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String prompt = req.getParameter("query");
 		String ans = chatGPT(prompt);
-
-		promptAr.add(prompt);// Adds prompts to ArrayList
-		responses.add(ans); // Add response to ArrayList
+		
+		// Clear the ArrayLists before adding new entries
+	    responses.clear();
+	    promptAr.clear();
+	 // Adds prompts to ArrayList, Add response to ArrayList
+		promptAr.add(prompt);
+		responses.add(ans); 
+		// Check if the prompt is the initial query or a follow-up
+        if (prompt.equalsIgnoreCase("How can I help you?")) {
+            // Provide options to the user
+            ans = "Please choose one of the following options:\n" +
+                  "1. Plan a trip within a budget\n" +
+                  "2. Reduce monthly expenses\n" +
+                  "3. Investment\n" +
+                  "4. Others";
+        } else {
+            // Process user's choice and provide relevant follow-up questions
+            String userChoice = prompt.toLowerCase();
+            switch (userChoice) {
+                case "1":
+                    // Ask relevant questions for planning a trip within a budget
+                    ans = "Sure, I can help you plan a trip within a budget. " +
+                          "Could you please provide me with some details about your trip?";
+                    break;
+                case "2":
+                    // Ask relevant questions for reducing monthly expenses
+                    ans = "To help you reduce your monthly expenses, " +
+                          "could you please provide more information about your expenses?";
+                    break;
+                case "3":
+                    // Ask relevant questions for investment
+                    ans = "For investment advice, could you please specify your investment goals and risk tolerance?";
+                    break;
+                case "4":
+                    // Handle other options
+                    ans = "Please specify your query so I can assist you accordingly.";
+                    break;
+                default:
+                    ans = "Sorry, I didn't understand your choice. Please choose a valid option.";
+                    break;
+            }
+        }
+        
 		req.setAttribute("promptAr", promptAr);
 		req.setAttribute("responses", responses); // Set ArrayList as request attribute
 		req.getRequestDispatcher("budgetPlanning.jsp").forward(req, resp); // Forward to JSP page
+		
 		System.out.println("Prompt:" + prompt);
 		System.out.println("chatgpt:" + ans);
+		
 	}
+	
+	// Method to clear the chat history
+    public void clearChat() {
+        responses.clear(); // Clear responses ArrayList
+        promptAr.clear(); // Clear promptAr ArrayList
+    }
 
 	public static String chatGPT(String prompt) {
 		// Define keywords related to budgets and expenses
@@ -52,9 +99,10 @@ public class chatGpt extends HttpServlet {
 		if (!isBudgetRelated) {
 			return "Sorry, I can only answer questions related to budgets and expenses.";
 		}
+		
 
 		String url = "https://api.openai.com/v1/chat/completions";
-		String apiKey ="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";
+		String apiKey ="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";
 
 		String model = "gpt-3.5-turbo";
 

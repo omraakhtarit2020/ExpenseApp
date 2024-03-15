@@ -27,7 +27,7 @@ public class Login extends HttpServlet {
 			HttpSession session = req.getSession();
 			if (user != null) {
 				session.setAttribute("userobj", user);
-				resp.sendRedirect("index.jsp");
+				resp.sendRedirect("home.jsp");
 			} else {
 				session.setAttribute("errorMsg", "Invalid MPIN. Please try again.");
 				resp.sendRedirect("login.jsp");

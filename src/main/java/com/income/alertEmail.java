@@ -30,7 +30,9 @@ public class alertEmail extends HttpServlet {
 	    HttpSession mySession = request.getSession();
 	    String fname = (String) mySession.getAttribute("fname");
 	    String email = (String) mySession.getAttribute("email");
-
+	    double amt = (Double) request.getAttribute("percentOfIncome");
+	    int income = (Integer) request.getAttribute("income");
+	    int expense = (Integer) request.getAttribute("totalExpenses");
 	    if (email != null && !email.isEmpty()) {
 	        try {
 	            // Set up email properties and authentication details
@@ -54,11 +56,17 @@ public class alertEmail extends HttpServlet {
 	            message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
 	            message.setSubject("Alert: Expense budget exceeded for this month");
 	            StringBuilder sb = new StringBuilder();
-	            sb.append("Hello ").append(fname).append("!").append(System.lineSeparator());
+	            sb.append("Greetings ").append(fname).append("!").append(System.lineSeparator());
 	            sb.append(System.lineSeparator());
-	            sb.append("This is an Alert email!").append(System.lineSeparator());
+	            sb.append("This email is to notify you about your expenses. As of now, you have already spent ").append(expense).append(" rupees this month, which accounts to ").append(amt).append("% of you total income which was last updated to ").append(income).append(" rupees.").append(System.lineSeparator());
+	            sb.append("It is important to stay mindful of your spending to ensure financial stability and achieve your long-term goals.").append(System.lineSeparator());;
 	            sb.append(System.lineSeparator());
-	            sb.append("You have exceeded your expense").append(System.lineSeparator());
+	            sb.append("We encourage you to explore all the features of our application with confidence. Our platform offers tailored "
+	            		+ "AI assistance designed to address your budget planning needs effectively. Whether you're navigating loan calculations, EMIs, or investment strategies, "
+	            		+ "our calculators ensure accurate results every time.").append(System.lineSeparator());
+	            sb.append("Additionally, we provide comprehensive tracking tools for monitoring all your loans and borrowings, making financial management easy and efficient.").append(System.lineSeparator());
+	            sb.append(System.lineSeparator());
+	            sb.append("If the last transaction was not updated by you, then feel free to contact us at tracking.expense2024@gmail.com").append(System.lineSeparator());
 	            sb.append(System.lineSeparator());
 	            sb.append(System.lineSeparator());
 	            sb.append("Regards,").append(System.lineSeparator());
