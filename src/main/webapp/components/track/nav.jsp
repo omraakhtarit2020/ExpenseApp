@@ -46,7 +46,7 @@
 
 body {
 	min-height: 100vh;
-	background: white;
+	background: #f4f4f4;
 	color: black;
 	background-size: cover;
 	background-position: center;
@@ -103,7 +103,8 @@ body {
 
 .side-bar .menu .item a:hover {
 	background: rgba(146, 202, 164, 0.8);
-	transition: 0.3s ease;
+	color: white;
+	transition: 0.2s ease;
 }
 
 .side-bar .menu .item i {
@@ -211,6 +212,7 @@ span .itemExe {
 </head>
 
 <body>
+
 	<nav class="navbar">
 		<div class="container-fluid">
         <div class="logo-container">

@@ -38,7 +38,7 @@
 </head>
 <body>
 <%@ include file="components/track/nav.jsp" %>
-<div class="container p-5" style="margin-top:60px !important;">
+<div class="container p-2" style="margin-top:60px !important;">
   <div class="text-center">
   </div>
    <%
@@ -194,7 +194,7 @@
 	<%} %> 
 	</div>
 </div>
-<div class="add_button" type="button" data-bs-toggle="modal" data-bs-target="#exampleModalAdd"><h1 class="d-flex justify-content-center align-items-center fs-5"><b>+</b></h1></div>
+<div class="add_button sticky-bottom" type="button" data-bs-toggle="modal" data-bs-target="#exampleModalAdd"><h1 class="d-flex justify-content-center align-items-center fs-5"><b>+</b></h1></div>
 
 <a href="./download" class="d-flex justify-content-center align-items-center text-decoration-none" style="color:#66347F";>Download All Transactions</a>
 

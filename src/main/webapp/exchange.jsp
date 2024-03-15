@@ -3,7 +3,7 @@
 <%@page import="com.db.DBConnection"%>
 <%@page import="com.entity.Lend"%>
 <%@page import="com.entity.Borrow"%>
-<%@page import="com.entity.User" %>
+
 <%@page import="java.util.List"%>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -55,7 +55,7 @@
 
 			<button type="button" class="btn btn-dark" data-bs-toggle="modal"
 				data-bs-target="#exampleModal"
-				style="border-radius: 50%; margin-left: 50%; transform: translateX(-50%);">
+				style="border-radius: 50%; margin-left: 50%; transform: translateX(-50%); z-index: 999;">
 				+</button>
 
 			<!-- Modal -->
@@ -131,7 +131,7 @@
 
 			<div class="p-4">
 				<%
-				User user = (User) session.getAttribute("userobj");
+				
 				LendDAO dao = new LendDAO(DBConnection.getConn());
 				List<Lend> list = dao.getLendById(user.getId());
 				String[] color = {"#9ef01a", "#ff4800", "#ff0a54", "#ffb600", "#9448bc", "#99ffff"};

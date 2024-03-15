@@ -64,7 +64,8 @@
 
 .side-bar .menu .item a:hover {
 	background: rgba(80, 100, 190,0.4);
-	transition: 0.3s ease;
+	color: white;
+    transition: 0.2s ease;
 }
 
 .side-bar .menu .item i {

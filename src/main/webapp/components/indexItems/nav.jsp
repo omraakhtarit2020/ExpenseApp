@@ -46,7 +46,7 @@
 
 body {
 	min-height: 100vh;
-	background: white;
+	background: #f4f4f4;
 	color: rgb(233, 231, 240);
 	background-size: cover;
 	background-position: center;
@@ -103,7 +103,8 @@ body {
 
 .side-bar .menu .item a:hover {
 	background: rgba(92, 63, 1, 0.4);
-	transition: 0.3s ease;
+	color: white;
+	transition: 0.2s ease;
 }
 
 .side-bar .menu .item i {
@@ -239,16 +240,7 @@ span .itemExe {
 			<div class="item">
 				<a href="home.jsp"><i class="fas fa-desktop"></i>Dash-Board</a>
 			</div>
-			<div class="item">
-				<a class="sub-btn"><i class="fas fa-th-large"></i> Features <i
-					class="fas fa-angle-right dropdown"></i></a>
-				<div class="sub-menu">
-					<a href="#" class="sub-item"><i class="far fa-handshake"></i>
-						Split-Wiser</a> <a href="goal.jsp" class="sub-item"><i
-						class="fas fa-calculator"></i> Calculators</a> <a href="exchange.jsp"
-						class="sub-item"><i class="fas fa-university"></i> Lend/Borrow</a>
-				</div>
-			</div>
+			
 			<div class="item">
 				<a href="budgetPlanning.jsp"><i class="fas fa-robot"></i>
 					BudgetGPT</a>
