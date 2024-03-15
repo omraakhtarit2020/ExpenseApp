@@ -32,14 +32,13 @@ public class DownloadPdf extends HttpServlet {
 		// System.out.println("hi");
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("userobj");
-		String nameOfFile=user.getFname()+"_"+user.getLname()+"_"+"Transaction list";
-		String path = "C:\\Users\\DELL\\Desktop\\" + nameOfFile + ".pdf";		
+		String nameOfFile = user.getFname() + "_" + user.getLname() + "_" + "Transaction list";
+		String path = "C:\\Users\\DELL\\Desktop\\" + nameOfFile + ".pdf";
 		PdfWriter writer = new PdfWriter(path);
 		PdfDocument docu = new PdfDocument(writer);
 		docu.setDefaultPageSize(PageSize.A4);
 		Document document = new Document(docu);
 
-		
 		ExpenseDAO d = new ExpenseDAO(DBConnection.getConn());
 		List<User_expense> list1 = d.getAllExpenseById(user.getId());
 
