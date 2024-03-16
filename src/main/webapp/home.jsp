@@ -6,7 +6,7 @@
 <%@page import="com.db.DBConnection"%>
 <%@page import="com.entity.User_income" %>
 <%@page import="com.entity.User_expense" %>
-<%@page import="com.entity.User" %>
+
 <%@page import="com.entity.Type" %>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -38,11 +38,11 @@
 </head>
 <body>
 <%@ include file="components/track/nav.jsp" %>
-<div class="container p-5" style="margin-top:60px !important;">
+<div class="container p-2" style="margin-top:60px !important;">
   <div class="text-center">
   </div>
    <%
-          User user=(User) session.getAttribute("userobj");
+          
          ExpenseDAO d=new ExpenseDAO(DBConnection.getConn());
          long totalexp=d.totalExpense(user.getId());
          
@@ -194,12 +194,12 @@
 	<%} %> 
 	</div>
 </div>
-<div class="add_button" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"><h1 class="d-flex justify-content-center align-items-center fs-5"><b>+</b></h1></div>
+<div class="add_button sticky-bottom" type="button" data-bs-toggle="modal" data-bs-target="#exampleModalAdd"><h1 class="d-flex justify-content-center align-items-center fs-5"><b>+</b></h1></div>
 
 <a href="./download" class="d-flex justify-content-center align-items-center text-decoration-none" style="color:#66347F";>Download All Transactions</a>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModalAdd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
