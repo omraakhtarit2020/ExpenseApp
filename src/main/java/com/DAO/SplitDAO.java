@@ -3,6 +3,8 @@ package com.DAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -17,13 +19,12 @@ public class SplitDAO {
 		this.conn = conn;
 	}
 
-	public boolean addSplit(Split s) {
-		boolean f = false;
+	public int addSplit(Split s) {
+		int generatedGroupId = -1;
 
 		try {
-
-			String sql = "insert into split(grpname,people,amt,names,user_id,date) values(?,?,?,?,?,?)";
-			PreparedStatement ps = conn.prepareStatement(sql);
+			String sql = "INSERT INTO split(grpname, people, amt, names, user_id, date) VALUES (?, ?, ?, ?, ?, ?)";
+			PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, s.getGrpname());
 			ps.setInt(2, s.getPeople());
 			ps.setDouble(3, s.getAmt());
@@ -31,16 +32,19 @@ public class SplitDAO {
 			ps.setString(4, namesString);
 			ps.setInt(5, s.getUser_id());
 			ps.setDate(6, s.getDate());
-			int i = ps.executeUpdate();
-			if (i == 1) {
-				f = true;
-			}
+			int rowsAffected = ps.executeUpdate();
 
-		} catch (Exception e) {
+			if (rowsAffected == 1) {
+				ResultSet rs = ps.getGeneratedKeys();
+				if (rs.next()) {
+					generatedGroupId = rs.getInt(1);
+				}
+			}
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		return f;
+		return generatedGroupId;
 	}
 
 	public List<Split> getAllSplitById(int user_id) {
@@ -72,6 +76,34 @@ public class SplitDAO {
 		}
 
 		return list;
+	}
+
+	public Split getSplitByGroupId(int grp_id) {
+		Split sp = null;
+
+		try {
+
+			String sql = "select * from split where grpId = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, grp_id);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				sp = new Split();
+
+				sp.setGrpname(rs.getString("grpname"));
+				sp.setPeople(rs.getInt("people"));
+				sp.setAmt(rs.getDouble("amt"));
+				String namesString = rs.getString("names");
+				List<String> namesList = Arrays.asList(namesString.split(","));
+				sp.setNames(namesList);
+				sp.setDate(rs.getDate("date"));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return sp;
 	}
 
 }

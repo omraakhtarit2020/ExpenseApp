@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="com.entity.User" %>
-<%@page import="com.DAO.SplitDAO"%>
-<%@page import="com.DAO.UserDAO"%>
+<%@page import="com.DAO.*"%>
 <%@page import="com.db.DBConnection"%>
 <%@page import="com.entity.Split" %>
 <%@page import="java.util.*"%>
@@ -12,17 +11,22 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
+<style>
+.hide{
+ display:none;
+}
+</style>
 </head>
 <body>
-<%@include file="components/track/nav.jsp" %>
+<%@ include file="components/track/splitNav.jsp"%>
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="margin-top:100px !important;margin-left:50%;transform:translateX(-50%);">
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalsplit" style="margin-top:50px !important;margin-left:50%;transform:translateX(-50%);">
   CREATE GROUP
 </button>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModalsplit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -64,46 +68,94 @@
   </div>
 </div>
 <div class="container mt-5">
-  <% 
-    SplitDAO dao2 = new SplitDAO(DBConnection.getConn());
-    User user = (User) session.getAttribute("userobj");
-    List<Split> list = dao2.getAllSplitById(user.getId());
-    int count = 0;
-    for (Split sp : list) { 
-      if (count % 3 == 0) {
-  %>
-  <div class="row row-cols-1 row-cols-md-3 g-4">
-  <% } %>
-    <div class="col">
-      <div class="card">
-        <div class="card-header border-secondary text-center fs-4" style="background:#DFCCFB";>
-          <%= sp.getGrpname() %> 
-        </div>
-        <div class="card-body">
-          <p>Total Amount to be split on : <b><%=sp.getAmt()%></b></p>
-          <%
-            double amountPerPerson = sp.getAmt() / sp.getPeople();
-            for (String name : sp.getNames()) {
-          %>
-          <p class="card-text"><b><%= name %></b>: <%= amountPerPerson %></p>
-          <%
-            }
-          %>
-        </div>
-        <div class="card-footer">
-          <small class="text-body-secondary">Created on: <%= sp.getDate() %></small>
-        </div>
+   <div class="accordion accordion-flush" id="accordionFlushExample">
+      <div class="accordion-item">
+         <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+            <em>GROUP</em>
+            </button>
+         </h2>
+         <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+               <div class="row row-cols-1 row-cols-md-3 g-4">
+               <% 
+                  SplitDAO dao2 = new SplitDAO(DBConnection.getConn());
+                  User user = (User) session.getAttribute("userobj");
+                  GroupMembershipDAO gdao = new GroupMembershipDAO(DBConnection.getConn());
+                  List<Integer> ownedGroupIds = gdao.getGroupIdsByUserAndRole(user.getId(), "Owner");
+                  for (Integer groupId : ownedGroupIds) {
+                      Split sp = dao2.getSplitByGroupId(groupId);
+               %>
+                  <div class="col">
+                    <div class="card text-bg-dark mb-3" style="max-width: 18rem;">
+                        <div class="card-header text-center fs-4" style="background:#DFCCFB";>
+                           <%= sp.getGrpname() %> 
+                        </div>
+                        <div class="card-body">
+                           <p>Total Amount to be split on : <b><%=sp.getAmt()%></b></p>
+                           <%
+                              double amountPerPerson = sp.getAmt() / sp.getPeople();
+                              for (String name : sp.getNames()) {
+                           %>
+                           <p class="card-text"><b><%= name %></b>: <%= amountPerPerson %></p>
+                           <%
+                              }
+                           %>
+                        </div>
+                        <div class="card-footer">
+                           <small class="text-white">Created on: <%= sp.getDate() %></small>
+                        </div>
+                     </div>
+                  </div>
+               <% } %>
+               </div>
+            </div>
+         </div>
       </div>
-    </div>
-  <% 
-    if (count % 3 == 2 || count == list.size() - 1) {
-  %>
-  </div>
-  <% 
-    }
-    count++;
-  } %>
+      <div class="accordion-item">
+         <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+            <em>MEMBER</em>
+            </button>
+         </h2>
+         <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+               <div class="row row-cols-1 row-cols-md-3 g-4">
+               <% 
+                  List<Integer> memberGroupIds = gdao.getGroupIdsByUserAndRole(user.getId(), "Member");
+                  for (Integer groupId : memberGroupIds) {
+                      Split sp = dao2.getSplitByGroupId(groupId);
+               %>
+                  <div class="col">
+                     <div class="card">
+                        <div class="card-header text-center fs-4" style="background:#DFCCFB";>
+                           <%= sp.getGrpname() %>
+                        </div>
+                        <div class="card-body">
+                           <p>Total Amount to be split on : <b><%=sp.getAmt()%></b></p>
+                           <%
+                              double amountPerPerson = sp.getAmt() / sp.getPeople();
+                              for (String name : sp.getNames()) {
+                           %>
+                           <p class="card-text"><b><%= name %></b>: <%= amountPerPerson %></p>
+                           <%
+                              }
+                           %>
+                        </div>
+                        <div class="card-footer">
+                           <small class="text-body-secondary">Created on: <%= sp.getDate() %></small>
+                        </div>
+                     </div>
+                  </div>
+               <% } %>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
 </div>
+
+  
 
 <script>
 function sendEmail() {
@@ -122,6 +174,7 @@ function sendEmail() {
     xhr.send();
 }
 </script>
-
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 </body>
 </html>

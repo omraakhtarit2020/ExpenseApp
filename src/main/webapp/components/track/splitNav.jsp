@@ -42,7 +42,7 @@
         }
 
         .side-bar {
-            background: rgba(1, 43, 94, 0.208);
+            background: rgba(255, 214, 255, 0.208);
             backdrop-filter: blur(15px);
             width: 350px;
             height: 100vh;
@@ -94,8 +94,8 @@
         }
 
          .menu .item a:hover {
-            background: rgba(1, 44, 78, 0.4);
-            color: white;
+            background: rgba(255, 214, 255, 0.4);
+            color: black;
             transition: 0.2s ease;
         }
 
@@ -111,7 +111,7 @@
         }
 
         .side-bar .menu .item .sub-menu {
-            background: rgba(6, 61, 107, 0.2); /*rgba(224, 212, 188, 0.2)*/
+            background: rgba(255, 214, 255, 0.2); 
             display: none;
         }
 
@@ -148,7 +148,7 @@
         }
 
         header {
-            background: rgba(1, 43, 94, 0.208);
+            background: rgb(93 1 94 / 21%);
             height: 60px;
         }
 
@@ -227,8 +227,6 @@
         <div class="menu">
             <div class="item"><a href="home.jsp"><i class="fas fa-desktop"></i>Dashboard</a></div>
             <div class="item"><a href="budgetPlanning.jsp"><i class="fas fa-robot"></i> BudgetGPT</a></div>
-            <div class="item"><a href="split.jsp" class="sub-item"><i class="far fa-handshake"></i>
-						Split-Wiser</a></div>
             <div class="item">
                 <a class="sub-btn" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
                         class="fas fa-user"></i> Profile</a>
@@ -239,7 +237,7 @@
 
     <!-- Modal-->
    <%
-   User user=(User) session.getAttribute("userobj");
+   User u=(User) session.getAttribute("userobj");
  %>
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -247,17 +245,17 @@
                 <div class="modal-header">
                     <div class="modal-title fs-5" id="exampleModalLabel">
                         <div class="dot">
-     <h1><%=user.getFname().charAt(0) %><%=user.getLname().charAt(0) %></h1>
+     <h1><%=u.getFname().charAt(0) %><%=u.getLname().charAt(0) %></h1>
    </div>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Name        : <%=user.getFname() %> <%=user.getLname() %></p>
-    <p>Email       : <%=user.getEmail() %></p>
-    <p>Phone Number: <%=user.getPhnno() %></p>
-    <p>JobType     : <%=user.getJobtype() %></p>
-    <p>Id          : <%=user.getId() %>
+                    <p>Name        : <%=u.getFname() %> <%=u.getLname() %></p>
+    <p>Email       : <%=u.getEmail() %></p>
+    <p>Phone Number: <%=u.getPhnno() %></p>
+    <p>JobType     : <%=u.getJobtype() %></p>
+    <p>Id          : <%=u.getId() %>
 
                 </div>
                 <div class="modal-footer">

@@ -92,4 +92,24 @@ public class UserDAO {
 		return user;
 	}
 
+	public int getUserIdByEmail(String email) {
+		int id = -1;
+		try {
+			if (email != null && !email.isEmpty()) { // Check if email is not null or empty
+				String sql = "SELECT id FROM user WHERE email = ?";
+				PreparedStatement ps = conn.prepareStatement(sql);
+				ps.setString(1, email);
+				ResultSet rs = ps.executeQuery();
+				if (rs.next()) {
+					id = rs.getInt(1); // Retrieve the ID value directly using the column index 1
+				}
+			} else {
+				System.err.println("Email parameter is null or empty");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return id;
+	}
+
 }
