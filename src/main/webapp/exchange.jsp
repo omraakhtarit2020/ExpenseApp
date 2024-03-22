@@ -54,12 +54,12 @@
 			<!-- Button trigger modal -->
 
 			<button type="button" class="btn btn-dark" data-bs-toggle="modal"
-				data-bs-target="#exampleModal"
+				data-bs-target="#exampleModallend"
 				style="border-radius: 50%; margin-left: 50%; transform: translateX(-50%); z-index: 999;">
 				+</button>
 
 			<!-- Modal -->
-			<div class="modal fade" id="exampleModal" tabindex="-1"
+			<div class="modal fade" id="exampleModallend" tabindex="-1"
 				aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
 					<div class="modal-content">
