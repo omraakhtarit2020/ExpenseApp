@@ -127,7 +127,7 @@
                       Split sp = dao2.getSplitByGroupId(groupId);
                %>
                   <div class="col">
-                     <div class="card">
+                    <div class="card text-bg-dark mb-3" style="max-width: 18rem;">
                         <div class="card-header text-center fs-4" style="background:#DFCCFB";>
                            <%= sp.getGrpname() %>
                         </div>
@@ -143,7 +143,7 @@
                            %>
                         </div>
                         <div class="card-footer">
-                           <small class="text-body-secondary">Created on: <%= sp.getDate() %></small>
+                           <small class="text-white">Created on: <%= sp.getDate() %></small>
                         </div>
                      </div>
                   </div>
