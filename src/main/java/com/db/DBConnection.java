@@ -11,7 +11,7 @@ public class DBConnection {
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localHost:3306/tracker", "omra", "root");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tracker", "root", "Krittik@123");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
