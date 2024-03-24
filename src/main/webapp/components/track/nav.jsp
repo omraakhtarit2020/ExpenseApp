@@ -46,7 +46,7 @@
 
 body {
 	min-height: 100vh;
-	background: #f4f4f4;
+	background: #f6fff8;
 	color: black;
 	background-size: cover;
 	background-position: center;
@@ -161,7 +161,7 @@ header {
 }
 
 .navbar {
-	background-color: rgba(250,250,250,0.4);
+	background-color: rgba(255,255,255,0.4);
 	color: #09056c;
 	width: auto;
 	height: 60px;
@@ -243,7 +243,7 @@ span .itemExe {
 				<a class="sub-btn"><i class="fas fa-th-large"></i> Features <i
 					class="fas fa-angle-right dropdown"></i></a>
 				<div class="sub-menu">
-					<a href="#" class="sub-item"><i class="far fa-handshake"></i>
+					<a href="split.jsp" class="sub-item"><i class="far fa-handshake"></i>
 						Split-Wiser</a> <a href="goal.jsp" class="sub-item"><i
 						class="fas fa-calculator"></i> Calculators</a> <a href="exchange.jsp"
 						class="sub-item"><i class="fas fa-university"></i> Credit Exchange</a>
