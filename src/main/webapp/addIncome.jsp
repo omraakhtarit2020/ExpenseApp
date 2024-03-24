@@ -12,7 +12,7 @@
 </head>
 <body>
 <%@include file="components/track/nav.jsp"  %>
-<div class="container d-flex justify-content-center align-items-center" style="margin-top:150px !important;">
+<div class="container d-flex justify-content-center align-items-center" style="margin-top:100px !important;">
 <div class="card mb-3" style="min-width: 540px;min-height:240px;" >
   <div class="row g-0">
     <div class="col-md-5">

@@ -206,7 +206,7 @@ span .itemExe {
 				<a class="sub-btn"><i class="fas fa-th-large"></i> Features <i
 					class="fas fa-angle-right dropdown"></i></a>
 				<div class="sub-menu">
-					<a href="#" class="sub-item"><i class="far fa-handshake"></i>
+					<a href="split.jsp" class="sub-item"><i class="far fa-handshake"></i>
 						Split-Wiser</a> <a href="goal.jsp" class="sub-item"><i
 						class="fas fa-calculator"></i> Calculators</a> <a href="exchange.jsp"
 						class="sub-item"><i class="fas fa-university"></i> Lend/Borrow</a>
