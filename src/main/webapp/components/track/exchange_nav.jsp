@@ -15,9 +15,6 @@
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
             font-family: "Poppins", sans-serif;
         }
         .dot {
@@ -42,7 +39,7 @@
         }
 
         .side-bar {
-            background: rgba(1, 43, 94, 0.208);
+            background: rgba(254, 211, 97,0.2);
             backdrop-filter: blur(15px);
             width: 350px;
             height: 100vh;
@@ -94,7 +91,7 @@
         }
 
          .menu .item a:hover {
-            background: rgba(1, 44, 78, 0.4);
+            background: rgba(257, 210, 93,0.4);
             color: white;
             transition: 0.2s ease;
         }
@@ -148,7 +145,7 @@
         }
 
         header {
-            background: rgba(1, 43, 94, 0.208);
+            background: rgba(254, 211, 97,0.2);
             height: 60px;
         }
 
