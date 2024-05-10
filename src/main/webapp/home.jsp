@@ -106,10 +106,10 @@ window.onload = function() {
 
 <div class="container">
    <%if(exp==0 && inc==0 && balance==0) {%>
-   <div style="width:580px;height:480px;margin-left:24%;transform:trasnlateX(-50%);margin-bottom:10px;box-shadow: -14px 22px 14px -12px rgba(0,0,0,0.47);
+   <div style="width:880px;height:480px;margin-left:12%;transform:trasnlateX(-50%);margin-bottom:10px;box-shadow: -14px 22px 14px -12px rgba(0,0,0,0.47);
 -webkit-box-shadow: -14px 22px 14px -12px rgba(0,0,0,0.47);
 -moz-box-shadow: -14px 22px 14px -12px rgba(0,0,0,0.47);">
-      <img src="images/home.gif" alt="..." style="width:580px;height:480px;">
+      <img src="images/background.gif" alt="..." style="width:850px;height:480px;">
    </div>
    <%}else{ %>
     <div class="row justify-content-center">

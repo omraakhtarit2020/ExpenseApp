@@ -275,7 +275,7 @@ span .itemExe {
 				<div class="modal-header">
 					<div class="modal-title fs-5" id="exampleModalLabel">
 						<div class="dot">
-							<h1 class="dot-h1"><%=user.getFname().charAt(0)%><%=user.getLname().charAt(0)%></h1>
+							<h1 class="dot-h1"><%=String.valueOf(user.getFname().charAt(0)).toUpperCase()%><%=String.valueOf(user.getLname().charAt(0)).toUpperCase()%></h1>
 						</div>
 					</div>
 					<button type="button" class="btn-close" data-bs-dismiss="modal"

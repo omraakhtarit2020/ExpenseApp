@@ -15,7 +15,9 @@
 </head>
 <body>
 <%@include file="components/track/nav.jsp"%>
+<div id="alertContainer" style="max-width:550px;margin-left:30%;"></div>
 <div class="container d-flex justify-content-center align-items-center" style="margin-top:100px !important;">
+
 <div class="card mb-3" style="min-width: 740px;min-height:240px;" >
   <div class="row g-0">
     <div class="col-md-5">
@@ -42,7 +44,7 @@
 			 </div>
 			  <div class="mb-3">
 			    <label for="expense">Enter the amount spent</label>
-			    <input type="number" class="form-control" name="expense">
+			    <input type="number" class="form-control" name="expense" id="expense" required oninput="checkExpense()">
 			  </div>
 			  <button type="submit" class="btn btn-warning">ADD</button>
 		</form>
@@ -53,5 +55,25 @@
 </div>
 
 
+<script>
+function checkExpense() {
+	  var expense = document.getElementById("expense").value;
+	  if (expense < 0) {
+	    displayAlert();
+	    document.getElementById("expense").value = ""; 
+	  }
+	}
+function displayAlert() {
+	  var alertContainer = document.getElementById("alertContainer");
+	  var alertDiv = document.createElement("div");
+	  alertDiv.classList.add("alert", "alert-danger", "alert-dismissible", "fade", "show");
+	  alertDiv.setAttribute("role", "alert");
+	  alertDiv.innerHTML = `
+	    <strong>Expense cannot be negative!</strong> please enter positive value.
+	    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	  `;
+	  alertContainer.appendChild(alertDiv);
+	}
+</script>
 </body>
 </html>
