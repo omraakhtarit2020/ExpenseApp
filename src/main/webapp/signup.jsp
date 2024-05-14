@@ -213,6 +213,10 @@ input[type="submit"] {
     transform: translateX(0px);
   }
 } 
+.footer-link span {
+    font-size: 15px;
+    text-align: center;
+}
 </style>
 
 </head>
@@ -272,9 +276,9 @@ input[type="submit"] {
 				class="box-root padding-top--24 flex-flex flex-direction--column"
 				style="flex-grow: 1; z-index: 9;">
 				<div
-					class="box-root padding-top--42 padding-bottom--24 flex-flex flex-justifyContent--center">
+					class="box-root padding-top--42 padding-bottom--23 flex-flex flex-justifyContent--center">
 					<h1>
-						<a href="home.jsp" rel="#">Sign-Up</a>
+						<a href="#" rel="#">Sign-Up</a>
 					</h1>
 				</div>
 					<div class="formbg-outer">
@@ -302,26 +306,35 @@ input[type="submit"] {
 								<div class="field padding-bottom--24 col-md-5">
 									<label for="mpin">
 										Security Pin </label> <input id="mpin" type="password"
-										placeholder="****" name="mpin"></div>
+										placeholder="****" name="mpin">
+										</div>
 								<div class="field padding-bottom--24 col-md-7">
 									<label for="jobtype">
 										Current Job Type</label> <input
 								for="text" name="jobtype"></div>
+								<% 
+    										String msg = (String) request.getAttribute("errorMsg");  
+    										if (msg != null) { 
+										%>
+    										<div class="alert" role="alert" style="color:red;padding-top:5px;">
+        											<%= msg %>
+    										</div>
+										<% } %>
 							<div class="field padding-bottom--24">
 								<input id="signUp" type="submit" name="submit" value="Sign-Up">
 							</div>
 						</form>
 					</div>
 				</div>
+				<div class="footer-link padding-top--24">
+						<span>Have an account already? <a href="login.jsp">Log
+								in</a></span>
+					</div>
 			</div>
 			</div>
 			</div>
 			</div>
 			
-			
-			
-
-
 			<script
 				src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
 				integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
@@ -330,5 +343,27 @@ input[type="submit"] {
 				src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
 				integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
 				crossorigin="anonymous"></script>
+				
+				<script>
+				document.getElementById("stripe-login").addEventListener("submit", function(event) {
+			        var mpin = document.getElementById("mpin").value;
+			        var len = mpin.length;
+
+			        if(len < 4){
+			            alert("Security Pin cannot be less than 4 digits");
+			            event.preventDefault();
+			            document.getElementById("mpin").value = "";
+			        }
+			        else if(len > 6){
+			            alert("Security Pin cannot be more than 6 digits");
+			            event.preventDefault();
+			            document.getElementById("mpin").value = "";
+			        } else if(!/^\d+$/.test(mpin)){
+			            alert("Security pin must contain only digits");
+			            event.preventDefault();
+			            document.getElementById("mpin").value = "";
+			        }
+			    });
+				</script>
 </body>
 </html>

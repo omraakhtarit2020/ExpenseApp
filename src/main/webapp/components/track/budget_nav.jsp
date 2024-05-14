@@ -209,7 +209,7 @@ span .itemExe {
 					<a href="split.jsp" class="sub-item"><i class="far fa-handshake"></i>
 						Split-Wiser</a> <a href="goal.jsp" class="sub-item"><i
 						class="fas fa-calculator"></i> Calculators</a> <a href="exchange.jsp"
-						class="sub-item"><i class="fas fa-university"></i> Lend/Borrow</a>
+						class="sub-item"><i class="fas fa-university"></i> Credit Exchange</a>
 				</div>
 			</div>
 			<div class="item">

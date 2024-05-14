@@ -31,8 +31,8 @@
           }
 
         body {
+        	background-color:rgba(201,235,250,0.2);
             min-height: 100vh;
-            background: #f4f4f4;
             color: rgb(7, 1, 30);
             background-size: cover;
             background-position: center;
