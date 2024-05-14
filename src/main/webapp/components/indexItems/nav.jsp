@@ -46,7 +46,7 @@
 
 body {
 	min-height: 100vh;
-	background: #f4f4f4;
+	background: rgba(243,237,230,0.3);
 	color: rgb(233, 231, 240);
 	background-size: cover;
 	background-position: center;

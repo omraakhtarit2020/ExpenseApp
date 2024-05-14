@@ -1,0 +1,268 @@
+[33mcommit 94a1e667fafedf972a729dfb5fe07165c4517753[m[33m ([m[1;36mHEAD -> [m[1;32mBackup(DO-NOT-TOUCH-IT)[m[33m, [m[1;31morigin/exchange[m[33m, [m[1;32mexchange[m[33m)[m
+Author: omra akhtar <umraakhtar786@gmail.com>
+Date:   Fri May 10 21:20:36 2024 +0530
+
+    added alert in income and expense.jsp
+
+[33mcommit 20cee77a513044f3cf04f3ebae13f479d091e8fe[m
+Author: omra akhtar <umraakhtar786@gmail.com>
+Date:   Thu Apr 18 12:10:41 2024 +0530
+
+    updated edit and home page
+
+[33mcommit 709cebecc433e2e5bcd17031a88eaf5f760fff61[m
+Author: omra akhtar <umraakhtar786@gmail.com>
+Date:   Sun Mar 24 23:55:33 2024 +0530
+
+    exchange ui updated
+
+[33mcommit 77908b47e1bd9265659b8c579c9546a6e4db80c2[m
+Merge: d92841d 4fb2af8
+Author: Omra Akhtar <79746003+omraakhtarit2020@users.noreply.github.com>
+Date:   Sun Mar 24 23:45:48 2024 +0530
+
+    Merge pull request #25 from omraakhtarit2020/main
+    
+    last pull
+
+[33mcommit 4fb2af81c2547681a5b963f60eb5e79786e7c57f[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: 5bfd358 8d382a9
+Author: Krittika2003 <ckrittika0603@gmail.com>
+Date:   Sun Mar 24 22:53:00 2024 +0530
+
+    update
+
+[33mcommit 5bfd358b4252a40a28e98f0df7f6a439e875e3d0[m
+Author: Krittika2003 <ckrittika0603@gmail.com>
+Date:   Sun Mar 24 22:41:11 2024 +0530
+
+    classpath Update
+
+[33mcommit 620347997c743c65539119554b48ecc39afa2d78[m
+Author: Krittika2003 <ckrittika0603@gmail.com>
+Date:   Sun Mar 24 22:33:45 2024 +0530
+
+    new update
+
+[33mcommit 8d382a92fc31827325e0b98721771c262de2826e[m
+Author: Krittika2003 <92219310+Krittika2003@users.noreply.github.com>
+Date:   Sun Mar 24 22:29:43 2024 +0530
+
+    Update exchange_nav.jsp
+
+[33mcommit eb681d36fba55ccb3461d14d7b7949333337f5d1[m
+Author: Krittika2003 <92219310+Krittika2003@users.noreply.github.com>
+Date:   Sun Mar 24 22:28:16 2024 +0530
+
+    Update exchange.jsp
+
+[33mcommit 390e95e7fdd77336ef698e70da31474c4d9597c8[m
+Author: Krittika2003 <ckrittika0603@gmail.com>
+Date:   Sun Mar 24 22:15:10 2024 +0530
+
+    updated exchange
+
+[33mcommit 646d50cfad23af738395f368ef264fb3636be705[m[33m ([m[1;32mmain[m[33m)[m
+Merge: b6a3069 d92841d
+Author: Omra Akhtar <79746003+omraakhtarit2020@users.noreply.github.com>
+Date:   Sat Mar 23 01:06:25 2024 +0530
+
+    Merge pull request #18 from omraakhtarit2020/exchange
+    
+    Pie chart and splitwiser
+
+[33mcommit d92841d6b85ff928f2b8c124cbd75d7ebc8b177f[m
+Author: omra akhtar <umraakhtar786@gmail.com>
+Date:   Sat Mar 23 00:54:51 2024 +0530
+
+    pie chart and color change in card
+
+[33mcommit 0907c67c3eac704abf04652c6d88c90b504b3e96[m
+Author: omra akhtar <umraakhtar786@gmail.com>
+Date:   Sat Mar 23 00:51:01 2024 +0530
+
+    splitwiser completed
+
+[33mcommit 0b4ed5033141845a409e682c48dbda128d93293b[m
+Merge: e926380 b6a3069
+Author: Omra Akhtar <79746003+omraakhtarit2020@users.noreply.github.com>
+Date:   Sat Mar 16 12:13:18 2024 +0530
+
+    Merge pull request #17 from omraakhtarit2020/main
+    
+    Taking changes from main (nav and budgetgpt)
+
+[33mcommit e9263809211479daad95a5c845cc61e86c9ec750[m
+Author: omra akhtar <umraakhtar786@gmail.com>
+Date:   Sat Mar 16 12:12:31 2024 +0530
+
+    index.jsp removed
+
+[33mcommit 6ea57b7178b002c9c3ca3fe5272ebbff95bf627e[m
+Author: omra akhtar <umraakhtar786@gmail.com>
+Date:   Sat Mar 16 02:37:03 2024 +0530
+
+    splitwiser added
+
+[33mcommit d48e11d656a8ca90ae23dbd9665dab347cb2b998[m
+Merge: 2a89795 b6a3069
+Author: Krittika2003 <92219310+Krittika2003@users.noreply.github.com>
+Date:   Sat Mar 16 01:05:28 2024 +0530
+
+    Merge pull request #16 from omraakhtarit2020/main
+    
+    Merge pull request #15 from omraakhtarit2020/loginFrontEnd
+
+[33mcommit b6a306989c629d8f93436ab22e66257f9e501fbc[m
+Merge: f82ea1a 2a89795
+Author: Krittika2003 <92219310+Krittika2003@users.noreply.github.com>
+Date:   Sat Mar 16 01:03:53 2024 +0530
+
+    Merge pull request #15 from omraakhtarit2020/loginFrontEnd
+    
+    Login front end
+
+[33mcommit 2a89795e0d9cb1644144e5086da040e462e3da09[m
+Author: Krittika2003 <ckrittika0603@gmail.com>
+Date:   Sat Mar 16 00:50:11 2024 +0530
+
+    update
+
+[33mcommit 98cdb3b53194e0c108ec0427f276021f540f0b88[m
+Author: Krittika2003 <ckrittika0603@gmail.com>
+Date:   Fri Mar 15 23:57:37 2024 +0530
+
+    update
+
+[33mcommit bccd773edc0c57ab15cefc964e6e571b0d276028[m
+Author: Krittika2003 <ckrittika0603@gmail.com>
+Date:   Fri Mar 15 23:53:02 2024 +0530
+
+    update
+
+[33mcommit febd34c72295f19cd1899f83d2db7121a716f705[m
+Author: Krittika2003 <ckrittika0603@gmail.com>
+Date:   Fri Mar 15 23:50:56 2024 +0530
+
+    update
+
+[33mcommit 9ba488e2ac96ebf4613b046c650ed4da1698cfd1[m
+Merge: f0fa9f7 f82ea1a
+Author: Krittika2003 <92219310+Krittika2003@users.noreply.github.com>
+Date:   Thu Mar 14 18:03:37 2024 +0530
+
+    Merge pull request #13 from omraakhtarit2020/main
+    
+    merge
+
+[33mcommit f0fa9f7a5d242f5d3ffa740e3b4eb3ba3c5177c4[m
+Author: Krittika2003 <ckrittika0603@gmail.com>
+Date:   Thu Mar 14 18:01:44 2024 +0530
+
+    updated gitignore
+
+[33mcommit 5f524ebeb62518be331110ae1c4daf97458b4cfa[m
+Merge: 5742ad7 f82ea1a
+Author: Omra Akhtar <79746003+omraakhtarit2020@users.noreply.github.com>
+Date:   Thu Mar 14 13:40:25 2024 +0530
+
+    Merge pull request #12 from omraakhtarit2020/main
+    
+    Update from main
+
+[33mcommit f82ea1ab63632f54ca81665b5bcfac29ecf9b9a4[m
+Author: omra akhtar <umraakhtar786@gmail.com>
+Date:   Thu Mar 14 13:38:48 2024 +0530
+
+    lend updated
+
+[33mcommit 932fc314a6176f929615bfd736e8d9a5dc1d3880[m
+Merge: 1912d6d 5742ad7
+Author: Omra Akhtar <79746003+omraakhtarit2020@users.noreply.github.com>
+Date:   Thu Mar 14 13:27:58 2024 +0530
+
+    Merge pull request #11 from omraakhtarit2020/exchange
+    
+    Added edit option and changed income/expense page
+
+[33mcommit 5742ad79a5565f4563d16a6934822b335f72c136[m
+Author: omra akhtar <umraakhtar786@gmail.com>
+Date:   Thu Mar 14 13:22:30 2024 +0530
+
+    updated add expnese and income jsp, also added edit option in both pages
+
+[33mcommit 1912d6d172650ae786ea5746f73f4b7959cdd27e[m
+Author: Krittika2003 <92219310+Krittika2003@users.noreply.github.com>
+Date:   Thu Mar 14 01:21:26 2024 +0530
+
+    Update budgetPlanning.jsp
+
+[33mcommit 6c6a4758eee57d6aaaa555b8f66ac89e943d58d5[m
+Merge: ff6e41b f1bc09a
+Author: Krittika2003 <ckrittika0603@gmail.com>
+Date:   Thu Mar 14 00:51:22 2024 +0530
+
+    updated budget
+
+[33mcommit ff6e41b2bad3ecbaa53969f93879a57d214563b7[m
+Author: Krittika2003 <ckrittika0603@gmail.com>
+Date:   Thu Mar 14 00:28:10 2024 +0530
+
+    updated budgteGPT
+
+[33mcommit f1bc09a6173249b72fb4c368c77f7be03620aa25[m
+Merge: 0f1e97e ef2575d
+Author: Krittika2003 <92219310+Krittika2003@users.noreply.github.com>
+Date:   Wed Mar 13 18:40:46 2024 +0530
+
+    Merge pull request #10 from omraakhtarit2020/main
+    
+    new update
+
+[33mcommit 1aa8b5f95f2c2193a55afd29d37ff44a4865b228[m
+Merge: 0ec52f3 ef2575d
+Author: Omra Akhtar <79746003+omraakhtarit2020@users.noreply.github.com>
+Date:   Wed Mar 13 13:38:33 2024 +0530
+
+    Merge pull request #9 from omraakhtarit2020/main
+    
+    Taking all the changes from main
+
+[33mcommit ef2575da1698708d0c4b31e4bfee80708dfb72d4[m
+Author: omra akhtar <umraakhtar786@gmail.com>
+Date:   Wed Mar 13 13:35:25 2024 +0530
+
+    added nav in budget
+
+[33mcommit 3a0a5aad6bc171eef84a900ed458afde9bf9fb94[m
+Author: omra akhtar <umraakhtar786@gmail.com>
+Date:   Wed Mar 13 12:36:54 2024 +0530
+
+    updated git ignore
+
+[33mcommit 2736f73fe279115261a339297c1374095a008a69[m
+Merge: 4bae614 0f1e97e
+Author: Krittika2003 <92219310+Krittika2003@users.noreply.github.com>
+Date:   Wed Mar 13 12:27:01 2024 +0530
+
+    Merge pull request #8 from omraakhtarit2020/loginFrontEnd
+    
+    Login front end
+
+[33mcommit 0f1e97e813a39c69a1800f6c1aaf0c0684bd428e[m
+Merge: 5e43b8b 4bae614
+Author: Krittika2003 <92219310+Krittika2003@users.noreply.github.com>
+Date:   Wed Mar 13 12:16:35 2024 +0530
+
+    Merge pull request #7 from omraakhtarit2020/main
+    
+    merge
+
+[33mcommit 5e43b8b1e707f6f84ede2bc611f6e215784dce63[m
+Author: Krittika2003 <ckrittika0603@gmail.com>
+Date:   Wed Mar 13 11:40:37 2024 +0530
+
+    gitignore
+
+[33mcommit 4bae614d0fce6abc8fd2a721b5182cc8210b35d4[m[33m ([m[1;31morigin/budgetGPT[m[33m)[m
+Merge: d2807db 0ec5

@@ -256,10 +256,10 @@ span .itemExe {
 			<div class="item">
 				<a class="sub-btn" href="#" data-bs-toggle="modal"
 					data-bs-target="#exampleModal"><i class="fas fa-user"></i>
-					Profile</a>
+					 Profile</a>
 			</div>
 			<div class="item">
-				<a href="./logout"><i class="fas fa-sign-out-alt"></i>Log-Out</a>
+				<a href="./logout"><i class="fas fa-sign-out-alt"></i> Log-Out</a>
 			</div>
 		</div>
 	</div>

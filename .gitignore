@@ -1,5 +1,0 @@
-/bin/
-.classpath
-com/db/DBConnection.java
-com/download/DownloadPdf.java
-com/budget/chatGpt.java

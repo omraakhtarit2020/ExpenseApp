@@ -1,6 +1,10 @@
 package com.user;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,6 +31,14 @@ public class SignUp extends HttpServlet {
 			int mpin = Integer.parseInt(req.getParameter("mpin"));
 			String jobtype = req.getParameter("jobtype");
 
+			// Check if MPIN already exists in the database
+            if (Checkmpin(mpin)) {
+                HttpSession session = req.getSession();
+                req.setAttribute("errorMsg", "MPIN already exists. Please choose a different one.");
+                req.getRequestDispatcher("signup.jsp").forward(req, resp);
+                return;
+            }
+			
 			User user = new User(fname, lname, email, phnno, jobtype, mpin);
 
 			UserDAO dao = new UserDAO(DBConnection.getConn());
@@ -43,4 +55,34 @@ public class SignUp extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-}
+		// Method to check if MPIN already exists in the database
+	    public boolean Checkmpin(int mpin) throws SQLException {
+	        Connection conn = null;
+	        PreparedStatement ps = null;
+	        ResultSet rs = null;
+
+	        try {
+	            conn = DBConnection.getConn();
+	            String query = "SELECT COUNT(*) FROM user WHERE mpin = ?";
+	            ps = conn.prepareStatement(query);
+	            ps.setInt(1, mpin);
+	            rs = ps.executeQuery();
+	            if (rs.next()) {
+	                int count = rs.getInt(1);
+	                return count > 0; // Returns true if MPIN exists, false otherwise
+	            }
+	            return false;
+	        } finally {
+	            // Close resources
+	            if (rs != null) {
+	                rs.close();
+	            }
+	            if (ps != null) {
+	                ps.close();
+	            }
+	            if (conn != null) {
+	                conn.close();
+	            }
+	        }
+	    }
+	}

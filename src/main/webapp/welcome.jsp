@@ -5,7 +5,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Tracking Expense</title>
-
+	<link rel="icon" type="images/icon" href="images/NewLogo.png">
     <link rel="canonical" href="https://https://demo.themesberg.com/landwind/" />
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -2498,6 +2498,7 @@ input:checked + .toggle-bg {
             </div>
         </nav>
     </header>
+    
 
     <!-- Start block -->
     <section class="bg-white dark:bg-gray-900">

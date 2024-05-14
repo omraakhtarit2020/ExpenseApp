@@ -3,7 +3,6 @@
 <%@page import="com.db.DBConnection"%>
 <%@page import="com.entity.Lend"%>
 <%@page import="com.entity.Borrow"%>
-
 <%@page import="java.util.List"%>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -25,21 +24,17 @@
 .grid1 {
 	height: 400px;
 	width: 280px;
-
 }
 .grid2 {
 	height: 400px;
 	width: 280px;
 }
-
 .gridm {
 	width: 150px;
 	margin: 40px;
 
 }
-
 .card {
-	
 	border: none;
 	box-shadow: rgba(149, 157, 165, 0.5) 0px 8px 24px;
 }
@@ -185,14 +180,26 @@ line-height:35px;
 							LendDAO dao = new LendDAO(DBConnection.getConn());
 							List<Lend> list = dao.getLendById(user.getId());
 							for (Lend lend : list) {
+
+							if (list.isEmpty()){
+						%>
+								<div class="box loan">
+									<h6 style="text-align:center; font-size:18px; color:#4f5051; padding-top:30px">- No Entry Found -</h6>
+								</div>
+						<%		
+							} else {
+								String[] color = {"#9ef01a", "#ff4800", "#ff0a54", "#ffb600", "#9448bc", "#99ffff"};
+								int colorindex = 0;
+								for (Lend lend1 : list) {
+
 						%>
 						<div class="box loan">
 						
-							<h6><b> To: </b><%=lend.getTo()%></h6>
-							<h6><b>Date: </b> <%=lend.getDate().toLocalDate()%></h6>
-						<span class="fs-6 text-black"><b>Amount: </b><i class="bi bi-currency-rupee"></i><%=lend.getAmt()%> </span> 
+							<h6><b> To: </b><%=lend1.getTo()%></h6>
+							<h6><b>Date: </b> <%=lend1.getDate().toLocalDate()%></h6>
+						<span class="fs-6 text-black"><b>Amount: </b><i class="bi bi-currency-rupee"></i><%=lend1.getAmt()%> </span> 
 						<span style="margin-left: 25%;"> <%
- 							if (lend.getFollowup().equalsIgnoreCase("Yes")) {
+ 							if (lend1.getFollowup().equalsIgnoreCase("Yes")) {
  							%> <a data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i
 								class="bi bi-envelope-at-fill fs-4 text-black"
 								data-bs-toggle="tooltip" data-bs-title="want to send reminder?"></i></a>
@@ -222,7 +229,7 @@ line-height:35px;
 												<input name="to" type="hidden" value=<%=lend.getTo()%>>
 												<input name="amt" type="hidden" value=<%=lend.getAmt()%>>
 												<input name="date" type="hidden"
-													value=<%=lend.getDate().toLocalDate()%>>
+													value=<%=lend1.getDate().toLocalDate()%>>
 											</div>
 											<button type="submit" class="btn btn-primary">Submit</button>
 										</form>
@@ -232,9 +239,11 @@ line-height:35px;
 						</div>
 
 						<span style="transform: translateX(-50%);"><a
-							href="./deleteLend?lend_id=<%=lend.getLend_id()%>"><i
+							href="./deleteLend?lend_id=<%=lend1.getLend_id()%>"><i>
 								class="bi bi-trash3-fill fs-4 text-black" type="button"></i></a> 
-								<a  onclick="showLendDetails('<%=lend.getLend_id()%>','<%= lend.getTo()%>', '<%= lend.getAmt() %>', '<%= lend.getDate().toLocalDate() %>', '<%= lend.getPurpose() %>')" data-bs-toggle="modal" data-bs-target="#exampleModalupdatelend"><i
+								<a  onclick="showLendDetails('<%=lend1.getLend_id()%>','<%= lend1.getTo()%>', '<%= lend1.getAmt() %>', '<%= lend1.getDate().toLocalDate() %>', '<%= lend1.getPurpose() %>')" data-bs-toggle="modal" data-bs-target="#exampleModalupdatelend"><i>
+								class="bi bi-trash3-fill fs-4 text-black" type="button"></i></a> <a
+							data-bs-toggle="modal" data-bs-target="#exampleModalupdatelend" onclick="setLendId(<%=lend1.getLend_id()%>)"><i>
 								class="bi bi-pencil-fill fs-4 text-black" type="button"></i></a> </span>
 
 						<div class="modal fade" id="exampleModalupdatelend" tabindex="-1"
@@ -258,8 +267,7 @@ line-height:35px;
 											</div>
 											<br>
 											<div class="form-group row">
-												<input type="hidden" class="form-control"
-													 name="lend_id" id="lendid">
+												<input type="hidden" class="form-control" name="lend_id" id="lendid" value="<%=lend1.getLend_id()%>" name="lend_id" id="lendIdInput">
 											</div>
 											<br>
 											<div class="form-group row">
@@ -297,6 +305,11 @@ line-height:35px;
 						
 					</div>
 					<%} %>
+					<%
+					colorindex++;
+					}
+					}
+					%>
 				</div>
 
 			</div>
@@ -331,16 +344,28 @@ line-height:35px;
 						for (Borrow borrow : list2) {
 						%>
 				<div class="box borrow">
-					<b>From: </b><%=borrow.getTo()%>
-					<h6><b>Date: </b><%=borrow.getDate().toLocalDate()%></h6>
-							<span class="fs-6 text-black"><b>Amount: </b><i class="bi bi-currency-rupee"></i><%=borrow.getAmt()%></span> <span style="margin-left: 25%;"> <%
- if (borrow.getFollowup().equalsIgnoreCase("Yes")) {
- %> <a data-bs-toggle="modal" data-bs-target="#staticBackdropborrow"><i
+						<%if (list2.isEmpty()) {
+							%>
+								<div class="box borrow">
+									<h6 style="text-align:center; font-size:18px; color:#4f5051; padding-top:30px">- No Entry Found -</h6>
+								</div>
+							<%
+								} else {
+									String[] colors = {"#d00000", "#ffba08", "#8ac926", "#1982c4", "#6a4c93", "#99ffff"};
+									int colorIndex = 0;
+									for (Borrow borrow1 : list2) {
+							%>
+					<div class="box borrow">
+					<b>From: </b><%=borrow1.getTo()%>
+					<h6><b>Date: </b><%=borrow1.getDate().toLocalDate()%></h6>
+							<span class="fs-6 text-black"><b>Amount: </b><i class="bi bi-currency-rupee"></i><%=borrow1.getAmt()%></span> <span style="margin-left: 25%;"> <%
+                              if (borrow1.getFollowup().equalsIgnoreCase("Yes")) {
+                                %> <a data-bs-toggle="modal" data-bs-target="#staticBackdropborrow"><i
 									data-bs-toggle="tooltip"
 									data-bs-title="Want to send a notification?"
 									class="bi bi-envelope-at-fill fs-4 text-black"></i></a> <%
- }
- %>
+                                 }
+                          %>
 							</span>
 
 							<div class="modal fade" id="staticBackdropborrow"
@@ -361,10 +386,10 @@ line-height:35px;
 														aria-describedby="emailHelp" name="lenderemail">
 													<div id="emailHelp" class="form-text">We'll never
 														share the email with anyone else.</div>
-													<input name="to" type="hidden" value=<%=borrow.getTo()%>>
-													<input name="amt" type="hidden" value=<%=borrow.getAmt()%>>
+													<input name="to" type="hidden" value=<%=borrow1.getTo()%>>
+													<input name="amt" type="hidden" value=<%=borrow1.getAmt()%>>
 													<input name="date" type="hidden"
-														value=<%=borrow.getDate().toLocalDate()%>>
+														value=<%=borrow1.getDate().toLocalDate()%>>
 												</div>
 												<button type="submit" class="btn btn-primary">Submit</button>
 											</form>
@@ -373,8 +398,8 @@ line-height:35px;
 								</div>
 							</div>
 							<span style="transform: translateX(-50%);"><a
-								href="./deleteBorrow?borrow_id=<%=borrow.getBorrow_id()%>"><i
-									class="bi bi-trash3-fill fs-4 text-black" type="button"></i></a> <a onclick="showBorrowDetails('<%=borrow.getBorrow_id()%>','<%= borrow.getTo()%>', '<%= borrow.getAmt()%>', '<%= borrow.getDate().toLocalDate() %>', '<%= borrow.getPurpose() %>')"
+								href="./deleteBorrow?borrow_id=<%=borrow1.getBorrow_id()%>"><i
+									class="bi bi-trash3-fill fs-4 text-black" type="button"></i></a> <a onclick="showBorrowDetails('<%=borrow1.getBorrow_id()%>','<%= borrow1.getTo()%>', '<%= borrow1.getAmt()%>', '<%= borrow1.getDate().toLocalDate() %>', '<%= borrow1.getPurpose() %>')"
 								data-bs-toggle="modal"
 								data-bs-target="#exampleModalupdateborrow"><i
 									class="bi bi-pencil-fill fs-4 text-black" type="button"></i></a> </span>
@@ -440,7 +465,13 @@ line-height:35px;
 							</div>
 
 						</div>
-						<%} %>
+             
+						<%
+									}
+						colorIndex++;
+						}
+						}
+						%>
 					</div>
 				</div>
 			</div>
@@ -589,6 +620,7 @@ line-height:35px;
 			</div>
 		</div>
 		</div>
+		</div></div>
 		
 
 	<script>
@@ -614,6 +646,10 @@ line-height:35px;
         var xhr = new XMLHttpRequest();
         xhr.open('GET', './borrowRequest?purpose=' + purpose + '&date=' + date + '&to=' + to + '&amt=' + amt, true);
         xhr.send();
+    }
+    
+    function setLendId(id) {
+        document.getElementById('lendIdInput').value = id;
     }
     
     </script>

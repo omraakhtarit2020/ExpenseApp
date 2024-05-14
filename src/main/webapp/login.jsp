@@ -335,6 +335,15 @@ a.ssolink {
 									<label for="mpin"><i class="fa-solid fa-lock lock"></i>
 										Security Pin </label> <input id="mpin" type="password"
 										placeholder="****" name="mpin">
+										<% 
+    										String msg = (String) request.getAttribute("errorMsg");  
+    										if (msg != null) { 
+										%>
+    										<div class="alert" role="alert" style="color:red; height:10px;">
+        											<%= msg %>
+    										</div>
+										<% } %>
+									
 									<div class="reset-pass">
 										<a href="mailForget.jsp">Forgot your Pin?</a>
 									</div>
@@ -351,10 +360,31 @@ a.ssolink {
 					</div>
 
 				</div>
+                    	
 			</div>
 		</div>
 	</div>
+	<script>
+	document.getElementById("stripe-login").addEventListener("submit", function(event) {
+	    var pwd = document.getElementById("mpin").value;
+	    var pwdLen = pwd.length;
 
+	    if (pwdLen < 4) {
+	        alert("Password must contain at least 4 digits.");
+	        event.preventDefault(); // Prevent form submission if validation fails
+	        document.getElementById("mpin").value="";
+	    } else if (pwdLen > 6) {
+	        alert("Password limit exceeded. Maximum 6 digits allowed.");
+	        document.getElementById("mpin").value = ""; // Truncate the password to 6 digits
+	        event.preventDefault(); // Prevent form submission if validation fails
+	    } else if (!/^\d+$/.test(pwd)) {
+	        alert("Password must contain digits only.");
+	        document.getElementById("mpin").value = ""; // Clear the input field if validation fails
+	        event.preventDefault(); // Prevent form submission if validation fails
+	    }
+	});
+	</script>
+	
 	<script
 		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
 		integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"

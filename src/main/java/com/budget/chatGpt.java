@@ -22,6 +22,7 @@ public class chatGpt extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		//String que=req.getParameter("que");
 		String prompt = req.getParameter("query");
 		String ans = chatGPT(prompt);
 
@@ -31,46 +32,21 @@ public class chatGpt extends HttpServlet {
 		// Adds prompts to ArrayList, Add response to ArrayList
 		promptAr.add(prompt);
 		responses.add(ans);
-		// Check if the prompt is the initial query or a follow-up
-		if (prompt.equalsIgnoreCase("How can I help you?")) {
-			// Provide options to the user
-			ans = "Please choose one of the following options:\n" + "1. Plan a trip within a budget\n"
-					+ "2. Reduce monthly expenses\n" + "3. Investment\n" + "4. Others";
-		} else {
-			// Process user's choice and provide relevant follow-up questions
-			String userChoice = prompt.toLowerCase();
-			switch (userChoice) {
-			case "1":
-				// Ask relevant questions for planning a trip within a budget
-				ans = "Sure, I can help you plan a trip within a budget. "
-						+ "Could you please provide me with some details about your trip?";
-				break;
-			case "2":
-				// Ask relevant questions for reducing monthly expenses
-				ans = "To help you reduce your monthly expenses, "
-						+ "could you please provide more information about your expenses?";
-				break;
-			case "3":
-				// Ask relevant questions for investment
-				ans = "For investment advice, could you please specify your investment goals and risk tolerance?";
-				break;
-			case "4":
-				// Handle other options
-				ans = "Please specify your query so I can assist you accordingly.";
-				break;
-			default:
-				ans = "Sorry, I didn't understand your choice. Please choose a valid option.";
-				break;
-			}
+		/*if(que!=null) {
+			promptAr.add(que);
+			req.setAttribute("promptAr", que);
+			ans=chatGPT(que);
 		}
-
+		else*/ 
+		
 		req.setAttribute("promptAr", promptAr);
 		req.setAttribute("responses", responses); // Set ArrayList as request attribute
 		req.getRequestDispatcher("budgetPlanning.jsp").forward(req, resp); // Forward to JSP page
 
 		System.out.println("Prompt:" + prompt);
 		System.out.println("chatgpt:" + ans);
-
+		//System.out.println("que:"+ que);
+		//que="";
 	}
 
 	// Method to clear the chat history
@@ -81,8 +57,8 @@ public class chatGpt extends HttpServlet {
 
 	public static String chatGPT(String prompt) {
 		// Define keywords related to budgets and expenses
-		String[] budgetKeywords = { "budget", "expenses", "spending", "savings", "financial", "planning", "finances",
-				"trip", "Track", "flight", "train", "cost", "price" };
+		String[] budgetKeywords = { "budget", "expense", "expenses", "spending", "savings", "financial", "planning", "finances",
+				"trip", "Track", "flight", "train", "cost", "price","investement plans","invest","investment","equity", "Insurance", "Payment","Mortgage" };
 		boolean isBudgetRelated = false;
 
 		// Check if the prompt contains any of the budget-related keywords
@@ -99,7 +75,7 @@ public class chatGpt extends HttpServlet {
 		}
 
 		String url = "https://api.openai.com/v1/chat/completions";
-		String apiKey = "";
+		String apiKey ="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";
 
 		String model = "gpt-3.5-turbo";
 
