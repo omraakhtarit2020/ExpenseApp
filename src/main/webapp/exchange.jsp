@@ -3,7 +3,6 @@
 <%@page import="com.db.DBConnection"%>
 <%@page import="com.entity.Lend"%>
 <%@page import="com.entity.Borrow"%>
-
 <%@page import="java.util.List"%>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -25,21 +24,17 @@
 .grid1 {
 	height: 400px;
 	width: 280px;
-
 }
 .grid2 {
 	height: 400px;
 	width: 280px;
 }
-
 .gridm {
 	width: 150px;
 	margin: 40px;
 
 }
-
 .card {
-	
 	border: none;
 	box-shadow: rgba(149, 157, 165, 0.5) 0px 8px 24px;
 }
@@ -184,9 +179,16 @@ line-height:35px;
 						<%
 							LendDAO dao = new LendDAO(DBConnection.getConn());
 							List<Lend> list = dao.getLendById(user.getId());
-							String[] color = {"#9ef01a", "#ff4800", "#ff0a54", "#ffb600", "#9448bc", "#99ffff"};
-							int colorindex = 0;
-							for (Lend lend : list) {
+							if (list.isEmpty()){
+						%>
+								<div class="box loan">
+									<h6 style="text-align:center; font-size:18px; color:#4f5051; padding-top:30px">- No Entry Found -</h6>
+								</div>
+						<%		
+							} else {
+								String[] color = {"#9ef01a", "#ff4800", "#ff0a54", "#ffb600", "#9448bc", "#99ffff"};
+								int colorindex = 0;
+								for (Lend lend : list) {
 						%>
 						<div class="box loan">
 						
@@ -236,7 +238,7 @@ line-height:35px;
 						<span style="transform: translateX(-50%);"><a
 							href="./deleteLend?lend_id=<%=lend.getLend_id()%>"><i
 								class="bi bi-trash3-fill fs-4 text-black" type="button"></i></a> <a
-							data-bs-toggle="modal" data-bs-target="#exampleModalupdatelend"><i
+							data-bs-toggle="modal" data-bs-target="#exampleModalupdatelend" onclick="setLendId(<%=lend.getLend_id()%>)"><i
 								class="bi bi-pencil-fill fs-4 text-black" type="button"></i></a> </span>
 
 						<div class="modal fade" id="exampleModalupdatelend" tabindex="-1"
@@ -261,7 +263,7 @@ line-height:35px;
 											<br>
 											<div class="form-group row">
 												<input type="hidden" class="form-control"
-													value="<%=lend.getLend_id()%>" name="lend_id">
+													value="<%=lend.getLend_id()%>" name="lend_id" id="lendIdInput">
 											</div>
 											<br>
 											<div class="form-group row">
@@ -302,6 +304,7 @@ line-height:35px;
 					<%
 					colorindex++;
 					}
+					}
 					%>
 				</div>
 
@@ -334,11 +337,18 @@ line-height:35px;
 			<%
 						BorrowDAO dao2 = new BorrowDAO(DBConnection.getConn());
 						List<Borrow> list2 = dao2.getBorrowById(user.getId());
-						String[] colors = {"#d00000", "#ffba08", "#8ac926", "#1982c4", "#6a4c93", "#99ffff"};
-						int colorIndex = 0;
-						for (Borrow borrow : list2) {
-						%>
-				<div class="box borrow">
+						if (list2.isEmpty()) {
+							%>
+								<div class="box borrow">
+									<h6 style="text-align:center; font-size:18px; color:#4f5051; padding-top:30px">- No Entry Found -</h6>
+								</div>
+							<%
+								} else {
+									String[] colors = {"#d00000", "#ffba08", "#8ac926", "#1982c4", "#6a4c93", "#99ffff"};
+									int colorIndex = 0;
+									for (Borrow borrow : list2) {
+							%>
+					<div class="box borrow">
 					<b>From: </b><%=borrow.getTo()%>
 					<h6><b>Date: </b><%=borrow.getDate().toLocalDate()%></h6>
 							<span class="fs-6 text-black"><b>Amount: </b><i class="bi bi-currency-rupee"></i><%=borrow.getAmt()%></span> <span style="margin-left: 25%;"> <%
@@ -451,6 +461,7 @@ line-height:35px;
 
 						<%
 						colorIndex++;
+						}
 						}
 						%>
 					</div>
@@ -599,7 +610,7 @@ line-height:35px;
 					</form>
 				</div>
 			</div>
-		</div>
+		</div></div>
 		
 
 	<script>
@@ -625,6 +636,10 @@ line-height:35px;
         var xhr = new XMLHttpRequest();
         xhr.open('GET', './borrowRequest?purpose=' + purpose + '&date=' + date + '&to=' + to + '&amt=' + amt, true);
         xhr.send();
+    }
+    
+    function setLendId(id) {
+        document.getElementById('lendIdInput').value = id;
     }
     
     </script>
