@@ -181,10 +181,10 @@ line-height:35px;
 							List<Lend> list = dao.getLendById(user.getId());
 							for (Lend lend : list) {
 
-							if (list.isEmpty()){
-						%>
+							if (list.isEmpty())
+							{%>
 								<div class="box loan">
-									<h6 style="text-align:center; font-size:18px; color:#4f5051; padding-top:30px">- No Entry Found -</h6>
+									<h6 style="text-align:center; font-size:18px; color:black; padding-top:30px">- No Entry Found -</h6>
 								</div>
 						<%		
 							} else {
@@ -207,7 +207,6 @@ line-height:35px;
 							}
 							%>
 						</span>
-
 						<div class="modal fade" id="staticBackdrop"
 							data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
 							aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -239,12 +238,10 @@ line-height:35px;
 						</div>
 
 						<span style="transform: translateX(-50%);"><a
-							href="./deleteLend?lend_id=<%=lend1.getLend_id()%>"><i>
+							href="./deleteLend?lend_id=<%=lend1.getLend_id()%>"><i
 								class="bi bi-trash3-fill fs-4 text-black" type="button"></i></a> 
-								<a  onclick="showLendDetails('<%=lend1.getLend_id()%>','<%= lend1.getTo()%>', '<%= lend1.getAmt() %>', '<%= lend1.getDate().toLocalDate() %>', '<%= lend1.getPurpose() %>')" data-bs-toggle="modal" data-bs-target="#exampleModalupdatelend"><i>
-								class="bi bi-trash3-fill fs-4 text-black" type="button"></i></a> <a
-							data-bs-toggle="modal" data-bs-target="#exampleModalupdatelend" onclick="setLendId(<%=lend1.getLend_id()%>)"><i>
-								class="bi bi-pencil-fill fs-4 text-black" type="button"></i></a> </span>
+								<a  onclick="showLendDetails('<%=lend1.getLend_id()%>','<%= lend1.getTo()%>', '<%= lend1.getAmt() %>', '<%= lend1.getDate().toLocalDate() %>', '<%= lend1.getPurpose() %>')" data-bs-toggle="modal" data-bs-target="#exampleModalupdatelend"><i class="bi bi-pencil-fill fs-4 text-black" type="button"></i></a> 
+								<a data-bs-toggle="modal" data-bs-target="#exampleModalupdatelend" onclick="setLendId(<%=lend1.getLend_id()%>)"><i></i></a> </span>
 
 						<div class="modal fade" id="exampleModalupdatelend" tabindex="-1"
 							aria-labelledby="exampleModalLabel" aria-hidden="true">
