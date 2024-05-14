@@ -179,7 +179,6 @@ line-height:35px;
 						<%
 							LendDAO dao = new LendDAO(DBConnection.getConn());
 							List<Lend> list = dao.getLendById(user.getId());
-							for (Lend lend : list) {
 
 							if (list.isEmpty())
 							{%>
@@ -225,8 +224,8 @@ line-height:35px;
 													aria-describedby="emailHelp" name="senderemail">
 												<div id="emailHelp" class="form-text">We'll never
 													share the email with anyone else.</div>
-												<input name="to" type="hidden" value=<%=lend.getTo()%>>
-												<input name="amt" type="hidden" value=<%=lend.getAmt()%>>
+												<input name="to" type="hidden" value=<%=lend1.getTo()%>>
+												<input name="amt" type="hidden" value=<%=lend1.getAmt()%>>
 												<input name="date" type="hidden"
 													value=<%=lend1.getDate().toLocalDate()%>>
 											</div>
@@ -305,7 +304,6 @@ line-height:35px;
 					<%
 					colorindex++;
 					}
-					}
 					%>
 				</div>
 
@@ -338,9 +336,7 @@ line-height:35px;
 			<%
 						BorrowDAO dao2 = new BorrowDAO(DBConnection.getConn());
 						List<Borrow> list2 = dao2.getBorrowById(user.getId());
-						for (Borrow borrow : list2) {
 						%>
-				<div class="box borrow">
 						<%if (list2.isEmpty()) {
 							%>
 								<div class="box borrow">
@@ -466,7 +462,6 @@ line-height:35px;
 						<%
 									}
 						colorIndex++;
-						}
 						}
 						%>
 					</div>
