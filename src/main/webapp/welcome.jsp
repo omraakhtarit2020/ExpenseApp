@@ -4,13 +4,13 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Tracking Expense</title>
-	<link rel="icon" type="images/icon" href="images/NewLogo.png">
+<title>D.O.S.T</title>
+	<link rel="icon" type="images/icon" href="images/logo.png">
     <link rel="canonical" href="https://https://demo.themesberg.com/landwind/" />
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expense-Tastic</title>
+    <title>D.O.S.T</title>
 
     <!-- Meta SEO -->
     <meta name="title" content="Expense-Tastic - your everyday expense tracker">
@@ -2464,8 +2464,8 @@ input:checked + .toggle-bg {
         <nav class="bg-white border-gray-200 py-2.5 dark:bg-gray-900">
             <div class="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto">
                 <a href="#" class="flex items-center">
-                    <img src="images/favicon-16x16.png" class="h-6 mr-3 sm:h-9" alt="logo" />
-                    <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Expense-Tastic</span>
+                    <img src="images/logo.png" class="h-6 mr-3 sm:h-9" style="height:68px;" alt="logo" />
+                    <span class="self-center text-5xl font-bold whitespace-nowrap dark:text-white">D.O.S.T</span>
                 </a>
                 <div class="flex items-center lg:order-2">
                     <div class="hidden mt-2 mr-4 sm:inline-block">
@@ -2504,7 +2504,7 @@ input:checked + .toggle-bg {
     <section class="bg-white dark:bg-gray-900">
         <div class="grid max-w-screen-xl px-4 pt-20 pb-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 lg:pt-28">
             <div class="mr-auto place-self-center lg:col-span-7">
-                <h1 class="max-w-2xl mb-4 text-4xl font-extrabold leading-none tracking-tight md:text-5xl xl:text-6xl dark:text-white">Tracking Daily <br>EXPENSES.</h1>
+                <h1 class="max-w-2xl mb-4 text-4xl font-extrabold leading-none tracking-tight md:text-5xl xl:text-6xl dark:text-white">Daily Oversight &<br> Spending Tracker.</h1>
                 <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">Welcome to our cutting-edge Expense Tracker website, your ultimate companion in financial management! Our platform is designed to empower you with efficient tools to track your expenses, plan your budget, and achieve your financial goals seamlessly.</a>.</p>
                 <div class="space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
                     <a href="login.jsp" class="inline-flex items-center justify-center w-full px-5 py-3 text-sm font-medium text-center text-gray-900 border border-gray-200 rounded-lg sm:w-auto hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">

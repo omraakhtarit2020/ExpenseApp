@@ -8,7 +8,8 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>D.O.S.T</title>
+<link rel="icon" type="images/icon" href="images/logo.png">
 </head>
 <body>
 <%@include file="components/track/nav.jsp"  %>

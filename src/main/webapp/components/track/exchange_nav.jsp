@@ -194,6 +194,23 @@
     display: flex;
     align-items: center;
 }
+.self-center {
+  align-self: center;
+}
+.whitespace-nowrap {
+  white-space: nowrap;
+}
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+.font-bold {
+  font-weight: 700;
+}
+.dark .dark\:text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
     </style>
 </head>
 
@@ -201,8 +218,8 @@
     <nav class="navbar">
 		<div class="container-fluid">
         <div class="logo-container">
-            <img src="images/favicon-16x16.png" class="h-6 mr-3 sm:h-9" alt="logo" />
-            <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Expense-Tastic</span>
+            <img src="images/logo.png" class="h-6 mr-3 sm:h-9" alt="logo" />
+            <span class="self-center text-3xl font-bold whitespace-nowrap dark:text-white" style="color:black;">D.O.S.T</span>
         </div>
     </div>
 	</nav>

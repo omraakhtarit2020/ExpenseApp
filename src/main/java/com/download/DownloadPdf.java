@@ -29,11 +29,10 @@ public class DownloadPdf extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// System.out.println("hi");
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("userobj");
 		String nameOfFile = user.getFname() + "_" + user.getLname() + "_" + "Transaction list";
-		String path = "C:\\Users\\Krittika\\Downloads\\download_expenses" + nameOfFile + ".pdf";
+		String path = "C:\\Users\\Dell\\Downloads\\download_expenses" + nameOfFile + ".pdf";
 		PdfWriter writer = new PdfWriter(path);
 		PdfDocument docu = new PdfDocument(writer);
 		docu.setDefaultPageSize(PageSize.A4);

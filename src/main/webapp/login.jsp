@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Login</title>
+<title>D.O.S.T</title>
+<link rel="icon" type="images/icon" href="images/logo.png">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 	integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
@@ -334,7 +335,7 @@ a.ssolink {
 								<div class="field padding-bottom--24">
 									<label for="mpin"><i class="fa-solid fa-lock lock"></i>
 										Security Pin </label> <input id="mpin" type="password"
-										placeholder="****" name="mpin">
+										placeholder="****" name="mpin" required>
 										<% 
     										String msg = (String) request.getAttribute("errorMsg");  
     										if (msg != null) { 

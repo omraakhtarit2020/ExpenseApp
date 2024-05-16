@@ -13,7 +13,8 @@
 	crossorigin="anonymous">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-<title>BudgetGPT</title>
+<title>D.O.S.T</title>
+<link rel="icon" type="images/icon" href="images/logo.png">
 <style>
 body {
 	font-family: Arial, sans-serif;
