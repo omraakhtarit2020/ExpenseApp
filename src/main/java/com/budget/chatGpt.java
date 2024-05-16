@@ -70,9 +70,9 @@ public class chatGpt extends HttpServlet {
 		}
 
 		String url = "https://api.openai.com/v1/chat/completions";
-		String apiKey = "sk-proj-bGoxUXDWz0Z16VTdZUlQT3BlbkFJZzIlKAfRrkxu5iqamush";
+		String apiKey = "";
 
-		String model = "gpt-3.5-turbo";
+		String model = "";
 
 		try {
 			URL obj = new URL(url);
