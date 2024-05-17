@@ -13,13 +13,14 @@
 	crossorigin="anonymous">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-<title>BudgetGPT</title>
+<title>D.O.S.T</title>
+<link rel="icon" type="images/icon" href="images/logo.png">
 <style>
 body {
 	font-family: Arial, sans-serif;
 	margin: 0;
 	padding: 0;
-	background-color: #f4f4f4;
+	background-color: rgba(237,240,250,0.5);
 }
 
 .container {
@@ -42,8 +43,7 @@ input[type=text] {
 	border-radius: 10px;
 	border: 1px solid #ccc;
 }
-
-input[type=submit] {
+.submit {
 	color: rgb(252, 252, 252);
 	width: 100px;
 	height: 42px;
@@ -54,7 +54,7 @@ input[type=submit] {
 	transition: background-color 0.3s ease;
 }
 
-input[type=submit]:hover {
+.submit:hover {
 	background-color: rgb(77, 83, 191);
 }
 
@@ -78,6 +78,14 @@ h1 {
 .chat-gpt {
 	text-align: left;
 	margin-bottom: 10px;
+}
+.chat-bubble-user{
+	border: 1.5px solid rgb(84,105,212);
+	background-color: rgba(84,105,212,0.2);
+	display: inline-block;
+	padding: 10px;
+	border-radius: 10px;
+	max-width: 70%;
 }
 
 .chat-bubble {
@@ -110,6 +118,26 @@ h1 {
 	color: rgb(84, 105, 212);
 	right:20px;
 }
+.box{
+	padding: 10px;
+	margin-top:10px;
+	margin-right:8px;
+	border-radius: 10px;
+	border: 1.5px solid rgba(84,105,212,0.2);
+	background-color: rgba(84,105,212,0.2);
+	max-width: fit-content;
+	cursor: pointer;
+	transition:0.3s ease out;
+	text-decoration:none;
+}
+.box:hover{
+background-color: rgba(84,105,212,0.35);
+}
+hr{
+background-color:rgb(84,105,212);
+border: 1.6px solid rgb(84,105,212);
+border-radius:20px;
+}
 </style>
 </head>
 <body>
@@ -130,7 +158,7 @@ h1 {
 				for (int i = 0; i < promptAr.size(); i++) {
 			%>
 			<div class="chat-user">
-				<div class="chat-bubble"><%=promptAr.get(i)%></div>
+				<div class="chat-bubble-user"><%=promptAr.get(i)%></div>
 			</div>
 			<%
 			if (responses != null && i < responses.size()) {
@@ -146,7 +174,16 @@ h1 {
 			} else {
 			%>
 			<div class="chat-gpt">
-				<div class="chat-bubble">How can I assist you today!..</div>
+				<div class="chat-bubble">How can I assist you today!</div>
+				<form action="chatgpt" method="post">
+
+				<input class="box" type="submit" name="query" value="Investment Suggestions">
+				
+				<input class="box" type="submit" name="query" value="Plan a trip within a budget">
+				
+				<input class="box" type="submit" name="query" value="monthly budget plan">
+			
+				<input class="box" type="submit" name="query" value="Expense related"></form>
 			</div>
 			<%
 			}
@@ -157,7 +194,7 @@ h1 {
 
 			<form action="chatgpt" method="POST">
 				<input type="text" name="query" placeholder=" Enter your query">
-				<input type="submit" value="Submit">
+				<input class="submit" type="submit" value="Submit">
 
 			</form>
 		</div>
@@ -208,7 +245,9 @@ h1 {
         //clearMessage.innerHTML = '<div class="chat-bubble">How can I help you.</div>';
         chatContainer.appendChild(clearMessage);
 	});
+	
 
+	
 	</script>
 
 </body>

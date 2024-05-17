@@ -13,7 +13,8 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 	integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
 	crossorigin="anonymous" referrerpolicy="no-referrer">
-<title>Financial-Goal</title>
+<title>D.O.S.T</title>
+<link rel="icon" type="images/icon" href="images/logo.png">
 
 <style>
 h2{
@@ -519,22 +520,22 @@ color:#09056c;
 							<form action="goalServlet" method="POST">
 								<div class="group">
 									<div class="title">Initial Amount</div>
-									<input name="principal" type="text" value=""
+									<input name="principal" type="number" value=""
 										class="initialAmount">
 								</div>
 								<div class="group">
 									<div class="title">Interest Rate</div>
-									<input name="intRate" type="text" value=""
+									<input name="intRate" type="number" value=""
 										class="interestGRate">
 								</div>
 								<div class="group">
 									<div class="title">Inflation Rate</div>
-									<input name="infRate" type="text" value=""
+									<input name="infRate" type="number" value=""
 										class="inflationRate">
 								</div>
 								<div class="group">
 									<div class="title">Tenure</div>
-									<input name="year" type="text" value="" class="year">
+									<input name="year" type="number" value="" class="year">
 								</div>
 								 
 							</form>
@@ -592,15 +593,15 @@ color:#09056c;
 							<form action="#">
 								<div class="group">
 									<div class="title">Principal Amount</div>
-									<input type="text" value="" class="pAmount">
+									<input type="number" value="" class="pAmount">
 								</div>
 								<div class="group">
 									<div class="title">Rate of Interest</div>
-									<input type="text" value="" class="rate">
+									<input type="number" value="" class="rate">
 								</div>
 								<div class="group">
 									<div class="title">Months</div>
-									<input type="text" value="" class="months">
+									<input type="number" value="" class="months">
 								</div>
 							</form>
 						</div>
@@ -664,15 +665,15 @@ color:#09056c;
 							<form action="#">
 								<div class="group">
 									<div class="title">Amount</div>
-									<input type="text" value="" class="loanAmount">
+									<input type="number" value="" class="loanAmount">
 								</div>
 								<div class="group">
 									<div class="title">Interest Rate</div>
-									<input type="text" value="" class="interestRate">
+									<input type="number" value="" class="interestRate">
 								</div>
 								<div class="group">
 									<div class="title">Tenure</div>
-									<input type="text" value="" class="loanTenure">
+									<input type="number" value="" class="loanTenure">
 								</div>
 							</form>
 						</div>

@@ -31,7 +31,7 @@ public class MyFilter implements Filter {
 		} else {
 //			arg1.setContentType("text/html");
 //			arg1.getWriter().println("Please login to visit");
-			resp.sendRedirect("./login.jsp");
+			resp.sendRedirect("./welcome.jsp");
 
 		}
 

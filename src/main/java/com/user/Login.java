@@ -2,6 +2,7 @@ package com.user;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,17 +24,22 @@ public class Login extends HttpServlet {
 
 			UserDAO dao = new UserDAO(DBConnection.getConn());
 			User user = dao.getUserById(mpin);
-			System.out.println(user.toString());
+			
 			HttpSession session = req.getSession();
 			if (user != null) {
 				session.setAttribute("userobj", user);
 				resp.sendRedirect("home.jsp");
-			} else {
-				session.setAttribute("errorMsg", "Invalid MPIN. Please try again.");
-				resp.sendRedirect("login.jsp");
+				System.out.println(user.toString());
+			} 
+			else {
+				req.setAttribute("errorMsg", "Invalid PIN. Please create an account.");
+				req.getRequestDispatcher("login.jsp").forward(req, resp);
 			}
 
-		} catch (NumberFormatException e) {
+		} catch (Exception e) {
+			e.printStackTrace();
+		
+		/*catch (NumberFormatException e) {
 			e.printStackTrace();
 			HttpSession session = req.getSession();
 			session.setAttribute("errorMsg", "Invalid input format. Please enter a valid MPIN.");
@@ -43,6 +49,7 @@ public class Login extends HttpServlet {
 			HttpSession session = req.getSession();
 			session.setAttribute("errorMsg", "An error occurred. Please try again later.");
 			resp.sendRedirect("login.jsp");
-		}
+		}*/
 	}
+}
 }

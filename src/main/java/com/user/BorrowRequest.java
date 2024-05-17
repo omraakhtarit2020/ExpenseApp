@@ -75,7 +75,7 @@ public class BorrowRequest extends HttpServlet {
 			message.setText("Dear " + name + " ,\n\nI hope this message finds you well.\r\n" + "\r\n"
 					+ "I am writing to remind you of a financial transaction that took place recently. It appears that you have taken a loan from "
 					+ to + ", as per our records.\r\n" + "\r\n" + "The purpose of this loan was noted as " + purpose
-					+ ", and the amount borrowed was " + amt + ".\r\n" + "\r\n"
+					+ ", and the amount borrowed was Rs." + amt + ".\r\n" + "\r\n"
 					+ "Thank you for your attention to this matter. Should you have any questions or require further clarification, please do not hesitate to reach out: tracking.expense2024@gmail.com"
 					+ ".\n\nBest regards,\nTeam Tracking Expense");
 			Transport.send(message);
