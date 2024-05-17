@@ -30,7 +30,12 @@ public class UpdateBorrow extends HttpServlet {
 			java.sql.Date date = java.sql.Date.valueOf(d);
 
 			HttpSession session = req.getSession();
-			int borrow_id = Integer.parseInt(req.getParameter("borrow_id"));
+
+			String borrowIdParam = req.getParameter("borrow_id");
+			int borrow_id = 0; // Default value or handle as needed
+			if (borrowIdParam != null && !borrowIdParam.isEmpty()) {
+				borrow_id = Integer.parseInt(borrowIdParam);
+			}
 			int userId = ((User) session.getAttribute("userobj")).getId();
 			Borrow borrow = new Borrow(to, purpose, amt, date, userId, borrow_id);
 			System.out.print(borrow.toString());
