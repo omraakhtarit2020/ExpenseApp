@@ -53,7 +53,14 @@ public class chatGpt extends HttpServlet {
 		// Define keywords related to budgets and expenses
 		String[] budgetKeywords = { "budget", "expense", "expenses", "spending", "savings", "financial", "planning",
 				"finances", "trip", "Track", "flight", "train", "cost", "price", "investement plans", "invest",
-				"investment", "equity", "Insurance", "Payment", "Mortgage", "money", "earning" };
+				"investment", "equity", "Insurance", "Payment", "Mortgage", "money", "earning", "currency", "wealth",
+				"liquid assets", "capital", "funds", "stipend", "fee", "wages", "salary", "resources", "rate",
+				"expenditure", "debt", "liability", "tariff", "value", "worth", "economy", "revenue", "income",
+				"profit", "gain", "earnings", "surplus", "return", "dividend", "proceeds", "windfall", "margin",
+				"gross", "net", "yield", "revenue stream", "benefit", "payoff", "profitability", "loss", "deficit",
+				"shortfall", "expense", "outlay", "expenditure", "cost", "overhead", "depreciation", "write-off",
+				"debt", "liability", "bus", "car", "business", "save", "stock", "share", "fare" };
+
 		boolean isBudgetRelated = false;
 
 		// Check if the prompt contains any of the budget-related keywords

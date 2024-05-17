@@ -103,8 +103,9 @@
                               }
                            %>
                         </div>
-                        <div class="card-footer">
+                        <div class="card-footer text-center">
                            <small class="text-white">Created on: <%= sp.getDate() %></small>
+                        
                         </div>
                      </div>
                   </div>
