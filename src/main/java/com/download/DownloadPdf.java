@@ -47,7 +47,7 @@ public class DownloadPdf extends HttpServlet {
 		List<Object> combinedList = new ArrayList<>();
 		combinedList.addAll(list1);
 		combinedList.addAll(list);
-		document.add(new Paragraph("Transcation history"));
+		document.add(new Paragraph("Transaction history"));
 		for (Object obj : combinedList) {
 			if (obj instanceof User_expense) {
 				User_expense expense = (User_expense) obj;
