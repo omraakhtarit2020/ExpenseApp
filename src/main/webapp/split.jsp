@@ -21,7 +21,7 @@
 <body>
 <%@ include file="components/track/splitNav.jsp"%>
 <!-- Button trigger modal -->
-
+<div id="alertContainer" style="max-width:550px;margin-left:30%;"></div>
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalsplit" style="margin-top:50px !important;margin-left:50%;transform:translateX(-50%);">
   CREATE GROUP
 </button>
@@ -84,8 +84,10 @@
                   User user = (User) session.getAttribute("userobj");
                   GroupMembershipDAO gdao = new GroupMembershipDAO(DBConnection.getConn());
                   List<Integer> ownedGroupIds = gdao.getGroupIdsByUserAndRole(user.getId(), "Owner");
+                  
                   for (Integer groupId : ownedGroupIds) {
                       Split sp = dao2.getSplitByGroupId(groupId);
+                      System.out.println(sp.toString()+" "+groupId);
                %>
                   <div class="col">
                     <div class="card text-bg-dark mb-3" style="max-width: 18rem;">
@@ -105,6 +107,35 @@
                         </div>
                         <div class="card-footer">
                            <small class="text-white">Created on: <%= sp.getDate() %></small>
+                           <% 
+                               String status=dao2.getStatus(groupId);
+                                System.out.println(status);
+                              if (status.equalsIgnoreCase("Paid")){ %>
+                              <button type="button" class="btn btn-success" style="width:100%;color:white;" onclick="statusReview()">PAID</button>
+                         <%}else{ %>
+                         <button type="button" class="btn btn-warning" style="width:100%;"data-bs-toggle="modal" data-bs-target="#exampleModalstatus">PENDING <i class="bi bi-hourglass-split"></i></button>
+                           <div class="modal fade" id="exampleModalstatus" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							  <div class="modal-dialog">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">Hey, <%=user.getFname().toUpperCase()%> </h1>
+							        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							      </div>
+							      <div class="modal-body">
+							       <form action="./UpdateStatusServlet" method="post">
+                                      <input type="text" name="grpId" value="<%= groupId %>" >
+                                      <input type="text" name="OwnerId" value="<%= user.getId() %>">
+                                       <label style="color:black;">Has the purpose of the group been fulfilled and the payment completed?</label>
+		                               <div class="mt-3">
+		                               <button type="submit" class="btn btn-primary">Yes</button>
+		                               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+		                           </div>
+                                    </form>
+							      </div>
+							    </div>
+							  </div>
+							  </div>
+							  <%} %>
                         </div>
                      </div>
                   </div>
@@ -145,6 +176,14 @@
                         </div>
                         <div class="card-footer">
                            <small class="text-white">Created on: <%= sp.getDate() %></small>
+                           <% 
+                               String status=dao2.getStatus(groupId);
+                                System.out.println(status);
+                              if (status.equalsIgnoreCase("Paid")){ %>
+                              <button type="button" class=" btn btn-success" style="width:100%;color:white;" onclick="statusReview()">PAID</button>
+                         <%}else{ %>
+                         <button type="button" class=" btn btn-warning" style="width:100%;" onclick="statusReviewPending()">PENDING</button>
+                         <%} %>
                         </div>
                      </div>
                   </div>
@@ -174,6 +213,32 @@ function sendEmail() {
     xhr.open('GET', './Splitrequest?grpname=' + grpname + '&people=' + people + '&names=' + namesString + '&amt=' + amt, true);
     xhr.send();
 }
+</script>
+<script type="text/javascript">
+function statusReview(){
+	var alertContainer = document.getElementById("alertContainer");
+	  var alertDiv = document.createElement("div");
+	  alertDiv.classList.add("alert", "alert-success", "alert-dismissible", "fade", "show");
+	  alertDiv.setAttribute("role", "alert");
+	  alertDiv.innerHTML = `
+	    <strong>Congrats ! </strong>The purpose of the group has already been fulfilled.
+	    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	  `;
+	  alertContainer.appendChild(alertDiv);
+}
+</script>
+<script type="text/javascript">
+ function statusReviewPending(){
+	 var alertContainer = document.getElementById("alertContainer");
+	  var alertDiv = document.createElement("div");
+	  alertDiv.classList.add("alert", "alert-warning", "alert-dismissible", "fade", "show");
+	  alertDiv.setAttribute("role", "alert");
+	  alertDiv.innerHTML = `
+	    <strong>Warning ! </strong>The purpose of the group is yet to be fulfilled.Have you paid your part?
+	    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	  `;
+	  alertContainer.appendChild(alertDiv);
+ }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>

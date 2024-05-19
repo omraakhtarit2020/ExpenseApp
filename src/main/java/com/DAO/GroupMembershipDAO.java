@@ -49,4 +49,24 @@ public class GroupMembershipDAO {
 		}
 		return list;
 	}
+
+	public boolean isUserOwnerOfGroup(int ownerId, int grpId) {
+
+		boolean isOwner = false;
+
+		try {
+			String sql = "SELECT COUNT(*) FROM group_membership WHERE user_id = ? AND group_id = ? AND role = 'Owner'";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, ownerId);
+			ps.setInt(2, grpId);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				isOwner = rs.getInt(1) > 0;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return isOwner;
+	}
 }
