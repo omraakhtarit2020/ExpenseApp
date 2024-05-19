@@ -105,7 +105,7 @@
                               }
                            %>
                         </div>
-                        <div class="card-footer">
+                        <div class="card-footer text-center">
                            <small class="text-white">Created on: <%= sp.getDate() %></small>
                            <% 
                                String status=dao2.getStatus(groupId);
@@ -136,6 +136,7 @@
 							  </div>
 							  </div>
 							  <%} %>
+
                         </div>
                      </div>
                   </div>
