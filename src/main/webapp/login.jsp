@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Login</title>
+<title>D.O.S.T</title>
+<link rel="icon" type="images/icon" href="images/logo.png">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 	integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
@@ -334,7 +335,16 @@ a.ssolink {
 								<div class="field padding-bottom--24">
 									<label for="mpin"><i class="fa-solid fa-lock lock"></i>
 										Security Pin </label> <input id="mpin" type="password"
-										placeholder="****" name="mpin">
+										placeholder="****" name="mpin" required>
+										<% 
+    										String msg = (String) request.getAttribute("errorMsg");  
+    										if (msg != null) { 
+										%>
+    										<div class="alert" role="alert" style="color:red; height:10px;">
+        											<%= msg %>
+    										</div>
+										<% } %>
+									
 									<div class="reset-pass">
 										<a href="mailForget.jsp">Forgot your Pin?</a>
 									</div>
@@ -351,10 +361,31 @@ a.ssolink {
 					</div>
 
 				</div>
+                    	
 			</div>
 		</div>
 	</div>
+	<script>
+	document.getElementById("stripe-login").addEventListener("submit", function(event) {
+	    var pwd = document.getElementById("mpin").value;
+	    var pwdLen = pwd.length;
 
+	    if (pwdLen < 4) {
+	        alert("Password must contain at least 4 digits.");
+	        event.preventDefault(); // Prevent form submission if validation fails
+	        document.getElementById("mpin").value="";
+	    } else if (pwdLen > 6) {
+	        alert("Password limit exceeded. Maximum 6 digits allowed.");
+	        document.getElementById("mpin").value = ""; // Truncate the password to 6 digits
+	        event.preventDefault(); // Prevent form submission if validation fails
+	    } else if (!/^\d+$/.test(pwd)) {
+	        alert("Password must contain digits only.");
+	        document.getElementById("mpin").value = ""; // Clear the input field if validation fails
+	        event.preventDefault(); // Prevent form submission if validation fails
+	    }
+	});
+	</script>
+	
 	<script
 		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
 		integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"

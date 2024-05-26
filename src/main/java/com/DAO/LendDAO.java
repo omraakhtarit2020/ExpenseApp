@@ -49,7 +49,7 @@ public class LendDAO {
 
 		try {
 
-			String sql = "select * from lend where user_id = ? order by lend_id desc limit 5";
+			String sql = "select * from lend where user_id = ? order by lend_id desc";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, user_id);
 			ResultSet rs = ps.executeQuery();

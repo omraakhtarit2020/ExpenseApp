@@ -13,9 +13,13 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 	integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
 	crossorigin="anonymous" referrerpolicy="no-referrer">
-<title>Financial-Goal</title>
+<title>D.O.S.T</title>
+<link rel="icon" type="images/icon" href="images/logo.png">
 
 <style>
+h2{
+color:#09056c;
+}
 
 .icon {
 	padding-top: 60px;
@@ -112,6 +116,7 @@
 	width: 37vh;
 	height: 40vh;
 	position: absolute;
+	z-index:999;
 	top: 50%;
 	left: 75%;
 	transform: translate(-50%, -50%);
@@ -502,8 +507,8 @@
 		<div class="modal-dialog" id="goalModal">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h1 class="modal-title fs-5" id="exampleModalLabel">Goal
-						Calculator</h1>
+					<h2 class="modal-title fs-5" id="exampleModalLabel">Goal
+						Calculator</h2>
 					<button type="button" class="btn-close" data-bs-dismiss="modal"
 						aria-label="Close"></button>
 				</div>
@@ -515,22 +520,22 @@
 							<form action="goalServlet" method="POST">
 								<div class="group">
 									<div class="title">Initial Amount</div>
-									<input name="principal" type="text" value=""
+									<input name="principal" type="number" value=""
 										class="initialAmount">
 								</div>
 								<div class="group">
 									<div class="title">Interest Rate</div>
-									<input name="intRate" type="text" value=""
+									<input name="intRate" type="number" value=""
 										class="interestGRate">
 								</div>
 								<div class="group">
 									<div class="title">Inflation Rate</div>
-									<input name="infRate" type="text" value=""
+									<input name="infRate" type="number" value=""
 										class="inflationRate">
 								</div>
 								<div class="group">
 									<div class="title">Tenure</div>
-									<input name="year" type="text" value="" class="year">
+									<input name="year" type="number" value="" class="year">
 								</div>
 								 
 							</form>
@@ -576,8 +581,8 @@
 		<div class="modal-dialog" id="emiModal">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h1 class="modal-title fs-5" id="exampleModalLabel">EMI
-						Calculator</h1>
+					<h2 class="modal-title fs-5" id="exampleModalLabel">EMI
+						Calculator</h2>
 					<button type="button" class="btn-close" data-bs-dismiss="modal"
 						aria-label="Close"></button>
 				</div>
@@ -588,15 +593,15 @@
 							<form action="#">
 								<div class="group">
 									<div class="title">Principal Amount</div>
-									<input type="text" value="" class="pAmount">
+									<input type="number" value="" class="pAmount">
 								</div>
 								<div class="group">
 									<div class="title">Rate of Interest</div>
-									<input type="text" value="" class="rate">
+									<input type="number" value="" class="rate">
 								</div>
 								<div class="group">
 									<div class="title">Months</div>
-									<input type="text" value="" class="months">
+									<input type="number" value="" class="months">
 								</div>
 							</form>
 						</div>
@@ -648,8 +653,8 @@
 		<div class="modal-dialog" id="loanModal">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h1 class="modal-title fs-5" id="exampleModalLabel">Loan
-						Calculator</h1>
+					<h2 class="modal-title fs-5" id="exampleModalLabel">Loan
+						Calculator</h2>
 					<button type="button" class="btn-close" data-bs-dismiss="modal"
 						aria-label="Close"></button>
 				</div>
@@ -660,15 +665,15 @@
 							<form action="#">
 								<div class="group">
 									<div class="title">Amount</div>
-									<input type="text" value="" class="loanAmount">
+									<input type="number" value="" class="loanAmount">
 								</div>
 								<div class="group">
 									<div class="title">Interest Rate</div>
-									<input type="text" value="" class="interestRate">
+									<input type="number" value="" class="interestRate">
 								</div>
 								<div class="group">
 									<div class="title">Tenure</div>
-									<input type="text" value="" class="loanTenure">
+									<input type="number" value="" class="loanTenure">
 								</div>
 							</form>
 						</div>
@@ -701,8 +706,204 @@
 	</div>
 
 
-<!-- Include script.js -->
-	<script src="financialGoal.js"></script>
+<!-- Include script.js src="financialGoal.js"-->
+	
+	<script>
+	
+	//Goal 
+
+	const initialAmount = document.querySelector(".initialAmount");
+	const interestRate = document.querySelector(".interestGRate");
+	const inflationRate = document.querySelector(".inflationRate");
+	const year = document.querySelector(".year");
+
+	const finalAmount = document.querySelector(".finalAmount .value");
+	const monthlyInvestment = document.querySelector(".monthlyInvestment .value");
+
+	const calculateGBtn = document.querySelector(".calculateGBtn");
+	const refreshGBtn = document.getElementById("refreshGBtn");
+
+	const calculatefv = () => {
+	    const PV = parseFloat(initialAmount.value);
+	    const R = parseFloat(interestRate.value) / 100;
+	    const I = parseFloat(inflationRate.value) / 100;
+	    const N = parseFloat(year.value);
+	    
+	    const FV = PV * Math.pow((1 + R) / (1 + I), N);
+	    
+	    return FV;
+	};
+
+	const updateGData = (inflatedFV) => {
+	    if (!isNaN(inflatedFV) && isFinite(inflatedFV)) {
+	        finalAmount.textContent = Math.round(inflatedFV);
+	        const monthlyInvestmentPayable = Math.round(inflatedFV / (parseFloat(year.value) * 12));
+	        monthlyInvestment.textContent = isNaN(monthlyInvestmentPayable) ? "" : monthlyInvestmentPayable;
+	    } else {
+	        finalAmount.textContent = "";
+	        monthlyInvestment.textContent = "";
+	    }
+	};
+
+	const initg = () => {
+	    const inflatedFV = calculatefv();
+	    updateGData(inflatedFV);
+	};
+
+	initg();
+	//calculateGBtn.addEventListener("click", initg);
+	calculateGBtn.addEventListener("click", () => {
+	    initg();
+	});
+
+	const refreshGInput = () => {
+	    initialAmount.value = "";
+	    interestRate.value = "";
+	    inflationRate.value = "";
+	    year.value = "";
+	    updateGData();
+	};
+
+	refreshGBtn.addEventListener("click", refreshGInput);
+
+	//Loan
+	const amount = document.querySelector(".loanAmount");
+	const interest = document.querySelector(".interestRate");
+	const tenure = document.querySelector(".loanTenure");
+
+	const loanEmi = document.querySelector(".loanEmi .value");
+	const totalInterest = document.querySelector(".totalInterest .value");
+	const totalAmount = document.querySelector(".totalAmount .value");
+
+	const calculateBtn = document.querySelector(".calculateBtn");
+	const refreshBtn = document.getElementById("refreshBtn");
+
+	let lAmount = parseFloat(amount.value);
+	let lInterestRate = parseFloat(interest.value);
+	let lTenure = parseFloat(tenure.value);
+
+	let loanInterest = lInterestRate / 12 / 100;
+
+	const calculateEMI = () => {
+		let emi = lAmount * loanInterest * (Math.pow(1 + loanInterest, lTenure) / (Math.pow(1 + loanInterest, lTenure) - 1));
+		return emi;
+	};
+
+	const updateData = (emi) => {
+		loanEmi.textContent = isNaN(emi) ? "" : Math.round(emi);
+
+		let totalAmountValue = isNaN(emi) ? "" : Math.round(lTenure * emi);
+		totalAmount.textContent = totalAmountValue;
+
+		let totalInterestPayable = isNaN(emi) ? "" : Math.round(totalAmountValue - lAmount);
+		totalInterest.textContent = totalInterestPayable;
+	};
+
+	const refreshInput = () => {
+		lAmount = parseFloat(amount.value) || 0;
+		lInterestRate = parseFloat(interest.value) || 0;
+		lTenure = parseFloat(tenure.value) || 0;
+		loanInterest = lInterestRate / 12 / 100;
+	};
+
+	const init = () => {
+		refreshInput();
+		let emi = calculateEMI();
+		updateData(emi);
+	};
+
+	init();
+
+
+	calculateBtn.addEventListener("click", () => {
+		init();
+	});
+
+
+	const clearInputs = () => {
+		amount.value = "";
+		interest.value = "";
+		tenure.value = "";
+		refreshInput();
+		updateData(); // Clear the result values
+	};
+
+	refreshBtn.addEventListener("click", clearInputs);
+
+
+	// EMI Calculator
+
+	const emiPrincipalInput = document.querySelector(".pAmount");
+	const emiInterestInput = document.querySelector(".rate");
+	const emiTenureInput = document.querySelector(".months");
+
+	const emiValueDisplay = document.querySelector(".emiMon .value");
+	const emiTotalInterestDisplay = document.querySelector(".totalInterestEmi .value");
+	const emiTotalAmountDisplay = document.querySelector(".totalPayable .value");
+
+	const calculateEBtn = document.querySelector(".calculateEBtn");
+	const emiRefreshButton = document.getElementById("refreshEBtn");
+
+	let emiPrincipalAmount = parseFloat(emiPrincipalInput.value) || 0;
+	let emiInterestRate = parseFloat(emiInterestInput.value) || 0;
+	let emiTenureMonths = parseFloat(emiTenureInput.value) || 0;
+
+	let emiInterestRateMonthly = emiInterestRate / 12 / 100;
+
+	const calculateemi = () => {
+		let emi = emiPrincipalAmount * emiInterestRateMonthly * (Math.pow(1 + emiInterestRateMonthly, emiTenureMonths) / (Math.pow(1 + emiInterestRateMonthly, emiTenureMonths) - 1));
+		return emi;
+	};
+
+	const updateEMIData = (emi) => {
+		emiValueDisplay.textContent = isNaN(emi) ? "" : Math.round(emi);
+
+		let emiTotalAmountValue = isNaN(emi) ? "" : Math.round(emiTenureMonths * emi);
+		emiTotalAmountDisplay.textContent = emiTotalAmountValue;
+
+		let emiTotalInterestPayable = isNaN(emi) ? "" : Math.round(emiTotalAmountValue - emiPrincipalAmount);
+		emiTotalInterestDisplay.textContent = emiTotalInterestPayable;
+	};
+
+	const refreshEMIInput = () => {
+		emiPrincipalAmount = parseFloat(emiPrincipalInput.value) || 0;
+		emiInterestRate = parseFloat(emiInterestInput.value) || 0;
+		emiTenureMonths = parseFloat(emiTenureInput.value) || 0;
+		emiInterestRateMonthly = emiInterestRate / 12 / 100;
+	};
+
+	const initEMI = () => {
+		refreshEMIInput();
+		let emi = calculateemi();
+		updateEMIData(emi);
+	};
+
+	initEMI();
+
+
+
+	// Define the function to open the popup
+	function openPopupWithDelay() {
+	    initEMI();
+	}
+
+	// Attach the event listener to the button
+	calculateEBtn.addEventListener("click", openPopupWithDelay);
+
+
+	const clearEMIInputs = () => {
+		emiPrincipalInput.value = "";
+		emiInterestInput.value = "";
+		emiTenureInput.value = "";
+		refreshEMIInput();
+		updateEMIData(); // Clear the result values
+	};
+
+	emiRefreshButton.addEventListener("click", clearEMIInputs);
+
+
+
+	</script>
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"

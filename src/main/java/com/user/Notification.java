@@ -62,8 +62,8 @@ public class Notification extends HttpServlet {
 			message.setSubject("Notification!");
 			message.setText("Dear " + to + " ,\n\nWe hope this message finds you well.\r\n" + "\r\n"
 					+ "We are writing to remind you of a financial transaction that took place recently. It appears that you have given a loan to "
-					+ name.toUpperCase() + ", as per our records.\r\n" + "\r\n" + "The amount given is " + amt + " on "
-					+ date + "\r\n"
+					+ name.toUpperCase() + ", as per our records.\r\n" + "\r\n" + "The amount given is Rs." + amt
+					+ " on " + date + "\r\n"
 					+ "Thank you for your attention to this matter. Should you have any questions or require further clarification, please do not hesitate to reach out: "
 					+ email + ".\n\nBest regards,\nTeam Tracking Expense");
 			Transport.send(message);

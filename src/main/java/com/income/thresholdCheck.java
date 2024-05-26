@@ -26,8 +26,8 @@ public class thresholdCheck extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("userobj");
-        double income = 0.0;
-        double totalExpenses = 0.0;
+        int income = 0;
+        int totalExpenses = 0;
 
         try {
             conn = DBConnection.getConn();
@@ -54,13 +54,17 @@ public class thresholdCheck extends HttpServlet {
         }
 
         double fiftyPercentOfIncome = 0.5 * income;
+        double perOfIncome = ((double) totalExpenses / income) * 100;
+        double percentOfIncome = Math.ceil(perOfIncome);
 
         try {
             if (totalExpenses > fiftyPercentOfIncome) {
-                System.out.println("Total expenses exceed 50% of income");
+                System.out.println("Total expenses exceed income by "+ percentOfIncome + "%");
                 //request.getRequestDispatcher("./alertEmail").forward(request, response);
              // Assuming you want to forward the request to ServletB from ServletA
-
+                request.setAttribute("totalExpenses", totalExpenses);
+                request.setAttribute("income", income);
+                request.setAttribute("percentOfIncome", percentOfIncome);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/alertEmail");
                 dispatcher.forward(request, response);
 
@@ -78,28 +82,28 @@ public class thresholdCheck extends HttpServlet {
         }
     }
 
-    private double getUserIncomeFromDatabase(int userId) throws SQLException {
-        double income = 0.0;
+    private int getUserIncomeFromDatabase(int userId) throws SQLException {
+        int income = 0;
         String sql = "SELECT SUM(income) AS totalIncome FROM inco WHERE user_id = ?";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, userId);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    income = rs.getDouble("totalIncome");
+                    income = rs.getInt("totalIncome");
                 }
             }
         }
         return income;
     }
 
-    private double getTotalExpensesForLast30DaysFromDatabase(int userId) throws SQLException {
-        double totalExpenses = 0.0;
+    private int getTotalExpensesForLast30DaysFromDatabase(int userId) throws SQLException {
+        int totalExpenses = 0;
         String sql = "SELECT SUM(expense) AS totalExpenses FROM expe WHERE user_id = ? AND date >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, userId);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    totalExpenses = rs.getDouble("totalExpenses");
+                    totalExpenses = rs.getInt("totalExpenses");
                 }
             }
         }

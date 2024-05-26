@@ -25,10 +25,13 @@
     </filter>
     <filter-mapping>
         <filter-name>MyFilter</filter-name>
-        <url-pattern>/index.jsp</url-pattern>
         <url-pattern>/home.jsp</url-pattern>
         <url-pattern>/addExpense.jsp</url-pattern>
         <url-pattern>/addIncome.jsp</url-pattern>
+        <url-pattern>/budgetPlanning.jsp</url-pattern>
+        <url-pattern>/exchange.jsp</url-pattern>
+        <url-pattern>/goal.jsp</url-pattern>
+        <url-pattern>/split.jsp</url-pattern>
     </filter-mapping>
 
 </web-app>

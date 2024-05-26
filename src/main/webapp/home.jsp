@@ -1,24 +1,24 @@
-<%@page import="com.DAO.IncomeDAO"%>
-<%@page import="com.entity.TypeExpense" %>
-<%@page import="com.DAO.TypeExpenseDAO"%>
-<%@page import="com.DAO.TypeDAO"%>
-<%@page import="com.DAO.ExpenseDAO"%>
-<%@page import="com.db.DBConnection"%>
-<%@page import="com.entity.User_income" %>
-<%@page import="com.entity.User_expense" %>
-<%@page import="com.entity.User" %>
-<%@page import="com.entity.Type" %>
-<%@page import="java.util.List"%>
+<%@ page import="java.util.*" %>
+<%@ page import="com.google.gson.Gson"%>
+<%@ page import="com.google.gson.JsonObject"%>
+<%@ page import="com.db.DBConnection"%>
+<%@ page import="com.entity.*" %>
+<%@ page import="com.DAO.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page isELIgnored="false"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="ISO-8859-1">
-<title>Track your Expense</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D.O.S.T</title>
+<link rel="icon" type="images/icon" href="images/logo.png">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" 
+integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <style>
 .add_button{
     background: rgba(3,7,30,0.60);
@@ -34,60 +34,104 @@
     gap: 0.8rem;
     border-radius: 3rem;
 }
+.neumorphic {
+    box-shadow: 5px 5px 15px #c0c0c0, -5px -5px 15px #ffffff; 
+    border-radius: 0px 15px 15px 0px; 
+    transition: all 0.3s ease;
+}
+
+.neumorphic:hover {
+    box-shadow: 8px 8px 20px #c0c0c0, -8px -8px 20px #ffffff; 
 </style>
+<%
+User u = (User) session.getAttribute("userobj");
+IncomeDAO incdao=new IncomeDAO(DBConnection.getConn());
+ExpenseDAO expdao=new ExpenseDAO(DBConnection.getConn());
+long exp=expdao.totalExpense(u.getId());
+long inc=incdao.totalIncome(u.getId());
+long balance=inc-exp;
+
+List<Map<Object,Object>> list = new ArrayList<Map<Object,Object>>();
+
+
+Map<Object,Object> incomeMap = new HashMap<Object,Object>();
+incomeMap.put("label", "Income");
+incomeMap.put("y", inc);
+incomeMap.put("color", "#9ef01a"); 
+list.add(incomeMap);
+
+
+Map<Object,Object> expenseMap = new HashMap<Object,Object>();
+expenseMap.put("label", "Expense");
+expenseMap.put("y", exp);
+expenseMap.put("color", "#e71d36"); 
+list.add(expenseMap);
+
+Map<Object,Object> balanceMap = new HashMap<Object,Object>();
+balanceMap.put("label", "Balance");
+balanceMap.put("y", balance);
+balanceMap.put("color", "#fcf300"); 
+list.add(balanceMap);
+
+
+Gson gsonObj = new Gson();
+String dataPoints = gsonObj.toJson(list);
+%>
+
+<script type="text/javascript">
+window.onload = function() { 
+    var chart = new CanvasJS.Chart("chartContainer", {
+        theme: "light2",
+        animationEnabled: true,
+        exportEnabled: false,
+        title:{
+            text: "Financial Overview"
+        },
+        backgroundColor: "transparent", 
+        data: [{
+            type: "pie",
+            showInLegend: true,
+            legendText: "{label}",
+            toolTipContent: "{label}: <strong>{y}</strong>",
+            indexLabel: "{label} {y}",
+            dataPoints : <%out.print(dataPoints);%>
+        }]
+    });
+ 
+    chart.render();
+}
+</script>
+
+
 </head>
 <body>
 <%@ include file="components/track/nav.jsp" %>
-<div class="container p-5" style="margin-top:60px !important;">
-  <div class="text-center">
-  </div>
-   <%
-          User user=(User) session.getAttribute("userobj");
-         ExpenseDAO d=new ExpenseDAO(DBConnection.getConn());
-         long totalexp=d.totalExpense(user.getId());
-         
-         IncomeDAO d1=new IncomeDAO(DBConnection.getConn());
-         long totalinc=d1.totalIncome(user.getId());
-	%>
-  <div class="d-flex justify-content-evenly"> 
-		  <div class="card text-bg-warning mb-3" style="min-width: 18rem;">
-		  <div class="card-header text-center"><b>BALANCE</b></div>
-		  <div class="card-body">
-		    <h5 class="card-title"><%=totalinc-totalexp%></h5>
-		  </div>
-		 </div>
-		 
-		 <div class="card text-bg-success mb-3" style="min-width: 18rem;">
-		  <div class="card-header text-center"><b>INCOME</b></div>
-		  <div class="card-body">
-		    <h5 class="card-title"><%=totalinc %></h5>
-		  </div>
-		 </div>
-		 
-		 <div class="card text-bg-danger mb-3" style="min-width: 18rem;">
-		  <div class="card-header text-center"><b>EXPENSE</b></div>
-		  <div class="card-body">
-		    <h5 class="card-title"><%=totalexp %></h5>
-		  </div>
-		 </div>
-  </div>
-</div>
 
-
-     <h4 class="text-center p-2"><b>TRANSACTIONS</b></h4>
-<div class=" container d-flex justify-content-between w-50 p-2" style="margin-top:5px !important;" >
-     <div class="px-3">
-    <%
-         IncomeDAO dao=new IncomeDAO(DBConnection.getConn());
-         List<User_income> list=dao.getIncomeById(user.getId());
-	     for(User_income inc:list){
-	%>
-	  <p class=" p-3" style="background:#F8E8EE;border-left:5px solid #008000;min-width: 20rem;"><b><%=inc.getType()%> :</b> <span><%=inc.getIncome()%></span>
-	     <span><cite style="margin-left:15%;color:#0E8388"><%=inc.getDate().toLocalDate() %>&nbsp&nbsp</cite></span>
-	     <a href="./deleteIncome?inco_id=<%=inc.getInco_id()%>" type="button"><i class="bi bi-trash3-fill " style="color:#7B2869;"></i></a>
-	     <span data-bs-toggle="modal" data-bs-target="#exampleModalupdateincome"><i class="bi bi-pencil-fill" type="button"></i></a></span>
-
-					<div class="modal fade" id="exampleModalupdateincome" tabindex="-1"
+<div class="container">
+   <%if(exp==0 && inc==0 && balance==0) {%>
+   <div style="width:880px;height:480px;margin-left:12%;transform:trasnlateX(-50%);margin-bottom:10px;box-shadow: -14px 22px 14px -12px rgba(0,0,0,0.47);
+-webkit-box-shadow: -14px 22px 14px -12px rgba(0,0,0,0.47);
+-moz-box-shadow: -14px 22px 14px -12px rgba(0,0,0,0.47);">
+      <img src="images/background.gif" alt="..." style="width:850px;height:480px;">
+   </div>
+   <%}else{ %>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h4 class=" p-2 mt-4"><b>TRANSACTIONS HISTORY</b>&nbsp<a href="./download" style="color:black;"><i class="fa-solid fa-download"></i></a></h4>
+            
+            <div class="p-2">
+                <div class="col-md-6">
+                   <span class="lead"><cite>Earning:</cite></span>
+                    <% 
+                    List<User_income> inclist=incdao.getIncomeById(user.getId());
+                    for(User_income in:inclist){
+                    %>
+                    <p class="p-3 neumorphic" style="background:#dcddee;border-left:5px solid #008000;min-width: 20rem;"><b><%=in.getType()%> :</b> <span><%=in.getIncome()%></span>
+                        <span><cite style="margin-left:7%;color:#0E8388"><%=in.getDate().toLocalDate() %>&nbsp&nbsp</cite></span>
+                        <a href="./deleteIncome?inco_id=<%=in.getInco_id()%>" type="button"><i class="bi bi-trash3-fill " style="color:#7B2869;"></i></a>
+                        <span data-bs-toggle="modal" data-bs-target="#exampleModalupdateincome"><i class="bi bi-pencil-fill" type="button"></i></a></span>
+                        
+                        <div class="modal fade" id="exampleModalupdateincome" tabindex="-1"
 						aria-labelledby="exampleModalLabel" aria-hidden="true">
 						<div class="modal-dialog">
 							<div class="modal-content">
@@ -102,7 +146,7 @@
 										<div class="mb-3">
 											<label for="type" class="form-label">Income</label>
 												  <select class="form-select" name="type">
-												    <option selected><%=inc.getType()%></option>
+												    <option selected><%=in.getType()%></option>
 												    <%
 														TypeDAO opt = new TypeDAO(DBConnection.getConn());
 														List<Type> list1=opt.getAllType();
@@ -114,11 +158,11 @@
 												  </select>
 									    </div>
 											<input type="hidden" class="form-control"
-												value="<%=inc.getInco_id()%>" name="inco_id">
+												value="<%=in.getInco_id()%>" name="inco_id">
 										<br>
 										 <div class="mb-3">
 										    <label for="income" class="form-label">Amount</label>
-										    <input type="number" class="form-control" name="income" value="<%=inc.getIncome()%>">
+										    <input type="number" class="form-control" name="income" value="<%=in.getIncome()%>">
 										  </div>
 										<br>
 				
@@ -129,24 +173,21 @@
 							</div>
 						</div>
 					</div>
-	 
-	<%} %>
-	</div>
-	
-	
-     <div class="px-3">
-    <%
-         ExpenseDAO dao2=new ExpenseDAO(DBConnection.getConn());
-          
-         List<User_expense> list2=dao2.getExpenseById(user.getId());
-	     for(User_expense exp:list2){
-	%>
-	  <p class="p-3" style="background:#F8E8EE;border-left:5px solid #d00000;min-width: 20rem;"><b><%=exp.getType()%>:</b> <span><%=exp.getExpense()%></span>	  
-	     	    <span><cite style="margin-left:20%;color:#0E8388"><%=exp.getDate().toLocalDate() %></cite></span>
-	     	    <a href="./deleteExpense?exp_id=<%=exp.getExp_id()%>" type="button"><i class="bi bi-trash3-fill" style="color:#7B2869;"></i></a>
-	     	    <span data-bs-toggle="modal" data-bs-target="#exampleModalupdateexpense"><i class="bi bi-pencil-fill" type="button" ></i></a></span>
-
-					<div class="modal fade" id="exampleModalupdateexpense" tabindex="-1"
+                    </p>
+                    <%} %>
+                </div>
+                <div class="col-md-6">
+                   <span class="lead"><cite>Expenditure:</cite></span>
+                 
+                    <%
+                    List<User_expense> list2=expdao.getExpenseById(user.getId());
+                    for(User_expense ex:list2){
+                    %>
+                    <p class="p-3 neumorphic" style="background:#dcddee;border-left:5px solid #d00000;min-width: 20rem;"><b><%=ex.getType()%>:</b> <span><%=ex.getExpense()%></span>	  
+                        <span><cite style="margin-left:7%;color:#0E8388"><%=ex.getDate().toLocalDate() %></cite></span>
+                        <a href="./deleteExpense?exp_id=<%=ex.getExp_id()%>" type="button"><i class="bi bi-trash3-fill" style="color:#7B2869;"></i></a>
+                        <span data-bs-toggle="modal" data-bs-target="#exampleModalupdateexpense"><i class="bi bi-pencil-fill" type="button" ></i></a></span>
+                        <div class="modal fade" id="exampleModalupdateexpense" tabindex="-1"
 						aria-labelledby="exampleModalLabel" aria-hidden="true">
 						<div class="modal-dialog">
 							<div class="modal-content">
@@ -161,7 +202,7 @@
 										<div class="mb-3">
 											<label for="type" class="form-label">Expense</label>
 												  <select class="form-select" name="type">
-												    <option selected><%=exp.getType() %></option>
+												    <option selected><%=ex.getType() %></option>
 												    <%
 														TypeExpenseDAO opt = new TypeExpenseDAO(DBConnection.getConn());
 														List<TypeExpense> expe=opt.getAllType();
@@ -173,11 +214,11 @@
 												  </select>
 									    </div>
 											<input type="hidden" class="form-control"
-												value="<%=exp.getExp_id()%>" name="exp_id">
+												value="<%=ex.getExp_id()%>" name="exp_id">
 										<br>
 										 <div class="mb-3">
 										    <label for="expense" class="form-label">Amount</label>
-										    <input type="number" class="form-control" name="expense" value="<%=exp.getExpense()%>">
+										    <input type="number" class="form-control" name="expense" value="<%=ex.getExpense()%>">
 										  </div>
 										<br>
 				
@@ -188,33 +229,60 @@
 							</div>
 						</div>
 					</div>
-	  </p>
-
-	
-	<%} %> 
-	</div>
+                    </p>
+                    <%} %> 
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div id="chartContainer" style="height: 510px;width:590px;"></div>  
+           
+        </div>
+    </div>
+    <%} %>
 </div>
-<div class="add_button" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"><h1 class="d-flex justify-content-center align-items-center fs-5"><b>+</b></h1></div>
-
-<a href="./download" class="d-flex justify-content-center align-items-center text-decoration-none" style="color:#66347F";>Download All Transactions</a>
+<%if(inc!=0 && inc>0){ %>
+<div class="add_button sticky-bottom" type="button" data-bs-toggle="modal" data-bs-target="#exampleModalAdd"><h1 class="d-flex justify-content-center align-items-center fs-5"><b>+</b></h1></div>
+<%}else{ %>
+<div class="add_button sticky-bottom" type="button" data-bs-toggle="modal" data-bs-target="#exampleModalAddwithoutexpense"><h1 class="d-flex justify-content-center align-items-center fs-5"><b>+</b></h1></div>
+<%} %>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body d-flex justify-content-evenly align-items-center">
-        <a  href="addIncome.jsp"><button class="btn btn-outline-success ">Add Income</button></a>
-        <a  href="addExpense.jsp"><button class="btn btn-outline-danger ">Add Expense</button></a>
-      </div>
+<div class="modal fade" id="exampleModalAdd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body d-flex justify-content-evenly align-items-center">
+                <a  href="addIncome.jsp"><button class="btn btn-outline-success ">Add Income</button></a>
+                <a  href="addExpense.jsp"><button class="btn btn-outline-danger ">Add Expense</button></a>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
+<div class="modal fade" id="exampleModalAddwithoutexpense" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body d-flex justify-content-center align-items-center">
+                <a  href="addIncome.jsp"><button class="btn btn-outline-success ">Add Income</button></a>
+            </div>
+        </div>
+    </div>
+</div>
 
-
+<script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" 
+integrity="sha512-GWzVrcGlo0TxTRvz9ttioyYJ+Wwk9Ck0G81D+eO63BaqHaJ3YZX9wuqjwgfcV/MrB2PhaVX9DkYVhbFpStnqpQ==" 
+crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 </html>
