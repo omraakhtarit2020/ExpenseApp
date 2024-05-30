@@ -22,7 +22,11 @@ public class chatGpt extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+
+
 		//String que=req.getParameter("que");
+
 		String prompt = req.getParameter("query");
 		String ans = chatGPT(prompt);
 
@@ -32,6 +36,9 @@ public class chatGpt extends HttpServlet {
 		// Adds prompts to ArrayList, Add response to ArrayList
 		promptAr.add(prompt);
 		responses.add(ans);
+
+
+
 		/*if(que!=null) {
 			promptAr.add(que);
 			req.setAttribute("promptAr", que);
@@ -39,14 +46,20 @@ public class chatGpt extends HttpServlet {
 		}
 		else*/ 
 		
+
 		req.setAttribute("promptAr", promptAr);
 		req.setAttribute("responses", responses); // Set ArrayList as request attribute
 		req.getRequestDispatcher("budgetPlanning.jsp").forward(req, resp); // Forward to JSP page
 
 		System.out.println("Prompt:" + prompt);
 		System.out.println("chatgpt:" + ans);
+
+
+		// que="";
+
 		//System.out.println("que:"+ que);
 		//que="";
+
 	}
 
 	// Method to clear the chat history
@@ -57,8 +70,20 @@ public class chatGpt extends HttpServlet {
 
 	public static String chatGPT(String prompt) {
 		// Define keywords related to budgets and expenses
+
+		String[] budgetKeywords = { "budget", "expense", "expenses", "spending", "savings", "financial", "planning",
+				"finances", "trip", "Track", "flight", "train", "cost", "price", "investement plans", "invest",
+				"investment", "equity", "Insurance", "Payment", "Mortgage", "money", "earning", "currency", "wealth",
+				"liquid assets", "capital", "funds", "stipend", "fee", "wages", "salary", "resources", "rate",
+				"expenditure", "debt", "liability", "tariff", "value", "worth", "economy", "revenue", "income",
+				"profit", "gain", "earnings", "surplus", "return", "dividend", "proceeds", "windfall", "margin",
+				"gross", "net", "yield", "revenue stream", "benefit", "payoff", "profitability", "loss", "deficit",
+				"shortfall", "expense", "outlay", "expenditure", "cost", "overhead", "depreciation", "write-off",
+				"debt", "liability", "bus", "car", "business", "save", "stock", "share", "fare" };
+
 		String[] budgetKeywords = { "budget", "expense", "expenses", "spending", "savings", "financial", "planning", "finances",
 				"trip", "Track", "flight", "train", "cost", "price","investement plans","invest","investment","equity", "Insurance", "Payment","Mortgage" };
+
 		boolean isBudgetRelated = false;
 
 		// Check if the prompt contains any of the budget-related keywords
@@ -75,7 +100,8 @@ public class chatGpt extends HttpServlet {
 		}
 
 		String url = "https://api.openai.com/v1/chat/completions";
-		String apiKey ="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";
+
+		String apiKey = "sk-proj-ZhENlsznjCR18YkZlkWJT3BlbkFJwUIHT4cHyNeXpwhE7GUG";
 
 		String model = "gpt-3.5-turbo";
 
@@ -123,6 +149,8 @@ public class chatGpt extends HttpServlet {
 		return message;
 	}
 
+
+
 	/*
 	 * public static void main(String[] args) {
 	 * 
@@ -130,4 +158,5 @@ public class chatGpt extends HttpServlet {
 	 * 
 	 * }
 	 */
+
 }

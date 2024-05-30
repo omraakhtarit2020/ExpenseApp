@@ -18,7 +18,8 @@
 	crossorigin="anonymous">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-<title>Credit Exchange</title>
+<title>D.O.S.T</title>
+<link rel="icon" type="images/icon" href="images/logo.png">
 
 <Style>
 .grid1 {
@@ -179,24 +180,37 @@ line-height:35px;
 						<%
 							LendDAO dao = new LendDAO(DBConnection.getConn());
 							List<Lend> list = dao.getLendById(user.getId());
+
+
+							if (list.isEmpty())
+							{%>
+								<div class="box loan">
+									<h6 style="text-align:center; font-size:18px; color:black; padding-top:30px">- No Entry Found -</h6>
+
 							if (list.isEmpty()){
 						%>
 								<div class="box loan">
 									<h6 style="text-align:center; font-size:18px; color:#4f5051; padding-top:30px">- No Entry Found -</h6>
+
 								</div>
 						<%		
 							} else {
 								String[] color = {"#9ef01a", "#ff4800", "#ff0a54", "#ffb600", "#9448bc", "#99ffff"};
 								int colorindex = 0;
+
+								for (Lend lend1 : list) {
+
+
 								for (Lend lend : list) {
+
 						%>
 						<div class="box loan">
 						
-							<h6><b> To: </b><%=lend.getTo()%></h6>
-							<h6><b>Date: </b> <%=lend.getDate().toLocalDate()%></h6>
-						<span class="fs-6 text-black"><b>Amount: </b><i class="bi bi-currency-rupee"></i><%=lend.getAmt()%> </span> 
+							<h6><b> To: </b><%=lend1.getTo()%></h6>
+							<h6><b>Date: </b> <%=lend1.getDate().toLocalDate()%></h6>
+						<span class="fs-6 text-black"><b>Amount: </b><i class="bi bi-currency-rupee"></i><%=lend1.getAmt()%> </span> 
 						<span style="margin-left: 25%;"> <%
- 							if (lend.getFollowup().equalsIgnoreCase("Yes")) {
+ 							if (lend1.getFollowup().equalsIgnoreCase("Yes")) {
  							%> <a data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i
 								class="bi bi-envelope-at-fill fs-4 text-black"
 								data-bs-toggle="tooltip" data-bs-title="want to send reminder?"></i></a>
@@ -204,7 +218,6 @@ line-height:35px;
 							}
 							%>
 						</span>
-
 						<div class="modal fade" id="staticBackdrop"
 							data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
 							aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -223,10 +236,10 @@ line-height:35px;
 													aria-describedby="emailHelp" name="senderemail">
 												<div id="emailHelp" class="form-text">We'll never
 													share the email with anyone else.</div>
-												<input name="to" type="hidden" value=<%=lend.getTo()%>>
-												<input name="amt" type="hidden" value=<%=lend.getAmt()%>>
+												<input name="to" type="hidden" value=<%=lend1.getTo()%>>
+												<input name="amt" type="hidden" value=<%=lend1.getAmt()%>>
 												<input name="date" type="hidden"
-													value=<%=lend.getDate().toLocalDate()%>>
+													value=<%=lend1.getDate().toLocalDate()%>>
 											</div>
 											<button type="submit" class="btn btn-primary">Submit</button>
 										</form>
@@ -236,10 +249,16 @@ line-height:35px;
 						</div>
 
 						<span style="transform: translateX(-50%);"><a
+							href="./deleteLend?lend_id=<%=lend1.getLend_id()%>"><i
+								class="bi bi-trash3-fill fs-4 text-black" type="button"></i></a> 
+								<a  onclick="showLendDetails('<%=lend1.getLend_id()%>','<%= lend1.getTo()%>', '<%= lend1.getAmt() %>', '<%= lend1.getDate().toLocalDate() %>', '<%= lend1.getPurpose() %>')" data-bs-toggle="modal" data-bs-target="#exampleModalupdatelend"><i class="bi bi-pencil-fill fs-4 text-black" type="button"></i></a> 
+								<a data-bs-toggle="modal" data-bs-target="#exampleModalupdatelend" onclick="setLendId(<%=lend1.getLend_id()%>)"><i></i></a> </span>
+
 							href="./deleteLend?lend_id=<%=lend.getLend_id()%>"><i
 								class="bi bi-trash3-fill fs-4 text-black" type="button"></i></a> <a
 							data-bs-toggle="modal" data-bs-target="#exampleModalupdatelend" onclick="setLendId(<%=lend.getLend_id()%>)"><i
 								class="bi bi-pencil-fill fs-4 text-black" type="button"></i></a> </span>
+
 
 						<div class="modal fade" id="exampleModalupdatelend" tabindex="-1"
 							aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -252,25 +271,29 @@ line-height:35px;
 											data-bs-dismiss="modal" aria-label="Close"></button>
 									</div>
 									<div class="modal-body">
-										<form action="./updateLend" method="POST">
+										<form >
 											<div class="form-group row">
 												<label for="to" class="col-sm-2 col-form-label">To</label>
 												<div class="col-sm-10">
 													<input type="text" class="form-control"
-														value="<%=lend.getTo()%>" name="to">
+														 name="to" id="lendto">
 												</div>
 											</div>
 											<br>
 											<div class="form-group row">
+
+												<input type="hidden" class="form-control" name="lend_id" id="lendid" value="<%=lend1.getLend_id()%>" name="lend_id" id="lendIdInput">
+
 												<input type="hidden" class="form-control"
 													value="<%=lend.getLend_id()%>" name="lend_id" id="lendIdInput">
+
 											</div>
 											<br>
 											<div class="form-group row">
 												<label for="amount" class="col-sm-2 col-form-label">Amount</label>
 												<div class="col-sm-10">
 													<input type="number" class="form-control"
-														value="<%=lend.getAmt()%>" name="amt">
+														 name="amt" id="lendamt">
 												</div>
 											</div>
 											<br>
@@ -278,7 +301,7 @@ line-height:35px;
 												<label for="date" class="col-sm-2 col-form-label">Date</label>
 												<div class="col-sm-10">
 													<input type="date" class="form-control"
-														value="<%=lend.getDate().toLocalDate()%>" name="date">
+														 name="date" id="lenddate">
 												</div>
 											</div>
 											<br>
@@ -286,13 +309,13 @@ line-height:35px;
 												<label for="purpose" class="col-sm-2 col-form-label">Purpose</label>
 												<div class="col-sm-10">
 													<input type="text" class="form-control"
-														value="<%=lend.getPurpose()%>" name="purpose">
+													 name="purpose" id="lendpurpose">
 												</div>
 											</div>
 											<br>
 
 											<button type="submit" class="btn btn-primary"
-												style="margin-top: 15px; margin-left: 50%; transform: translateX(-50%);">Save</button>
+												style="margin-top: 15px; margin-left: 50%; transform: translateX(-50%);" onclick="updateLend()">Save</button>
 										</form>
 									</div>
 								</div>
@@ -300,7 +323,7 @@ line-height:35px;
 						</div>
 						
 					</div>
-
+					<%} %>
 					<%
 					colorindex++;
 					}
@@ -337,7 +360,12 @@ line-height:35px;
 			<%
 						BorrowDAO dao2 = new BorrowDAO(DBConnection.getConn());
 						List<Borrow> list2 = dao2.getBorrowById(user.getId());
+
+						%>
+						<%if (list2.isEmpty()) {
+
 						if (list2.isEmpty()) {
+
 							%>
 								<div class="box borrow">
 									<h6 style="text-align:center; font-size:18px; color:#4f5051; padding-top:30px">- No Entry Found -</h6>
@@ -346,6 +374,15 @@ line-height:35px;
 								} else {
 									String[] colors = {"#d00000", "#ffba08", "#8ac926", "#1982c4", "#6a4c93", "#99ffff"};
 									int colorIndex = 0;
+
+									for (Borrow borrow1 : list2) {
+							%>
+					<div class="box borrow">
+					<b>From: </b><%=borrow1.getTo()%>
+					<h6><b>Date: </b><%=borrow1.getDate().toLocalDate()%></h6>
+							<span class="fs-6 text-black"><b>Amount: </b><i class="bi bi-currency-rupee"></i><%=borrow1.getAmt()%></span> <span style="margin-left: 25%;"> <%
+                              if (borrow1.getFollowup().equalsIgnoreCase("Yes")) {
+                                %> <a data-bs-toggle="modal" data-bs-target="#staticBackdropborrow"><i
 									for (Borrow borrow : list2) {
 							%>
 					<div class="box borrow">
@@ -354,11 +391,12 @@ line-height:35px;
 							<span class="fs-6 text-black"><b>Amount: </b><i class="bi bi-currency-rupee"></i><%=borrow.getAmt()%></span> <span style="margin-left: 25%;"> <%
  if (borrow.getFollowup().equalsIgnoreCase("Yes")) {
  %> <a data-bs-toggle="modal" data-bs-target="#staticBackdropborrow"><i
+
 									data-bs-toggle="tooltip"
 									data-bs-title="Want to send a notification?"
 									class="bi bi-envelope-at-fill fs-4 text-black"></i></a> <%
- }
- %>
+                                 }
+                          %>
 							</span>
 
 							<div class="modal fade" id="staticBackdropborrow"
@@ -379,10 +417,10 @@ line-height:35px;
 														aria-describedby="emailHelp" name="lenderemail">
 													<div id="emailHelp" class="form-text">We'll never
 														share the email with anyone else.</div>
-													<input name="to" type="hidden" value=<%=borrow.getTo()%>>
-													<input name="amt" type="hidden" value=<%=borrow.getAmt()%>>
+													<input name="to" type="hidden" value=<%=borrow1.getTo()%>>
+													<input name="amt" type="hidden" value=<%=borrow1.getAmt()%>>
 													<input name="date" type="hidden"
-														value=<%=borrow.getDate().toLocalDate()%>>
+														value=<%=borrow1.getDate().toLocalDate()%>>
 												</div>
 												<button type="submit" class="btn btn-primary">Submit</button>
 											</form>
@@ -391,8 +429,8 @@ line-height:35px;
 								</div>
 							</div>
 							<span style="transform: translateX(-50%);"><a
-								href="./deleteBorrow?borrow_id=<%=borrow.getBorrow_id()%>"><i
-									class="bi bi-trash3-fill fs-4 text-black" type="button"></i></a> <a
+								href="./deleteBorrow?borrow_id=<%=borrow1.getBorrow_id()%>"><i
+									class="bi bi-trash3-fill fs-4 text-black" type="button"></i></a> <a onclick="showBorrowDetails('<%=borrow1.getBorrow_id()%>','<%= borrow1.getTo()%>', '<%= borrow1.getAmt()%>', '<%= borrow1.getDate().toLocalDate() %>', '<%= borrow1.getPurpose() %>')"
 								data-bs-toggle="modal"
 								data-bs-target="#exampleModalupdateborrow"><i
 									class="bi bi-pencil-fill fs-4 text-black" type="button"></i></a> </span>
@@ -410,25 +448,25 @@ line-height:35px;
 												data-bs-dismiss="modal" aria-label="Close"></button>
 										</div>
 										<div class="modal-body">
-											<form action="./updateBorrow" method="POST">
+											<form>
 												<div class="form-group row">
 													<label for="to" class="col-sm-2 col-form-label">To</label>
 													<div class="col-sm-10">
 														<input type="text" class="form-control"
-															value="<%=borrow.getTo()%>" name="to">
+															 name="to" id="borrowto">
 													</div>
 												</div>
 												<br>
 												<div class="form-group row">
 													<input type="hidden" class="form-control"
-														value="<%=borrow.getBorrow_id()%>" name="borrow_id">
+														 name="borrow_id" id="borrowid">
 												</div>
 												<br>
 												<div class="form-group row">
 													<label for="amount" class="col-sm-2 col-form-label">Amount</label>
 													<div class="col-sm-10">
 														<input type="number" class="form-control"
-															value="<%=borrow.getAmt()%>" name="amt">
+															 name="amt" id="borrowamt">
 													</div>
 												</div>
 												<br>
@@ -436,7 +474,7 @@ line-height:35px;
 													<label for="date" class="col-sm-2 col-form-label">Date</label>
 													<div class="col-sm-10">
 														<input type="date" class="form-control"
-															value="<%=borrow.getDate().toLocalDate()%>" name="date">
+															 name="date" id="borrowdate">
 													</div>
 												</div>
 												<br>
@@ -444,13 +482,13 @@ line-height:35px;
 													<label for="purpose" class="col-sm-2 col-form-label">Purpose</label>
 													<div class="col-sm-10">
 														<input type="text" class="form-control"
-															value="<%=borrow.getPurpose()%>" name="purpose">
+															 name="purpose" id="borrowpurpose">
 													</div>
 												</div>
 												<br>
 
 												<button type="submit" class="btn btn-primary"
-													style="margin-top: 15px; margin-left: 50%; transform: translateX(-50%);">Save</button>
+													style="margin-top: 15px; margin-left: 50%; transform: translateX(-50%);" onclick="updateBorrow()">Save</button>
 											</form>
 										</div>
 									</div>
@@ -458,8 +496,9 @@ line-height:35px;
 							</div>
 
 						</div>
-
+             
 						<%
+									}
 						colorIndex++;
 						}
 						}
@@ -610,6 +649,11 @@ line-height:35px;
 					</form>
 				</div>
 			</div>
+
+		</div>
+		</div>
+
+
 		</div></div>
 		
 
@@ -643,6 +687,46 @@ line-height:35px;
     }
     
     </script>
+    <script>
+    function showLendDetails(lend_id,to, amt, date, purpose) {
+        $('#exampleModalupdatelend input[name="to"]').val(to);
+        $('#exampleModalupdatelend input[name="amt"]').val(amt);
+        $('#exampleModalupdatelend input[name="date"]').val(date);
+        $('#exampleModalupdatelend input[name="purpose"]').val(purpose);
+        $('#exampleModalupdatelend input[name="lend_id"]').val(lend_id);
+    }
+    function updateLend() {
+        var to = document.querySelector("#lendto").value;
+        var amt = document.querySelector("#lendamt").value;
+        var date = document.querySelector("#lenddate").value;
+        var purpose = document.querySelector("#lendpurpose").value;
+        var id = document.querySelector("#lendid").value;
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', './updateLend?purpose=' + purpose + '&date=' + date + '&to=' + to + '&amt=' + amt + '&lend_id=' + id, true);
+        xhr.send();
+    }
+    
+    
+    function showBorrowDetails(borrow_id,to, amt, date, purpose) {
+        $('#exampleModalupdateborrow input[name="to"]').val(to);
+        $('#exampleModalupdateborrow input[name="amt"]').val(amt);
+        $('#exampleModalupdateborrow input[name="date"]').val(date);
+        $('#exampleModalupdateborrow input[name="purpose"]').val(purpose);
+        $('#exampleModalupdateborrow input[name="borrow_id"]').val(borrow_id);
+    }
+    function updateBorrow() {
+        var to = document.querySelector("#borrowto").value;
+        var amt = document.querySelector("#borrowamt").value;
+        var date = document.querySelector("#borrowdate").value;
+        var purpose = document.querySelector("#borrowpurpose").value;
+        var id = document.querySelector("#borrowid").value;
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', './updateBorrow?purpose=' + purpose + '&date=' + date + '&to=' + to + '&amt=' + amt + '&borrow_id=' + id, true);
+        xhr.send();
+    }
+</script>
 	<script>
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
     const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))

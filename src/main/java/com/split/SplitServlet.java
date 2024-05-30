@@ -56,6 +56,7 @@ public class SplitServlet extends HttpServlet {
 			int ownerId = ((User) session.getAttribute("userobj")).getId();
 
 			Split s = new Split(grpname, people, amt, names, date, ownerId);
+			System.out.println(s.toString());
 			SplitDAO dao = new SplitDAO(DBConnection.getConn());
 			int groupId = dao.addSplit(s);
 			if (groupId != -1) {

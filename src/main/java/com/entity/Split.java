@@ -11,6 +11,7 @@ public class Split {
 	private List<String> names;
 	private java.sql.Date date;
 	private int user_id;
+	private String status;
 
 	public Split(String grpname, int people, double amt, List<String> names, java.sql.Date date, int user_id) {
 		super();
@@ -20,6 +21,19 @@ public class Split {
 		this.names = names;
 		this.date = date;
 		this.user_id = user_id;
+	}
+
+	public Split(String grpname, int grpId, int people, double amt, List<String> names, java.sql.Date date, int user_id,
+			String status) {
+		super();
+		this.grpname = grpname;
+		this.grpId = grpId;
+		this.people = people;
+		this.amt = amt;
+		this.names = names;
+		this.date = date;
+		this.user_id = user_id;
+		this.status = "Pending";
 	}
 
 	public Split() {
@@ -81,6 +95,14 @@ public class Split {
 
 	public void setDate(java.sql.Date date) {
 		this.date = date;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = "Pending";
 	}
 
 	@Override

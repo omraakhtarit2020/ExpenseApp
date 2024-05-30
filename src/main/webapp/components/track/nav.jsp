@@ -207,7 +207,23 @@ span .itemExe {
     display: flex;
     align-items: center;
 }
-
+.self-center {
+  align-self: center;
+}
+.whitespace-nowrap {
+  white-space: nowrap;
+}
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+.font-bold {
+  font-weight: 700;
+}
+.dark .dark\:text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
 </style>
 </head>
 
@@ -216,8 +232,8 @@ span .itemExe {
 	<nav class="navbar">
 		<div class="container-fluid">
         <div class="logo-container">
-            <img src="images/favicon-16x16.png" class="h-6 mr-3 sm:h-9" alt="logo" />
-            <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Expense-Tastic</span>
+            <img src="images/logo.png" class="h-6 mr-3 sm:h-9" alt="logo" />
+            <span class="self-center text-3xl font-bold whitespace-nowrap" style="color:black;">D.O.S.T</span>
         </div>
     </div>
 	</nav>
@@ -256,10 +272,10 @@ span .itemExe {
 			<div class="item">
 				<a class="sub-btn" href="#" data-bs-toggle="modal"
 					data-bs-target="#exampleModal"><i class="fas fa-user"></i>
-					Profile</a>
+					 Profile</a>
 			</div>
 			<div class="item">
-				<a href="./logout"><i class="fas fa-sign-out-alt"></i>Log-Out</a>
+				<a href="./logout"><i class="fas fa-sign-out-alt"></i> Log-Out</a>
 			</div>
 		</div>
 	</div>
@@ -275,7 +291,7 @@ span .itemExe {
 				<div class="modal-header">
 					<div class="modal-title fs-5" id="exampleModalLabel">
 						<div class="dot">
-							<h1 class="dot-h1"><%=user.getFname().charAt(0)%><%=user.getLname().charAt(0)%></h1>
+							<h1 class="dot-h1"><%=String.valueOf(user.getFname().charAt(0)).toUpperCase()%><%=String.valueOf(user.getLname().charAt(0)).toUpperCase()%></h1>
 						</div>
 					</div>
 					<button type="button" class="btn-close" data-bs-dismiss="modal"

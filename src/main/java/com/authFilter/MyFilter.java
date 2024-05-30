@@ -28,10 +28,13 @@ public class MyFilter implements Filter {
 
 		if (user != null) {
 			arg2.doFilter(arg0, arg1);
+		} else if (user == null) {
+
 		} else {
 //			arg1.setContentType("text/html");
 //			arg1.getWriter().println("Please login to visit");
-			resp.sendRedirect("./login.jsp");
+
+			resp.sendRedirect("./welcome.jsp");
 
 		}
 

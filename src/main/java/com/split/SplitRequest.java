@@ -126,8 +126,9 @@ public class SplitRequest extends HttpServlet {
 					+ "We wanted to inform you that you've  added  a new group on our website ."
 					+ "It has been created for the purpose of splitting bills among its members.\r\n" + "\r\n"
 					+ "Here are the details of the group:\r\n" + "\r\n" + "- Group Name:" + grpname + "\r\n"
-					+ "- Number of Members:" + people + "\r\n" + "- Total Amount to Be Split:" + amt + "\r\n" + "\r\n"
-					+ "You are one of the members of this group, and your contribution towards the total amount is "
+					+ "- Number of Members:" + people + "\r\n" + "- Total Amount to Be Split: Rs." + amt + "\r\n"
+					+ "\r\n"
+					+ "You are one of the members of this group, and your contribution towards the total amount is Rs."
 					+ (amt / people)
 					+ ". This amount has been calculated based on the expenses to be shared among the group members.\r\n"
 					+ "\r\n" + "\r\n" + "\r\n" + "Thank you for being a part of our community!\r\n" + "\r\n" + "\r\n"

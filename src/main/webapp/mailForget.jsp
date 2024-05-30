@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Email-verification</title>
+<title>D.O.S.T</title>
+<link rel="icon" type="images/icon" href="images/logo.png">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 	integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
@@ -112,23 +113,9 @@ a {
 	display: -ms-grid;
 	display: grid;
 	-ms-grid-columns: [start] 1fr[left-gutter] (86.6px)[16] [left-gutter] 1fr[end];
-	grid-template-columns: [start] 1fr[left-gutter] repeat(16, 86.6px)[left-gutter]
-		
-		
-		
-		
-		
-		
-		 1fr[end];
+	grid-template-columns: [start] 1fr[left-gutter] repeat(16, 86.6px)[left-gutter] 1fr[end];
 	-ms-grid-rows: [top] 1fr[top-gutter] (64px)[8] [bottom-gutter] 1fr[bottom];
-	grid-template-rows: [top] 1fr[top-gutter] repeat(8, 64px)[bottom-gutter]
-		
-		
-		
-		
-		
-		
-		 1fr[bottom];
+	grid-template-rows: [top] 1fr[top-gutter] repeat(8, 64px)[bottom-gutter] 1fr[bottom];
 	justify-content: center;
 	margin: 0 -2%;
 	transform: rotate(-12deg) skew(-12deg);

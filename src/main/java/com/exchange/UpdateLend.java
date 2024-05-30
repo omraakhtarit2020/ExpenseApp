@@ -19,8 +19,10 @@ public class UpdateLend extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		System.out.println("hi i am in update servlet");
 		try {
 			String to = (String) req.getParameter("to");
+
 			String purpose = (String) req.getParameter("purpose");
 			// String followup = (String) req.getParameter("followup");
 
@@ -30,10 +32,16 @@ public class UpdateLend extends HttpServlet {
 			java.sql.Date date = java.sql.Date.valueOf(d);
 
 			HttpSession session = req.getSession();
-			int lend_id = Integer.parseInt(req.getParameter("lend_id"));
+			String lendIdParam = req.getParameter("lend_id");
+			int lend_id = 0; // Default value or handle as needed
+			if (lendIdParam != null && !lendIdParam.isEmpty()) {
+				lend_id = Integer.parseInt(lendIdParam);
+			}
 			int userId = ((User) session.getAttribute("userobj")).getId();
 			Lend lend = new Lend(to, purpose, amt, date, userId, lend_id);
+
 			System.out.print(lend.toString());
+
 			LendDAO dao = new LendDAO(DBConnection.getConn());
 			if (dao.updateLend(lend)) {
 				session.setAttribute("succMsg", "Updated succesfully");
