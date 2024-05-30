@@ -123,8 +123,8 @@
 							      </div>
 							      <div class="modal-body">
 							       <form action="./UpdateStatusServlet" method="post">
-                                      <input type="text" name="grpId" value="<%= groupId %>" >
-                                      <input type="text" name="OwnerId" value="<%= user.getId() %>">
+                                      <input type="hidden" name="grpId" value="<%= groupId %>" >
+                                      <input type="hidden" name="OwnerId" value="<%= user.getId() %>">
                                        <label style="color:black;">Has the purpose of the group been fulfilled and the payment completed?</label>
 		                               <div class="mt-3">
 		                               <button type="submit" class="btn btn-primary">Yes</button>
