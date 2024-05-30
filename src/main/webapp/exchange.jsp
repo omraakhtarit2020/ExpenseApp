@@ -181,16 +181,27 @@ line-height:35px;
 							LendDAO dao = new LendDAO(DBConnection.getConn());
 							List<Lend> list = dao.getLendById(user.getId());
 
+
 							if (list.isEmpty())
 							{%>
 								<div class="box loan">
 									<h6 style="text-align:center; font-size:18px; color:black; padding-top:30px">- No Entry Found -</h6>
+
+							if (list.isEmpty()){
+						%>
+								<div class="box loan">
+									<h6 style="text-align:center; font-size:18px; color:#4f5051; padding-top:30px">- No Entry Found -</h6>
+
 								</div>
 						<%		
 							} else {
 								String[] color = {"#9ef01a", "#ff4800", "#ff0a54", "#ffb600", "#9448bc", "#99ffff"};
 								int colorindex = 0;
+
 								for (Lend lend1 : list) {
+
+
+								for (Lend lend : list) {
 
 						%>
 						<div class="box loan">
@@ -243,6 +254,12 @@ line-height:35px;
 								<a  onclick="showLendDetails('<%=lend1.getLend_id()%>','<%= lend1.getTo()%>', '<%= lend1.getAmt() %>', '<%= lend1.getDate().toLocalDate() %>', '<%= lend1.getPurpose() %>')" data-bs-toggle="modal" data-bs-target="#exampleModalupdatelend"><i class="bi bi-pencil-fill fs-4 text-black" type="button"></i></a> 
 								<a data-bs-toggle="modal" data-bs-target="#exampleModalupdatelend" onclick="setLendId(<%=lend1.getLend_id()%>)"><i></i></a> </span>
 
+							href="./deleteLend?lend_id=<%=lend.getLend_id()%>"><i
+								class="bi bi-trash3-fill fs-4 text-black" type="button"></i></a> <a
+							data-bs-toggle="modal" data-bs-target="#exampleModalupdatelend" onclick="setLendId(<%=lend.getLend_id()%>)"><i
+								class="bi bi-pencil-fill fs-4 text-black" type="button"></i></a> </span>
+
+
 						<div class="modal fade" id="exampleModalupdatelend" tabindex="-1"
 							aria-labelledby="exampleModalLabel" aria-hidden="true">
 							<div class="modal-dialog">
@@ -264,7 +281,12 @@ line-height:35px;
 											</div>
 											<br>
 											<div class="form-group row">
+
 												<input type="hidden" class="form-control" name="lend_id" id="lendid" value="<%=lend1.getLend_id()%>" name="lend_id" id="lendIdInput">
+
+												<input type="hidden" class="form-control"
+													value="<%=lend.getLend_id()%>" name="lend_id" id="lendIdInput">
+
 											</div>
 											<br>
 											<div class="form-group row">
@@ -305,6 +327,7 @@ line-height:35px;
 					<%
 					colorindex++;
 					}
+					}
 					%>
 				</div>
 
@@ -337,8 +360,12 @@ line-height:35px;
 			<%
 						BorrowDAO dao2 = new BorrowDAO(DBConnection.getConn());
 						List<Borrow> list2 = dao2.getBorrowById(user.getId());
+
 						%>
 						<%if (list2.isEmpty()) {
+
+						if (list2.isEmpty()) {
+
 							%>
 								<div class="box borrow">
 									<h6 style="text-align:center; font-size:18px; color:#4f5051; padding-top:30px">- No Entry Found -</h6>
@@ -347,6 +374,7 @@ line-height:35px;
 								} else {
 									String[] colors = {"#d00000", "#ffba08", "#8ac926", "#1982c4", "#6a4c93", "#99ffff"};
 									int colorIndex = 0;
+
 									for (Borrow borrow1 : list2) {
 							%>
 					<div class="box borrow">
@@ -355,6 +383,15 @@ line-height:35px;
 							<span class="fs-6 text-black"><b>Amount: </b><i class="bi bi-currency-rupee"></i><%=borrow1.getAmt()%></span> <span style="margin-left: 25%;"> <%
                               if (borrow1.getFollowup().equalsIgnoreCase("Yes")) {
                                 %> <a data-bs-toggle="modal" data-bs-target="#staticBackdropborrow"><i
+									for (Borrow borrow : list2) {
+							%>
+					<div class="box borrow">
+					<b>From: </b><%=borrow.getTo()%>
+					<h6><b>Date: </b><%=borrow.getDate().toLocalDate()%></h6>
+							<span class="fs-6 text-black"><b>Amount: </b><i class="bi bi-currency-rupee"></i><%=borrow.getAmt()%></span> <span style="margin-left: 25%;"> <%
+ if (borrow.getFollowup().equalsIgnoreCase("Yes")) {
+ %> <a data-bs-toggle="modal" data-bs-target="#staticBackdropborrow"><i
+
 									data-bs-toggle="tooltip"
 									data-bs-title="Want to send a notification?"
 									class="bi bi-envelope-at-fill fs-4 text-black"></i></a> <%
@@ -463,6 +500,7 @@ line-height:35px;
 						<%
 									}
 						colorIndex++;
+						}
 						}
 						%>
 					</div>
@@ -611,8 +649,11 @@ line-height:35px;
 					</form>
 				</div>
 			</div>
+
 		</div>
 		</div>
+
+
 		</div></div>
 		
 

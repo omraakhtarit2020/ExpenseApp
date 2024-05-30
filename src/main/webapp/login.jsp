@@ -335,7 +335,11 @@ a.ssolink {
 								<div class="field padding-bottom--24">
 									<label for="mpin"><i class="fa-solid fa-lock lock"></i>
 										Security Pin </label> <input id="mpin" type="password"
+
 										placeholder="****" name="mpin" required>
+
+										placeholder="****" name="mpin">
+
 										<% 
     										String msg = (String) request.getAttribute("errorMsg");  
     										if (msg != null) { 
