@@ -26,13 +26,12 @@ public class SplitDAO {
 			String sql = "INSERT INTO split(grpname, people, amt, names, user_id, date) VALUES (?, ?, ?, ?, ?, ?)";
 			PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, s.getGrpname());
-			ps.setInt(2, s.getGrpId());
-			ps.setInt(3, s.getPeople());
-			ps.setDouble(4, s.getAmt());
+			ps.setInt(2, s.getPeople());
+			ps.setDouble(3, s.getAmt());
 			String namesString = String.join(",", s.getNames());
-			ps.setString(5, namesString);
-			ps.setInt(6, s.getUser_id());
-			ps.setDate(7, s.getDate());
+			ps.setString(4, namesString);
+			ps.setInt(5, s.getUser_id());
+			ps.setDate(6, s.getDate());
 			int rowsAffected = ps.executeUpdate();
 
 			if (rowsAffected == 1) {
